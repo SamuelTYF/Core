@@ -1,16 +1,12 @@
-﻿using Automata;
-using TestFramework;
+﻿using TestFramework;
 namespace Automata.Test
 {
-    public class AKC_Test:ITest
+    public class AKC_Test : ITest
     {
-        public AKC_Test() 
-            : base("AKC_Test") 
-        { 
-        }
-        public override void Run()
+        public AKC_Test()
+            : base("AKC_Test")
         {
-            AutomataInstance instance = AKC.ReadFrom(Properties.Resources.XPath);
         }
+        public override void Run()=>AKC.ReadFrom(Properties.Resources.XPath);
     }
 }

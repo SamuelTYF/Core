@@ -1,4 +1,4 @@
 namespace Collection
 {
-	public delegate T Add<T>(T a, T b);
+    public delegate T Add<T>(T a, T b);
 }

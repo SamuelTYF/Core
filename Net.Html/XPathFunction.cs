@@ -1,4 +1,4 @@
 namespace Net.Html
 {
-	public delegate object XPathFunction(HtmlNode node);
+    public delegate object XPathFunction(HtmlNode node);
 }

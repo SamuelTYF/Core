@@ -3,8 +3,8 @@ namespace Net.Html.Net
 {
     public class Baidu_Test : ITest
     {
-        public Baidu_Test() 
-            : base("Baidu_Test") 
+        public Baidu_Test()
+            : base("Baidu_Test")
         {
         }
         public override void Run()

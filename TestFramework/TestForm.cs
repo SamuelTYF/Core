@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Reflection;
 using System.Windows.Forms;
-
 namespace TestFramework
 {
     public partial class TestForm : Form
@@ -14,25 +13,25 @@ namespace TestFramework
             foreach (Type t in assembly.GetTypes())
                 if (t.BaseType == ITest)
                 {
-                    ITest test = t.GetConstructor(new Type[0]).Invoke(null) as ITest;
+                    ITest test = t.GetConstructor(Array.Empty<Type>()).Invoke(null) as ITest;
                     listView1.Items.Add(new ListViewItem(test.TestName)
                     {
                         SubItems = { "Prepared" },
-                        Tag=test
+                        Tag = test
                     });
                 }
         }
         public void Run()
         {
             int ErrorCount = 0;
-            foreach(ListViewItem item in listView1.Items)
+            foreach (ListViewItem item in listView1.Items)
             {
                 ITest test = item.Tag as ITest;
                 item.SubItems[1].Text = "Running";
                 try
                 {
                     test.Run();
-                    item.SubItems[1].Text="Success";
+                    item.SubItems[1].Text = "Success";
                 }
                 catch (Exception e)
                 {
@@ -52,7 +51,6 @@ namespace TestFramework
         }
         private void startToolStripMenuItem_Click(object sender, EventArgs e)
             => Run();
-
         private void TestForm_SizeChanged(object sender, EventArgs e)
         {
             TestName.Width = Width / 3;
@@ -63,10 +61,6 @@ namespace TestFramework
             TestName.Width = Width / 3;
             Result.Width = 2 * Width / 3;
         }
-
-        private void exceptionToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            DebugForm.Display("Error", listView1.SelectedItems[0].SubItems[1].Tag);
-        }
+        private void exceptionToolStripMenuItem_Click(object sender, EventArgs e) => DebugForm.Display("Error", listView1.SelectedItems[0].SubItems[1].Tag);
     }
 }

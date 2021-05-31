@@ -7,7 +7,6 @@ namespace TestFramework
         ///  Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-
         /// <summary>
         ///  Clean up any resources being used.
         /// </summary>
@@ -20,9 +19,7 @@ namespace TestFramework
             }
             base.Dispose(disposing);
         }
-
         #region Windows Form Designer generated code
-
         /// <summary>
         ///  Required method for Designer support - do not modify
         ///  the contents of this method with the code editor.
@@ -83,11 +80,8 @@ namespace TestFramework
             this.SizeChanged += new System.EventHandler(this.DebugForm_SizeChanged);
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
-
         }
-
         #endregion
-
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ColumnHeader NameColumn;
         private System.Windows.Forms.ColumnHeader TypeColumn;
@@ -96,4 +90,3 @@ namespace TestFramework
         private System.Windows.Forms.ToolStripMenuItem invokeToolStripMenuItem;
     }
 }
-

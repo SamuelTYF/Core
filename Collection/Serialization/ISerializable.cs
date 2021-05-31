@@ -1,7 +1,7 @@
 namespace Collection.Serialization
 {
-	public interface ISerializable
-	{
-		void Write(Formatter formatter);
-	}
+    public interface ISerializable
+    {
+        void Write(Formatter formatter);
+    }
 }

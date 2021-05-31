@@ -1,5 +1,4 @@
-﻿using Collection;
-using Collection.Serialization;
+﻿using Collection.Serialization;
 using System;
 using System.IO;
 using TestFramework;
@@ -8,7 +7,7 @@ namespace Collection.Test
     public class AVL_Test : ITest
     {
         public AVL_Test()
-            :base("AVL_Test")
+            : base("AVL_Test")
         {
         }
         public override void Run()
@@ -17,15 +16,15 @@ namespace Collection.Test
             int[] keys = new int[len];
             double[] values = new double[len];
             int[] indexs = new int[len];
-            Random _R = new Random(DateTime.Now.Millisecond);
+            Random _R = new(DateTime.Now.Millisecond);
             for (int i = 0; i < len; i++)
             {
                 keys[i] = indexs[i] = i;
                 values[i] = _R.NextDouble();
             }
             Array.Sort(indexs, (a, b) => values[a].CompareTo(values[b]));
-            AVL<int, double> tree = new AVL<int, double>();
-            for (int i = 0; i < len; i++) 
+            AVL<int, double> tree = new();
+            for (int i = 0; i < len; i++)
             {
                 tree[keys[indexs[i]]] = values[indexs[i]];
                 Ensure.Equal(i + 1, tree.Length);
@@ -38,12 +37,12 @@ namespace Collection.Test
             double[] sortvalues = tree.LDRSort();
             for (int i = 0; i < len; i++)
                 Ensure.Equal(sortvalues[i], values[i]);
-            MemoryStream ms = new MemoryStream();
-            using (Formatter formatter = new Formatter())
+            MemoryStream ms = new();
+            using (Formatter formatter = new())
                 formatter.Serialize(ms, tree);
             ms.Position = 0;
             AVL<int, double> stree;
-            using (Formatter formatter = new Formatter())
+            using (Formatter formatter = new())
                 stree = formatter.Deserialize(ms) as AVL<int, double>;
             sortkeys = stree.LDROrder();
             for (int i = 0; i < len; i++)
@@ -51,7 +50,7 @@ namespace Collection.Test
             sortvalues = stree.LDRSort();
             for (int i = 0; i < len; i++)
                 Ensure.Equal(sortvalues[i], values[i]);
-            for(int i=0;i<len;i++)
+            for (int i = 0; i < len; i++)
             {
                 stree.Remove(i);
                 Ensure.Equal(stree.Length, len - i - 1);

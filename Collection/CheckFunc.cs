@@ -1,4 +1,4 @@
 namespace Collection
 {
-	public delegate bool CheckFunc<in T>(T Value);
+    public delegate bool CheckFunc<in T>(T Value);
 }

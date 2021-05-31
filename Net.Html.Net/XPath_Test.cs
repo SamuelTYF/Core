@@ -1,11 +1,10 @@
-﻿using Net.Html;
-using TestFramework;
+﻿using TestFramework;
 namespace Net.Html.Net
 {
-    public class XPath_Test:ITest
+    public class XPath_Test : ITest
     {
-        public XPath_Test() 
-            : base("XPath_Test") 
+        public XPath_Test()
+            : base("XPath_Test")
         {
         }
         public override void Run()

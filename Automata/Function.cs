@@ -1,4 +1,4 @@
 namespace Automata
 {
-	public delegate void Function();
+    public delegate void Function();
 }
