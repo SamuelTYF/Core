@@ -34,8 +34,10 @@ namespace TestFramework
             this.listView1 = new System.Windows.Forms.ListView();
             this.TestName = new System.Windows.Forms.ColumnHeader();
             this.Result = new System.Windows.Forms.ColumnHeader();
+            this.Progress = new System.Windows.Forms.ColumnHeader();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.exceptionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -45,7 +47,8 @@ namespace TestFramework
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.runToolStripMenuItem,
-            this.startToolStripMenuItem});
+            this.startToolStripMenuItem,
+            this.loadAllToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 28);
@@ -74,7 +77,8 @@ namespace TestFramework
             // 
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.TestName,
-            this.Result});
+            this.Result,
+            this.Progress});
             this.listView1.ContextMenuStrip = this.contextMenuStrip1;
             this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView1.HideSelection = false;
@@ -89,7 +93,6 @@ namespace TestFramework
             // TestName
             // 
             this.TestName.Text = "TestName";
-            this.TestName.Width = 400;
             // 
             // Result
             // 
@@ -110,6 +113,13 @@ namespace TestFramework
             this.exceptionToolStripMenuItem.Text = "Exception";
             this.exceptionToolStripMenuItem.Click += new System.EventHandler(this.exceptionToolStripMenuItem_Click);
             // 
+            // loadAllToolStripMenuItem
+            // 
+            this.loadAllToolStripMenuItem.Name = "loadAllToolStripMenuItem";
+            this.loadAllToolStripMenuItem.Size = new System.Drawing.Size(82, 24);
+            this.loadAllToolStripMenuItem.Text = "Load All";
+            this.loadAllToolStripMenuItem.Click += new System.EventHandler(this.loadAllToolStripMenuItem_Click);
+            // 
             // TestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -127,6 +137,7 @@ namespace TestFramework
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
         #endregion
         private System.Windows.Forms.MenuStrip menuStrip1;
@@ -138,5 +149,7 @@ namespace TestFramework
         private System.Windows.Forms.ColumnHeader Result;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem exceptionToolStripMenuItem;
+        private System.Windows.Forms.ColumnHeader Progress;
+        private System.Windows.Forms.ToolStripMenuItem loadAllToolStripMenuItem;
     }
 }

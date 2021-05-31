@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 namespace TestFramework
@@ -16,7 +17,7 @@ namespace TestFramework
                     ITest test = t.GetConstructor(Array.Empty<Type>()).Invoke(null) as ITest;
                     listView1.Items.Add(new ListViewItem(test.TestName)
                     {
-                        SubItems = { "Prepared" },
+                        SubItems = { "Prepared",$"0/{test.TaskCount}" },
                         Tag = test
                     });
                 }
@@ -28,9 +29,10 @@ namespace TestFramework
             {
                 ITest test = item.Tag as ITest;
                 item.SubItems[1].Text = "Running";
+                int runningcount = 0;
                 try
                 {
-                    test.Run();
+                    test.Run((count) => item.SubItems[2].Text = $"{runningcount=count}/{test.TaskCount}");
                     item.SubItems[1].Text = "Success";
                 }
                 catch (Exception e)
@@ -51,16 +53,28 @@ namespace TestFramework
         }
         private void startToolStripMenuItem_Click(object sender, EventArgs e)
             => Run();
-        private void TestForm_SizeChanged(object sender, EventArgs e)
-        {
-            TestName.Width = Width / 3;
-            Result.Width = 2 * Width / 3;
-        }
-        private void TestForm_Load(object sender, EventArgs e)
-        {
-            TestName.Width = Width / 3;
-            Result.Width = 2 * Width / 3;
-        }
+        private void TestForm_SizeChanged(object sender, EventArgs e)=>TestName.Width= Result.Width=Progress.Width = Width / 3;
+        private void TestForm_Load(object sender, EventArgs e) => TestName.Width = Result.Width = Progress.Width = Width / 3;
         private void exceptionToolStripMenuItem_Click(object sender, EventArgs e) => DebugForm.Display("Error", listView1.SelectedItems[0].SubItems[1].Tag);
+        private void loadAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            listView1.Items.Clear();
+            Type ITest = typeof(ITest);
+            Text = Environment.CurrentDirectory;
+            foreach (FileInfo fi in new DirectoryInfo(Environment.CurrentDirectory).EnumerateFiles("*.dll"))
+            {
+                Assembly assembly = Assembly.LoadFrom(fi.FullName);
+                foreach (Type t in assembly.GetTypes())
+                    if (t.BaseType == ITest)
+                    {
+                        ITest test = t.GetConstructor(Array.Empty<Type>()).Invoke(null) as ITest;
+                        listView1.Items.Add(new ListViewItem(test.TestName)
+                        {
+                            SubItems = { "Prepared", $"0/{test.TaskCount}" },
+                            Tag = test
+                        });
+                    }
+            }
+        }
     }
 }

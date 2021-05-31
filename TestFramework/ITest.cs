@@ -3,7 +3,12 @@
     public abstract class ITest
     {
         public string TestName;
-        public ITest(string name) => TestName = name;
-        public abstract void Run();
+        public int TaskCount;
+        public ITest(string name, int taskcount)
+        {
+            TestName = name;
+            TaskCount = taskcount;
+        }
+        public abstract void Run(UpdateTaskProgress update);
     }
 }

@@ -1,7 +1,7 @@
 using System;
 using System.Windows.Forms;
 using TestFramework;
-namespace Net.Html.Net
+namespace Code.Core.Test
 {
     static class Program
     {
