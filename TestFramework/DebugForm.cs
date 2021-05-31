@@ -4,7 +4,7 @@ using System.Collections;
 using System.Reflection;
 using System.Windows.Forms;
 
-namespace DebugTool
+namespace TestFramework
 {
     public partial class DebugForm : Form
     {
@@ -24,7 +24,7 @@ namespace DebugTool
 			foreach (FieldInfo fi in type.GetRuntimeFields())
 				listView1.Items.Add(new ListViewItem(fi.Name)
 				{
-					SubItems = { fi.FieldType.Name, (Values[fi.Name] = fi.GetValue(value)).ToString() }
+					SubItems = { fi.FieldType.Name, $"{Values[fi.Name] = fi.GetValue(value)}" }
 				});
 			foreach (PropertyInfo runtimeProperty in type.GetRuntimeProperties())
 			{

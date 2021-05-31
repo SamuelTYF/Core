@@ -63,5 +63,10 @@ namespace TestFramework
             TestName.Width = Width / 3;
             Result.Width = 2 * Width / 3;
         }
+
+        private void exceptionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DebugForm.Display("Error", listView1.SelectedItems[0].SubItems[1].Tag);
+        }
     }
 }

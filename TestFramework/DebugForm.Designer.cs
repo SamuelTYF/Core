@@ -1,5 +1,5 @@
 ﻿
-namespace DebugTool
+namespace TestFramework
 {
     partial class DebugForm
     {

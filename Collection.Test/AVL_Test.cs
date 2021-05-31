@@ -3,7 +3,6 @@ using Collection.Serialization;
 using System;
 using System.IO;
 using TestFramework;
-using DebugTool;
 namespace Collection.Test
 {
     public class AVL_Test : ITest
