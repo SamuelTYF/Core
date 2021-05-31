@@ -58,6 +58,7 @@ namespace Collection.Test
                 Ensure.Equal(stree.Length, len - i - 1);
                 Ensure.Equal(stree.ContainsKey(i), false);
             }
+            DebugForm.Display("AVL", tree);
         }
     }
 }

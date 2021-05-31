@@ -1,9 +1,0 @@
-{
-  "profiles": {
-    "TestFramework.Test": {
-      "commandName": "Executable",
-      "executablePath": "D:\\Core\\Debug\\net5.0\\TestFramework.Test.exe",
-      "nativeDebugging": true
-    }
-  }
-}

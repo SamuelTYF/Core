@@ -1,13 +1,17 @@
-﻿using System;
+using System;
+using System.Windows.Forms;
 using TestFramework;
-
 namespace Collection.Test
 {
-    class Program
+    static class Program
     {
-        static void Main(string[] args)
+        [STAThread]
+        static void Main()
         {
-            TestManager.Run();
+            Application.SetHighDpiMode(HighDpiMode.SystemAware);
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new TestForm());
         }
     }
 }
