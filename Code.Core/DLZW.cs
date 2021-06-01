@@ -73,7 +73,7 @@ namespace Code.Core
 		}
 		public void Decode(Stream stream)
 		{
-			byte[] last = new byte[0];
+			byte[] last = Array.Empty<byte>();
 			while (Reader.Read(BitLength, out int code))
 			{
 				byte[] r = new byte[last.Length + 1];

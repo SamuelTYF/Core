@@ -1,5 +1,6 @@
-﻿using TestFramework;
-namespace Net.Html.Test
+﻿using Net.Html;
+using TestFramework;
+namespace Net.Test
 {
     public class Baidu_Test : ITest
     {

@@ -4,6 +4,7 @@
     {
         public string TestName;
         public int TaskCount;
+        public UpdateInfo UpdateInfo;
         public ITest(string name, int taskcount)
         {
             TestName = name;
