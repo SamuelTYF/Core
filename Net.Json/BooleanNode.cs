@@ -4,8 +4,6 @@ namespace Net.Json
 	public class BooleanNode : Node
 	{
 		public bool Value;
-		private static string True = "true";
-		private static string False = "false";
 		public override Node this[object key]
         {
             get => throw new Exception();
@@ -26,13 +24,13 @@ namespace Net.Json
 				{
 					if (arg.Top() == 't')
 					{
-						text = True;
-						num = True.Length;
+						text = "true";
+						num = 4;
 					}
 					else if (arg.Top() == 'f')
 					{
-						text = False;
-						num = False.Length;
+						text = "false";
+						num = 5;
 						value = false;
 					}
 					else arg.Pop();

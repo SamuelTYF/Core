@@ -1,0 +1,49 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "Automata.IDE/1.0.0": {
+        "dependencies": {
+          "Automata": "1.0.0"
+        },
+        "runtime": {
+          "Automata.IDE.dll": {}
+        }
+      },
+      "Automata/1.0.0": {
+        "dependencies": {
+          "Collection": "1.0.0"
+        },
+        "runtime": {
+          "Automata.dll": {}
+        }
+      },
+      "Collection/1.0.0": {
+        "runtime": {
+          "Collection.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Automata.IDE/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Automata/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Collection/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

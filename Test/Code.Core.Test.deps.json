@@ -1,0 +1,60 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "Code.Core.Test/1.0.0": {
+        "dependencies": {
+          "Code.Core": "1.0.0",
+          "TestFramework": "1.0.0"
+        },
+        "runtime": {
+          "Code.Core.Test.dll": {}
+        }
+      },
+      "Code.Core/1.0.0": {
+        "dependencies": {
+          "Collection": "1.0.0"
+        },
+        "runtime": {
+          "Code.Core.dll": {}
+        }
+      },
+      "Collection/1.0.0": {
+        "runtime": {
+          "Collection.dll": {}
+        }
+      },
+      "TestFramework/1.0.0": {
+        "runtime": {
+          "TestFramework.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Code.Core.Test/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Code.Core/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Collection/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "TestFramework/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

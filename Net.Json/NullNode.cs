@@ -3,7 +3,7 @@ namespace Net.Json
 {
 	public class NullNode : Node
 	{
-		public static string key = "null";
+		private static readonly string key = "null";
 		public override Node this[object key]
         {
             get => throw new Exception();

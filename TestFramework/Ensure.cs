@@ -28,5 +28,9 @@ namespace TestFramework
                 Equal(sa, sb);
             }
         }
+        public static void NotNull(object value)
+        {
+            if (value == null)throw new IsNullException();
+        }
     }
 }
