@@ -11,6 +11,7 @@
           "Net.Html": "1.0.0",
           "Net.Http": "1.0.0",
           "Net.Json": "1.0.0",
+          "Net.Xml": "1.0.0",
           "TestFramework": "1.0.0"
         },
         "runtime": {
@@ -56,6 +57,14 @@
           "Net.Json.dll": {}
         }
       },
+      "Net.Xml/1.0.0": {
+        "dependencies": {
+          "Collection": "1.0.0"
+        },
+        "runtime": {
+          "Net.Xml.dll": {}
+        }
+      },
       "TestFramework/1.0.0": {
         "runtime": {
           "TestFramework.dll": {}
@@ -90,6 +99,11 @@
       "sha512": ""
     },
     "Net.Json/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Net.Xml/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

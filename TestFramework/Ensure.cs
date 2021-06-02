@@ -32,5 +32,15 @@ namespace TestFramework
         {
             if (value == null)throw new IsNullException();
         }
+        public static void DoubleEqual(double a, double b, double error = 0.000001)
+        {
+            if (a - b > error || b - a > error)
+                throw new NotEqualException(a, b);
+        }
+        public static void DoubleRateLess(double a, double b, double error = 0.000001)
+        {
+            if (Math.Abs((a-b)/b)>error)
+                throw new NotEqualException(a, b);
+        }
     }
 }

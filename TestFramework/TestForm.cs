@@ -8,6 +8,7 @@ namespace TestFramework
     public partial class TestForm : Form
     {
         public int SubTaskCount;
+        public bool RunningResult;
         public TestForm()
         {
             InitializeComponent();
@@ -39,6 +40,7 @@ namespace TestFramework
             progressBar1.Maximum = SubTaskCount;
             progressBar1.Minimum = 0;
             int value = 0;
+            RunningResult = true;
             foreach (ListViewItem item in listView1.Items)
             {
                 ITest test = item.Tag as ITest;
@@ -66,6 +68,7 @@ namespace TestFramework
                     item.SubItems[1].Text = "Fail";
                     item.SubItems[1].Tag = e;
                     item.ForeColor = Color.Red;
+                    RunningResult = false;
                 }
                 value += test.TaskCount;
             }
@@ -130,6 +133,14 @@ namespace TestFramework
                         SubTaskCount += test.TaskCount;
                     }
             }
+            Run();
+            if (RunningResult) Application.Exit();
+        }
+        private void runToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem item in listView1.Items)
+                if (!item.Selected)
+                    item.Remove();
             Run();
         }
     }

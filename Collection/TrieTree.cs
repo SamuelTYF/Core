@@ -32,8 +32,7 @@ namespace Collection
         }
         public TrieTree<TValue> GetNode(byte[] keys, int index = 0)
         {
-            if (index == keys.Length)
-                return this;
+            if (index == keys.Length)return this;
             byte b = keys[index];
             return (Nodes[b] ?? (Nodes[b] = new TrieTree<TValue>())).GetNode(keys, index + 1);
         }

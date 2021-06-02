@@ -1,0 +1,60 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "NumericalAnalysis.Test/1.0.0": {
+        "dependencies": {
+          "NumericalAnalysis": "1.0.0",
+          "TestFramework": "1.0.0"
+        },
+        "runtime": {
+          "NumericalAnalysis.Test.dll": {}
+        }
+      },
+      "Collection/1.0.0": {
+        "runtime": {
+          "Collection.dll": {}
+        }
+      },
+      "NumericalAnalysis/1.0.0": {
+        "dependencies": {
+          "Collection": "1.0.0"
+        },
+        "runtime": {
+          "NumericalAnalysis.dll": {}
+        }
+      },
+      "TestFramework/1.0.0": {
+        "runtime": {
+          "TestFramework.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "NumericalAnalysis.Test/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Collection/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "NumericalAnalysis/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "TestFramework/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

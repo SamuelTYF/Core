@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 namespace Collection
 {
-    public class List<TValue> : IList<TValue>, ISerializable, IEnumerable<TValue>, IEnumerable
+    public class List<TValue> : ISerializable, IEnumerable<TValue>, IEnumerable
     {
         public TValue[] Values;
         public int Capacity;
@@ -76,6 +76,11 @@ namespace Collection
             CheckCapcity(Length + values.Length);
             Array.Copy(values, 0, Values, Length, values.Length);
             Length += values.Length;
+        }
+        public void AddRange(IEnumerable<TValue> values)
+        {
+            foreach (TValue value in values)
+                Add(value);
         }
         public void AddList(List<TValue> values, int index, int length)
         {

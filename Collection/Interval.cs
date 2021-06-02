@@ -82,7 +82,6 @@ namespace Collection
             0 => downblock && upblock ? DiscreteSet<T>.CreateFromSortedArray(inf) : new EmptySet<T>(),
             _ => new Interval<T>(inf, sup, downblock, upblock)
         };
-
         public ISet<T> GetIntersection(ISet<T> other) => other is Interval<T> ? GetIntersection(other as Interval<T>) : other.GetIntersection(this);
         public IEnumerator<ISet<T>> GetEnumerator()
         {

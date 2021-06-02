@@ -5,6 +5,7 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <StartupObject>File.Test.Program</StartupObject>
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -13,6 +14,21 @@
     <OutputPath>D:\Core\Debug\</OutputPath>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <DefineConstants />
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>D:\Core\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants />
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>D:\Core\Release\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <DefineConstants />
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>D:\Core\Release\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\File.SV\File.SV.csproj" />
     <ProjectReference Include="..\TestFramework\TestFramework.csproj" />

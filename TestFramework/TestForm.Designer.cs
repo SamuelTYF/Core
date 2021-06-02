@@ -42,6 +42,7 @@ namespace TestFramework
             this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
+            this.runToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -119,21 +120,22 @@ namespace TestFramework
             this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exceptionToolStripMenuItem,
-            this.infoToolStripMenuItem});
+            this.infoToolStripMenuItem,
+            this.runToolStripMenuItem1});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(151, 52);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(211, 104);
             // 
             // exceptionToolStripMenuItem
             // 
             this.exceptionToolStripMenuItem.Name = "exceptionToolStripMenuItem";
-            this.exceptionToolStripMenuItem.Size = new System.Drawing.Size(150, 24);
+            this.exceptionToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
             this.exceptionToolStripMenuItem.Text = "Exception";
             this.exceptionToolStripMenuItem.Click += new System.EventHandler(this.exceptionToolStripMenuItem_Click);
             // 
             // infoToolStripMenuItem
             // 
             this.infoToolStripMenuItem.Name = "infoToolStripMenuItem";
-            this.infoToolStripMenuItem.Size = new System.Drawing.Size(150, 24);
+            this.infoToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
             this.infoToolStripMenuItem.Text = "Info";
             this.infoToolStripMenuItem.Click += new System.EventHandler(this.infoToolStripMenuItem_Click);
             // 
@@ -148,6 +150,13 @@ namespace TestFramework
             // backgroundWorker2
             // 
             this.backgroundWorker2.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker2_DoWork);
+            // 
+            // runToolStripMenuItem1
+            // 
+            this.runToolStripMenuItem1.Name = "runToolStripMenuItem1";
+            this.runToolStripMenuItem1.Size = new System.Drawing.Size(210, 24);
+            this.runToolStripMenuItem1.Text = "Run";
+            this.runToolStripMenuItem1.Click += new System.EventHandler(this.runToolStripMenuItem1_Click);
             // 
             // TestForm
             // 
@@ -185,5 +194,6 @@ namespace TestFramework
         private System.Windows.Forms.ToolStripMenuItem infoToolStripMenuItem;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.ComponentModel.BackgroundWorker backgroundWorker2;
+        private System.Windows.Forms.ToolStripMenuItem runToolStripMenuItem1;
     }
 }
