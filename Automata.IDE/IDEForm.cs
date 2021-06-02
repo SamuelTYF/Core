@@ -37,13 +37,13 @@ namespace Automata.IDE
                 if (path.EndsWith(".ams"))
                 {
                     using (StreamReader streamReader = new(path))
-                        richTextBox1.Text = streamReader.ReadToEnd();
+                        AMSBox.Text = streamReader.ReadToEnd();
                     checkToolStripMenuItem.PerformClick();
                 }
                 else if (path.EndsWith(".amss"))
                 {
                     using StreamReader streamReader2 = new(path);
-                    richTextBox2.Text = streamReader2.ReadToEnd();
+                    AMSSBox.Text = streamReader2.ReadToEnd();
                 }
                 else
                 {
@@ -61,58 +61,54 @@ namespace Automata.IDE
                         path4 = dir + path4;
                     string host = sr.EndOfStream ? null : sr.ReadLine();
                     using (StreamReader streamReader3 = new(path2))
-                        richTextBox1.Text = streamReader3.ReadToEnd();
+                        AMSBox.Text = streamReader3.ReadToEnd();
                     checkToolStripMenuItem.PerformClick();
                     using (StreamReader srr = new(path3))
-                        richTextBox2.Text = srr.ReadToEnd();
+                        AMSSBox.Text = srr.ReadToEnd();
                     Assembly assembly = Assembly.LoadFrom(path4);
-                    toolStripComboBox1.Items.Clear();
+                    HostBox.Items.Clear();
                     int index = 0;
                     Type[] exportedTypes = assembly.GetExportedTypes();
                     foreach (Type type in exportedTypes)
-                    {
                         if (typeof(AutomataHost).FullName.Equals(type.BaseType?.FullName) && (type.GetConstructor(Type.EmptyTypes) != null || type.GetConstructor(new Type[1] { typeof(IStringArg) }) != null))
                         {
-                            toolStripComboBox1.Items.Add(type);
+                            HostBox.Items.Add(type);
                             if (type.FullName.CompareTo(host) == 0)
-                                index = toolStripComboBox1.Items.Count - 1;
+                                index = HostBox.Items.Count - 1;
                         }
-                    }
                     if (host != null)
-                        toolStripComboBox1.SelectedIndex = index;
-                    else if (toolStripComboBox1.Items.Count == 1)
-                    {
-                        toolStripComboBox1.SelectedIndex = 0;
-                    }
+                        HostBox.SelectedIndex = index;
+                    else if (HostBox.Items.Count == 1)
+                        HostBox.SelectedIndex = 0;
                     return;
                 }
             }
             catch (Exception e)
             {
-                richTextBox4.AppendText($"{DateTime.Now}:{e}");
+                ConsoleBox.AppendText($"{DateTime.Now}:{e}");
             }
         }
         public void UpdateTool(List<string> modes, List<string> functions)
         {
-            contextMenuStrip1.Items.Clear();
+            contextmenu.Items.Clear();
             string[] array = keys;
             foreach (string key in array)
             {
                 ToolStripMenuItem Key = new(key);
                 Key.Click += delegate
                 {
-                    richTextBox1.SelectedText = key;
+                    AMSBox.SelectedText = key;
                 };
-                contextMenuStrip1.Items.Add(Key);
+                contextmenu.Items.Add(Key);
             }
             foreach (string mode in modes)
             {
                 ToolStripMenuItem Mode = new(mode);
                 Mode.Click += delegate
                 {
-                    richTextBox1.SelectedText = mode;
+                    AMSBox.SelectedText = mode;
                 };
-                contextMenuStrip1.Items.Add(Mode);
+                contextmenu.Items.Add(Mode);
             }
             array = values;
             foreach (string value in array)
@@ -120,24 +116,24 @@ namespace Automata.IDE
                 ToolStripMenuItem Value = new(value);
                 Value.Click += delegate
                 {
-                    richTextBox1.SelectedText = value;
+                    AMSBox.SelectedText = value;
                 };
-                contextMenuStrip1.Items.Add(Value);
+                contextmenu.Items.Add(Value);
             }
             foreach (string function in functions)
             {
                 ToolStripMenuItem Function = new(function);
                 Function.Click += delegate
                 {
-                    richTextBox1.SelectedText = function;
+                    AMSBox.SelectedText = function;
                 };
-                contextMenuStrip1.Items.Add(Function);
+                contextmenu.Items.Add(Function);
             }
         }
         private void checkToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            richTextBox1.SuspendLayout();
-            RichTextStringArg arg = new(richTextBox1, SourceOn);
+            AMSBox.SuspendLayout();
+            RichTextStringArg arg = new(AMSBox, SourceOn);
             AKCHost host = new(arg);
             try
             {
@@ -146,27 +142,27 @@ namespace Automata.IDE
             }
             catch (Exception ee)
             {
-                richTextBox4.AppendText($"{DateTime.Now}:{ee}");
+                ConsoleBox.AppendText($"{DateTime.Now}:{ee}");
                 createInstanceToolStripMenuItem.Enabled = false;
             }
             finally
             {
-                richTextBox3.Clear();
+                InfoBox.Clear();
                 foreach (var (error, index, _) in host.Errors)
                 {
-                    richTextBox3.AppendText($"{index}:{error}\n");
+                    InfoBox.AppendText($"{index}:{error}\n");
                 }
-                richTextBox1.Select(Curve, 0);
+                AMSBox.Select(Curve, 0);
                 UpdateTool(host._Modes, host._Functions);
             }
-            richTextBox1.PerformLayout();
+            AMSBox.PerformLayout();
         }
         private void createInstanceToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
-                Instance = Automata.AKC.ReadFrom(richTextBox1.Text);
-                richTextBox1.Enabled = false;
+                Instance = Automata.AKC.ReadFrom(AMSBox.Text);
+                AMSBox.Enabled = false;
                 disposeToolStripMenuItem.Enabled = true;
                 createInstanceToolStripMenuItem.Enabled = false;
                 checkToolStripMenuItem.Enabled = false;
@@ -174,14 +170,14 @@ namespace Automata.IDE
             }
             catch (Exception ee)
             {
-                richTextBox4.AppendText($"{DateTime.Now}:{ee}");
+                ConsoleBox.AppendText($"{DateTime.Now}:{ee}");
             }
         }
         private void disposeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            richTextBox1.Enabled = true;
+            AMSBox.Enabled = true;
             Instance = null;
-            richTextBox1.Enabled = true;
+            AMSBox.Enabled = true;
             disposeToolStripMenuItem.Enabled = false;
             createInstanceToolStripMenuItem.Enabled = true;
             checkToolStripMenuItem.Enabled = true;
@@ -189,49 +185,47 @@ namespace Automata.IDE
         }
         private void loadToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (openFileDialog1.ShowDialog() != DialogResult.OK)
+            if (HostDialog.ShowDialog() != DialogResult.OK)
                 return;
-            openFileDialog1.OpenFile().Dispose();
-            Assembly assembly = Assembly.LoadFrom(openFileDialog1.FileName);
-            toolStripComboBox1.Items.Clear();
+            HostDialog.OpenFile().Dispose();
+            Assembly assembly = Assembly.LoadFrom(HostDialog.FileName);
+            HostBox.Items.Clear();
             Type[] exportedTypes = assembly.GetExportedTypes();
             foreach (Type type in exportedTypes)
             {
                 if (typeof(AutomataHost).FullName.Equals(type.BaseType?.FullName) && (type.GetConstructor(Type.EmptyTypes) != null || type.GetConstructor(new Type[1] { typeof(IStringArg) }) != null))
-                    toolStripComboBox1.Items.Add(type);
+                    HostBox.Items.Add(type);
             }
-            if (toolStripComboBox1.Items.Count == 1)
-                toolStripComboBox1.SelectedIndex = 0;
+            if (HostBox.Items.Count == 1)
+                HostBox.SelectedIndex = 0;
         }
-        private void newToolStripMenuItem_Click(object sender, EventArgs e) => richTextBox1.Clear();
+        private void newToolStripMenuItem_Click(object sender, EventArgs e) => AMSBox.Clear();
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (openFileDialog2.ShowDialog() != DialogResult.OK)
-                return;
-            string path = openFileDialog2.FileName;
+            if (AMIDialog.ShowDialog() != DialogResult.OK)return;
+            string path = AMIDialog.FileName;
             Open(path);
         }
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            if (SaveDialog.ShowDialog() == DialogResult.OK)
             {
-                saveFileDialog1.OpenFile().Dispose();
-                FileInfo fi = new(saveFileDialog1.FileName);
-                if (fi.Exists)
-                    fi.Delete();
+                SaveDialog.OpenFile().Dispose();
+                FileInfo fi = new(SaveDialog.FileName);
+                if (fi.Exists)fi.Delete();
                 using StreamWriter sw = new(fi.OpenWrite());
-                sw.Write(richTextBox1.Text);
+                sw.Write(AMSBox.Text);
             }
         }
         private void toolStripComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            HostType = toolStripComboBox1.SelectedItem as Type;
-            richTextBox4.AppendText($"{DateTime.Now}:{HostType}\n");
+            HostType = HostBox.SelectedItem as Type;
+            ConsoleBox.AppendText($"{DateTime.Now}:{HostType}\n");
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            richTextBox2.DragDrop += RichTextBox2_DragDrop;
-            richTextBox2.DragEnter += RichTextBox2_DragEnter;
+            AMSSBox.DragDrop += RichTextBox2_DragDrop;
+            AMSSBox.DragEnter += RichTextBox2_DragEnter;
             if (!Settings.Default.SourceOn)
                 sourceOnToolStripMenuItem.PerformClick();
             if (!Settings.Default.TextOn)
@@ -244,12 +238,12 @@ namespace Automata.IDE
         private void RichTextBox2_DragDrop(object sender, DragEventArgs e)
         {
             using (StreamReader sr = new(((Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0) as string))
-                richTextBox2.Text = sr.ReadToEnd();
+                AMSSBox.Text = sr.ReadToEnd();
             e.Effect = DragDropEffects.None;
         }
         private void runToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            RichTextStringArg arg = new(richTextBox2, SourceOn);
+            RichTextStringArg arg = new(AMSSBox, SourceOn);
             try
             {
                 AutomataHost host = (AutomataHost)Activator.CreateInstance(HostType);
@@ -257,23 +251,23 @@ namespace Automata.IDE
             }
             catch (Exception ee)
             {
-                richTextBox4.AppendText($"{DateTime.Now}:{ee}\n");
+                ConsoleBox.AppendText($"{DateTime.Now}:{ee}\n");
             }
             finally
             {
-                richTextBox2.Select(arg.StringArg.index, arg.StringArg.end - arg.StringArg.index);
-                richTextBox2.SelectionColor = Color.Red;
-                richTextBox2.Select(arg.StringArg.index, 0);
+                AMSSBox.Select(arg.StringArg.index, arg.StringArg.end - arg.StringArg.index);
+                AMSSBox.SelectionColor = Color.Red;
+                AMSSBox.Select(arg.StringArg.index, 0);
             }
         }
         private void toolStripTextBox1_TextChanged(object sender, EventArgs e)
         {
             List<int> numbers = new();
-            for (int i = 0; i < toolStripTextBox1.Text.Length; i++)
+            for (int i = 0; i < StringBox.Text.Length; i++)
             {
-                if (toolStripTextBox1.Text[i] == '\\')
+                if (StringBox.Text[i] == '\\')
                 {
-                    switch (toolStripTextBox1.Text[++i])
+                    switch (StringBox.Text[++i])
                     {
                         case '\\':
                             numbers.Add(92);
@@ -287,9 +281,9 @@ namespace Automata.IDE
                     }
                 }
                 else
-                    numbers.Add(toolStripTextBox1.Text[i]);
+                    numbers.Add(StringBox.Text[i]);
             }
-            toolStripTextBox2.Text = string.Join(",", numbers.ToArray());
+            CharBox.Text = string.Join(",", numbers.ToArray());
         }
         public void UpdateDebugging(bool debugging)
         {
@@ -301,11 +295,11 @@ namespace Automata.IDE
         private void debugToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Debugging = true;
-            Debugger = new Debugger(richTextBox1, richTextBox2, HostType, delegate (string s)
+            Debugger = new Debugger(AMSBox, AMSSBox, HostType, delegate (string s)
             {
-                richTextBox3.Text = s;
+                InfoBox.Text = s;
                 if (StateOn)
-                    richTextBox3.Refresh();
+                    InfoBox.Refresh();
             }, SourceOn, () => TextOn);
             if (Debugger.BeginDebug())
                 UpdateDebugging(debugging: true);
@@ -315,8 +309,8 @@ namespace Automata.IDE
         private void infoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AutomataHost host = ((!(HostType.GetConstructor(new Type[1] { typeof(IStringArg) }) != null)) ? ((AutomataHost)Activator.CreateInstance(HostType)) : ((AutomataHost)Activator.CreateInstance(HostType, new object[1])));
-            richTextBox3.Clear();
-            richTextBox3.AppendText($"{host}\n");
+            InfoBox.Clear();
+            InfoBox.AppendText($"{host}\n");
             MethodInfo[] mis = host.GetType().GetMethods();
             int[] functionHash = host.FunctionHash;
             foreach (int i in functionHash)
@@ -325,7 +319,7 @@ namespace Automata.IDE
                 foreach (MethodInfo mi in array)
                 {
                     if (i == mi.Name.GetHashCode())
-                        richTextBox3.AppendText(mi.Name + "\n");
+                        InfoBox.AppendText(mi.Name + "\n");
                 }
             }
         }
@@ -341,14 +335,14 @@ namespace Automata.IDE
         }
         private void breakPointToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int index = richTextBox2.SelectionStart;
-            int end = richTextBox2.SelectionStart + richTextBox2.SelectionLength;
+            int index = AMSSBox.SelectionStart;
+            int end = AMSSBox.SelectionStart + AMSSBox.SelectionLength;
             if (end == index)
                 end++;
             for (int i = index; i < end; i++)
             {
-                richTextBox2.Select(i, 1);
-                richTextBox2.SelectionBackColor = ((richTextBox2.SelectionBackColor == Color.White) ? Color.Red : Color.White);
+                AMSSBox.Select(i, 1);
+                AMSSBox.SelectionBackColor = ((AMSSBox.SelectionBackColor == Color.White) ? Color.Red : Color.White);
             }
         }
         private void stopToolStripMenuItem_Click(object sender, EventArgs e) => UpdateDebugging(Debugger.Debugging = false);
@@ -383,15 +377,26 @@ namespace Automata.IDE
                 }
             }
             s += "SetInitFunction(Init)\nSetEndCheck(true)";
-            richTextBox1.Text = s;
+            AMSBox.Text = s;
         }
         private void richTextBox1_KeyDown(object sender, KeyEventArgs e)
         {
             if (!Debugging && e.KeyData == Keys.Return)
             {
-                Curve = richTextBox1.SelectionStart;
+                Curve = AMSBox.SelectionStart;
                 checkToolStripMenuItem.PerformClick();
             }
+        }
+
+        private void IDEForm_SizeChanged(object sender, EventArgs e)
+        {
+            AMSBox.Width =Width / 2;
+            InfoBox.Width=ConsoleBox.Width = Width / 4;
+            AMSBox.Height = Height;
+            AMSSBox.Width = Width/2;
+            AMSSBox.Height = InfoBox.Height = ConsoleBox.Height = Height / 2;
+            AMSSBox.Left=InfoBox.Left = AMSBox.Width;
+            ConsoleBox.Left = InfoBox.Width + InfoBox.Left;
         }
     }
 }

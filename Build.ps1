@@ -1,5 +1,7 @@
+& "D:\VS 2019\MSBuild\Current\Bin\MSBuild.exe" -t:rebuild
+
 if (Test-Path(".\Test\")) {
-    Remove-Item(".\Test\")
+    Remove-Item .\Test\ -Recurse
 }
 
 New-Item .\Test\ -ItemType Directory
@@ -12,16 +14,20 @@ foreach ($fi in Get-ChildItem(".\Debug\net5.0-windows")) {
         }
         ".json" {
             $l=".\Test\"+$fi.Name
-            Copy-Item $fi -Destination $l
+            Move-Item $fi -Destination $l
         }
         ".dll" {
             $l=".\Test\"+$fi.Name
-            Copy-Item $fi -Destination $l
+            Move-Item $fi -Destination $l
+        }
+        ".exe" {
+            $l=".\Test\"+$fi.Name
+            Move-Item $fi -Destination $l
         }
     }
 }
 
-Copy-Item .\Debug\net5.0-windows\TestProgram.exe -Destination .\Test\TestProgram.exe
+Remove-Item .\Debug\net5.0-windows -Recurse
 
 $location=Get-Location
 

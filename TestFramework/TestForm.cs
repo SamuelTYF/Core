@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
@@ -25,6 +26,12 @@ namespace TestFramework
                     SubTaskCount += test.TaskCount;
                 }
         }
+        public TestForm(string[] Args)
+        {
+            InitializeComponent();
+            Text = string.Join(",",Args);
+            backgroundWorker2.RunWorkerAsync();
+        }
         public void Run()
         {
             int ErrorCount = 0;
@@ -36,6 +43,7 @@ namespace TestFramework
             {
                 ITest test = item.Tag as ITest;
                 item.SubItems[1].Text = "Running";
+                item.ForeColor = Color.Blue;
                 test.UpdateInfo = (object value) =>
                 {
                     item.SubItems[3].Tag = value;
@@ -50,12 +58,14 @@ namespace TestFramework
                         progressBar1.Value = value + count;
                     });
                     item.SubItems[1].Text = "Success";
+                    item.ForeColor = Color.Green;
                 }
                 catch (Exception e)
                 {
                     ErrorCount++;
                     item.SubItems[1].Text = "Fail";
                     item.SubItems[1].Tag = e;
+                    item.ForeColor = Color.Red;
                 }
                 value += test.TaskCount;
             }
@@ -97,5 +107,30 @@ namespace TestFramework
             }
         }
         private void infoToolStripMenuItem_Click(object sender, EventArgs e) => DebugForm.Display("Info", listView1.SelectedItems[0].SubItems[3].Tag);
+        private void backgroundWorker2_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            startToolStripMenuItem.Visible = false;
+            loadAllToolStripMenuItem.Visible = false;
+            Type ITest = typeof(ITest);
+            Text = Environment.CurrentDirectory;
+            progressBar1.Value = 0;
+            SubTaskCount = 0;
+            foreach (FileInfo fi in new DirectoryInfo(Environment.CurrentDirectory).EnumerateFiles("*.dll"))
+            {
+                Assembly assembly = Assembly.LoadFrom(fi.FullName);
+                foreach (Type t in assembly.GetTypes())
+                    if (t.BaseType == ITest)
+                    {
+                        ITest test = t.GetConstructor(Array.Empty<Type>()).Invoke(null) as ITest;
+                        listView1.Items.Add(new ListViewItem(test.TestName)
+                        {
+                            SubItems = { "Prepared", $"0/{test.TaskCount}", "" },
+                            Tag = test
+                        });
+                        SubTaskCount += test.TaskCount;
+                    }
+            }
+            Run();
+        }
     }
 }

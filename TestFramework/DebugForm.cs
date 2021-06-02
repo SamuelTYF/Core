@@ -52,7 +52,7 @@ namespace TestFramework
                     if (item != null)
                     {
                         string key = $"[{num2++}]";
-                        listView1.Items.Add(new ListViewItem($"[{num2++}]")
+                        listView1.Items.Add(new ListViewItem(key)
                         {
                             SubItems = { item.GetType().Name, $"{Values[key] = item}" }
                         });

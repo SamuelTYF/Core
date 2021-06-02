@@ -50,19 +50,15 @@ namespace Automata.IDE
         public bool HasMode(string mode)
         {
             foreach (string mode2 in _Modes)
-            {
                 if (mode2 == mode)
                     return true;
-            }
             return false;
         }
         public bool HasFunction(string function)
         {
             foreach (string function2 in _Functions)
-            {
                 if (function2 == function)
                     return true;
-            }
             return false;
         }
         public void Tackle()
@@ -179,21 +175,15 @@ namespace Automata.IDE
                             if (!HasMode(mode3))
                                 SetError("Hasn't Define " + mode3, Indexs[1], TempStrings[1].Length);
                             else if (!HasFunction(function4))
-                            {
                                 SetError("Hasn't Define " + function4, Indexs[3], TempStrings[3].Length);
-                            }
                             else if (!HasMode(next2))
-                            {
                                 SetError("Hasn't Define " + next2, Indexs[4], TempStrings[4].Length);
-                            }
                             else if (int.TryParse(sindex, out int index2))
                             {
                                 Kernel.RegisterRule(mode3, index2, function4, next2);
                                 Rules[mode3, 0][index2] = (Indexs[0], RichTextStringArg.StringArg.index - Indexs[0]);
                             }
-                            else
-                            {
-                                switch (sindex)
+                            else switch (sindex)
                                 {
                                     case "Number":
                                         {
@@ -229,7 +219,6 @@ namespace Automata.IDE
                                         SetError("Can't Find " + sindex, Indexs[2], TempStrings[2].Length);
                                         break;
                                 }
-                            }
                         }
                     }
                     else if (TempStrings.Length == 6)
@@ -252,27 +241,19 @@ namespace Automata.IDE
                             if (!HasMode(mode2))
                                 SetError("Hasn't Define " + mode2, Indexs[1], TempStrings[1].Length);
                             else if (!HasFunction(function3))
-                            {
                                 SetError("Hasn't Define " + function3, Indexs[4], TempStrings[4].Length);
-                            }
                             else if (!HasMode(next))
-                            {
                                 SetError("Hasn't Define " + next, Indexs[5], TempStrings[5].Length);
-                            }
                             else
-                            {
                                 for (int index = start; index <= end; index++)
                                 {
                                     Kernel.RegisterRule(mode2, index, function3, next);
                                     Rules[mode2, 0][index] = (Indexs[0], RichTextStringArg.StringArg.index - Indexs[0]);
                                 }
-                            }
                         }
                     }
                     else
-                    {
                         SetError("RegisterRule Format Error", Indexs[0], RichTextStringArg.StringArg.index - Indexs[0]);
-                    }
                     if (State != 3)
                         SetError("State Error", Indexs[0], RichTextStringArg.StringArg.index - Indexs[0]);
                     State = 3;

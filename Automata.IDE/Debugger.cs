@@ -46,9 +46,7 @@ namespace Automata.IDE
                 Modes = host._Modes.ToArray();
                 Functions = new string[host._Functions.Length - 1];
                 for (int i = 1; i < host._Functions.Length; i++)
-                {
                     Functions[i - 1] = host._Functions[i];
-                }
                 Rules = host.Rules;
                 Host = HostType.GetConstructor(new Type[1] { typeof(IStringArg) }) != null
                     ? (AutomataHost)Activator.CreateInstance(HostType, Text)
@@ -58,10 +56,8 @@ namespace Automata.IDE
                     string r = "";
                     string[] functions = Functions;
                     foreach (string s in functions)
-                    {
                         if (host.GetType().GetMethod(s, Type.EmptyTypes) == null)
                             r = r + "Host Hasn't Define " + s + "\n";
-                    }
                     Display(r);
                     return false;
                 }
@@ -134,9 +130,7 @@ namespace Automata.IDE
         public bool Continue()
         {
             while (Debugging && !Break)
-            {
                 MoveToNext();
-            }
             if (Break)
                 Break = false;
             else

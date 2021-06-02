@@ -18,16 +18,10 @@ namespace Automata
         public bool CheckFunctions(int[] functions)
         {
             if (functions.Length > FunctionHash.Length)
-            {
                 return false;
-            }
             for (int i = 0; i < functions.Length; i++)
-            {
                 if (FunctionHash[i] != functions[i])
-                {
                     return false;
-                }
-            }
             return true;
         }
     }
