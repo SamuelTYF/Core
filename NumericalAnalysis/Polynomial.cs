@@ -2,14 +2,16 @@ using System;
 using Collection;
 namespace NumericalAnalysis
 {
-	public class Polynomial
+	public class Polynomial:IFunction
 	{
 		public const double PError = 1E-10;
 		public const double NError = -1E-10;
 		public int Order;
 		public double[] P;
 		public static readonly Polynomial Zero = new(default(double));
-		public double this[double x]
+		public int Dimension => 1;
+        public double this[double[] xs]=>xs.Length!=1?throw new Exception():this[xs[0]];
+        public double this[double x]
 		{
 			get
 			{
@@ -228,11 +230,6 @@ namespace NumericalAnalysis
 			Array.Copy(P, offset, r, 0, length);
 			return new(r);
 		}
-		public void Test(double[] xs)
-		{
-			foreach (double x in xs)
-				Console.WriteLine($"{x},{this[x]},{GetDerivativeValue(x)}");
-		}
 		public override string ToString()
 		{
 			List<string> s = new();
@@ -243,7 +240,8 @@ namespace NumericalAnalysis
 				s.Add(P[0].ToString());
             return s.Length == 0 ? "0" : string.Join("+", s);
         }
-        public Polynomial GetDerivative()
+		public IFunction GetDerivatives() => GetDerivative();
+		public Polynomial GetDerivative()
 		{
 			double[] r = new double[Order];
 			for (int i = Order; i > 0; i--)

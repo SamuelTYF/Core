@@ -2,7 +2,7 @@ using Collection.Serialization;
 using System;
 namespace Collection
 {
-    public class Heap<T> : IHeap<T>, ISerializable where T : IComparable<T>
+    public class Heap<T> : ISerializable where T : IComparable<T>
     {
         public List<T> Values;
         public int Mode;

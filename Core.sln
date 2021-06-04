@@ -45,9 +45,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "File.Test", "File.Test\File
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Net.Xml", "Net.Xml\Net.Xml.csproj", "{43218B58-5D7D-43AA-92A1-FCB7CD05E908}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumericalAnalysis", "NumericalAnalysis\NumericalAnalysis.csproj", "{8BD78E2C-9FB8-4B61-97E8-0AC24C4BAD6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NumericalAnalysis", "NumericalAnalysis\NumericalAnalysis.csproj", "{8BD78E2C-9FB8-4B61-97E8-0AC24C4BAD6A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumericalAnalysis.Test", "NumericalAnalysis.Test\NumericalAnalysis.Test.csproj", "{99FCD81B-33A5-4FA4-B517-1D16F8354564}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NumericalAnalysis.Test", "NumericalAnalysis.Test\NumericalAnalysis.Test.csproj", "{99FCD81B-33A5-4FA4-B517-1D16F8354564}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ColorFunction", "ColorFunction\ColorFunction.csproj", "{A74BF2CF-F3E9-4078-94A5-53A0EC306893}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tikz", "Tikz\Tikz.csproj", "{E9178ADE-019A-458B-801F-309A1A530850}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TikzForm", "TikzForm\TikzForm.csproj", "{DA394BE2-283D-4703-B4A8-0615B0B228E8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hook", "Hook\Hook.csproj", "{690C19BC-700A-4044-BEA6-5E793B482D1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hook.Test", "Hook.Test\Hook.Test.csproj", "{6A839FEF-2A8C-4A8E-84BB-72E6A354974D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hook.TestForm", "Hook.TestForm\Hook.TestForm.csproj", "{2A4EC118-3574-4015-B2D9-CBEDC9673901}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -225,6 +237,54 @@ Global
 		{99FCD81B-33A5-4FA4-B517-1D16F8354564}.Release|Any CPU.Build.0 = Release|Any CPU
 		{99FCD81B-33A5-4FA4-B517-1D16F8354564}.Release|x64.ActiveCfg = Release|x64
 		{99FCD81B-33A5-4FA4-B517-1D16F8354564}.Release|x64.Build.0 = Release|x64
+		{A74BF2CF-F3E9-4078-94A5-53A0EC306893}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A74BF2CF-F3E9-4078-94A5-53A0EC306893}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A74BF2CF-F3E9-4078-94A5-53A0EC306893}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A74BF2CF-F3E9-4078-94A5-53A0EC306893}.Debug|x64.Build.0 = Debug|Any CPU
+		{A74BF2CF-F3E9-4078-94A5-53A0EC306893}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A74BF2CF-F3E9-4078-94A5-53A0EC306893}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A74BF2CF-F3E9-4078-94A5-53A0EC306893}.Release|x64.ActiveCfg = Release|Any CPU
+		{A74BF2CF-F3E9-4078-94A5-53A0EC306893}.Release|x64.Build.0 = Release|Any CPU
+		{E9178ADE-019A-458B-801F-309A1A530850}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9178ADE-019A-458B-801F-309A1A530850}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9178ADE-019A-458B-801F-309A1A530850}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E9178ADE-019A-458B-801F-309A1A530850}.Debug|x64.Build.0 = Debug|Any CPU
+		{E9178ADE-019A-458B-801F-309A1A530850}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9178ADE-019A-458B-801F-309A1A530850}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9178ADE-019A-458B-801F-309A1A530850}.Release|x64.ActiveCfg = Release|Any CPU
+		{E9178ADE-019A-458B-801F-309A1A530850}.Release|x64.Build.0 = Release|Any CPU
+		{DA394BE2-283D-4703-B4A8-0615B0B228E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA394BE2-283D-4703-B4A8-0615B0B228E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA394BE2-283D-4703-B4A8-0615B0B228E8}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{DA394BE2-283D-4703-B4A8-0615B0B228E8}.Debug|x64.Build.0 = Debug|Any CPU
+		{DA394BE2-283D-4703-B4A8-0615B0B228E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA394BE2-283D-4703-B4A8-0615B0B228E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA394BE2-283D-4703-B4A8-0615B0B228E8}.Release|x64.ActiveCfg = Release|Any CPU
+		{DA394BE2-283D-4703-B4A8-0615B0B228E8}.Release|x64.Build.0 = Release|Any CPU
+		{690C19BC-700A-4044-BEA6-5E793B482D1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{690C19BC-700A-4044-BEA6-5E793B482D1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{690C19BC-700A-4044-BEA6-5E793B482D1E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{690C19BC-700A-4044-BEA6-5E793B482D1E}.Debug|x64.Build.0 = Debug|Any CPU
+		{690C19BC-700A-4044-BEA6-5E793B482D1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{690C19BC-700A-4044-BEA6-5E793B482D1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{690C19BC-700A-4044-BEA6-5E793B482D1E}.Release|x64.ActiveCfg = Release|Any CPU
+		{690C19BC-700A-4044-BEA6-5E793B482D1E}.Release|x64.Build.0 = Release|Any CPU
+		{6A839FEF-2A8C-4A8E-84BB-72E6A354974D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A839FEF-2A8C-4A8E-84BB-72E6A354974D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A839FEF-2A8C-4A8E-84BB-72E6A354974D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6A839FEF-2A8C-4A8E-84BB-72E6A354974D}.Debug|x64.Build.0 = Debug|Any CPU
+		{6A839FEF-2A8C-4A8E-84BB-72E6A354974D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A839FEF-2A8C-4A8E-84BB-72E6A354974D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A839FEF-2A8C-4A8E-84BB-72E6A354974D}.Release|x64.ActiveCfg = Release|Any CPU
+		{6A839FEF-2A8C-4A8E-84BB-72E6A354974D}.Release|x64.Build.0 = Release|Any CPU
+		{2A4EC118-3574-4015-B2D9-CBEDC9673901}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A4EC118-3574-4015-B2D9-CBEDC9673901}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A4EC118-3574-4015-B2D9-CBEDC9673901}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2A4EC118-3574-4015-B2D9-CBEDC9673901}.Debug|x64.Build.0 = Debug|Any CPU
+		{2A4EC118-3574-4015-B2D9-CBEDC9673901}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A4EC118-3574-4015-B2D9-CBEDC9673901}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A4EC118-3574-4015-B2D9-CBEDC9673901}.Release|x64.ActiveCfg = Release|Any CPU
+		{2A4EC118-3574-4015-B2D9-CBEDC9673901}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

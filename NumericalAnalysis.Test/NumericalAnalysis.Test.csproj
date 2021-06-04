@@ -30,6 +30,7 @@
     <OutputPath>D:\Core\Release\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ColorFunction\ColorFunction.csproj" />
     <ProjectReference Include="..\NumericalAnalysis\NumericalAnalysis.csproj" />
     <ProjectReference Include="..\TestFramework\TestFramework.csproj" />
   </ItemGroup>
