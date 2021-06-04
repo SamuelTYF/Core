@@ -33,6 +33,7 @@ namespace TestFramework
             this.ValueColumn = new System.Windows.Forms.ColumnHeader();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.invokeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,16 +59,24 @@ namespace TestFramework
             // 
             this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.invokeToolStripMenuItem});
+            this.invokeToolStripMenuItem,
+            this.showToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(127, 28);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(211, 80);
             // 
             // invokeToolStripMenuItem
             // 
             this.invokeToolStripMenuItem.Name = "invokeToolStripMenuItem";
-            this.invokeToolStripMenuItem.Size = new System.Drawing.Size(126, 24);
+            this.invokeToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
             this.invokeToolStripMenuItem.Text = "invoke";
             this.invokeToolStripMenuItem.Click += new System.EventHandler(this.invokeToolStripMenuItem_Click);
+            // 
+            // showToolStripMenuItem
+            // 
+            this.showToolStripMenuItem.Name = "showToolStripMenuItem";
+            this.showToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.showToolStripMenuItem.Text = "show";
+            this.showToolStripMenuItem.Click += new System.EventHandler(this.showToolStripMenuItem_Click);
             // 
             // DebugForm
             // 
@@ -80,6 +89,7 @@ namespace TestFramework
             this.SizeChanged += new System.EventHandler(this.DebugForm_SizeChanged);
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
+
         }
         #endregion
         private System.Windows.Forms.ListView listView1;
@@ -88,5 +98,6 @@ namespace TestFramework
         private System.Windows.Forms.ColumnHeader ValueColumn;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem invokeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showToolStripMenuItem;
     }
 }

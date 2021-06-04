@@ -10,13 +10,11 @@ namespace Hook.Test
         }
         public override void Run(UpdateTaskProgress update)
         {
-            Manager manager = new("Hook.TestForm.exe");
+            Manager manager = new("ResourceForm.exe");
             manager.Start();
-            int r=(int)manager.Execute("Get");
-            Ensure.Equal(r,5);
             update(1);
             long last = System.DateTime.Now.Ticks;
-            long tick = (long)manager.Execute("GetTick");
+            long tick = (long)manager.Execute("GetTicks");
             UpdateInfo(tick - last);
             update(2);
             manager.Dispose();

@@ -89,5 +89,8 @@ namespace TestFramework
                 Display(this.text + "." + text, Values[text]);
             }
         }
+
+        private void showToolStripMenuItem_Click(object sender, EventArgs e) 
+            => MessageBox.Show(listView1.SelectedItems[0].SubItems[2].ToString());
     }
 }

@@ -27,6 +27,11 @@ foreach ($fi in Get-ChildItem(".\Debug\net5.0-windows")) {
     }
 }
 
+foreach ($fi in Get-ChildItem(".\TestResources")) {
+    $l=".\Test\"+$fi.Name
+    Copy-Item $fi -Destination $l
+}
+
 Remove-Item .\Debug\net5.0-windows -Recurse
 
 $location=Get-Location

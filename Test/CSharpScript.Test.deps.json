@@ -1,0 +1,74 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "CSharpScript.Test/1.0.0": {
+        "dependencies": {
+          "CSharpScript": "1.0.0",
+          "TestFramework": "1.0.0"
+        },
+        "runtime": {
+          "CSharpScript.Test.dll": {}
+        }
+      },
+      "Collection/1.0.0": {
+        "runtime": {
+          "Collection.dll": {}
+        }
+      },
+      "CSharpScript/1.0.0": {
+        "dependencies": {
+          "Collection": "1.0.0",
+          "Hook": "1.0.0"
+        },
+        "runtime": {
+          "CSharpScript.dll": {}
+        }
+      },
+      "Hook/1.0.0": {
+        "dependencies": {
+          "Collection": "1.0.0"
+        },
+        "runtime": {
+          "Hook.dll": {}
+        }
+      },
+      "TestFramework/1.0.0": {
+        "runtime": {
+          "TestFramework.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "CSharpScript.Test/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Collection/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "CSharpScript/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Hook/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "TestFramework/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
