@@ -73,6 +73,7 @@ namespace CSharpScript.File
 				SectionHeader sectionHeader = new(stream);
 				SectionHeaders[sectionHeader.VirtualAddress] = sectionHeader;
 			}
+			if (OptionalHeader.DataDirectories.CLRRuntimeHeader.Size == 0) return;
 			stream.Position = GetOffset(OptionalHeader.DataDirectories.CLRRuntimeHeader.RVA);
 			CLIHeader = new CLIHeader(stream);
 			StrongNameSignature = new byte[CLIHeader.StrongNameSignature.Size];
@@ -94,5 +95,12 @@ namespace CSharpScript.File
 				otherResource.ReadOtherResourceInfo(stream, offset);
 		}
         public override string ToString() => string.Format("Header:\n{0}\nOptionalHeader:\n{1}\nSectionHeaders:\n{2}\nImportTable:\n{3}\nCLIHeader:\n{4}\nMetadataRoot\n{5}\nResources\n{6}", Header, OptionalHeader, string.Join("\n", SectionHeaders), ImportTable, CLIHeader, MetadataRoot, string.Join("\n", Resources));
-    }
+		public TypeDef GetType(string name)
+        {
+			foreach (TypeDef type in MetadataRoot.TildeHeap.TypeDefTable.TypeDefs)
+				if (type.TypeName == name)
+					return type;
+			return null;
+        }
+	}
 }

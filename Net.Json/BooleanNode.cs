@@ -42,7 +42,7 @@ namespace Net.Json
 					num2++;
 				}
 				if (num2 != num)continue;
-                return !arg.NotOver || arg.Top() is ' ' or ',' or ']' or '}'
+                return !arg.NotOver || arg.Top() is '\r' or '\n' or ' ' or ',' or ']' or '}'
                     ? new BooleanNode(value)
                     : throw new Exception();
             }

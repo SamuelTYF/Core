@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="NumericalAnalysis.Minimum.Gradient">
+    <Position X="7.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAIAAgAAAABAI=</HashCode>
+      <FileName>Minimum\Gradient.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NumericalAnalysis.Minimum.IMinimum">
+    <Position X="6.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAABAIAAgAAAAAAAAEAAABAY=</HashCode>
+      <FileName>Minimum\IMinimum.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NumericalAnalysis.Minimum.Simplex">
+    <Position X="4.75" Y="3.5" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="NumericalAnalysis.Minimum.Simplex.Point">
+        <TypeIdentifier>
+          <NewMemberFileName>Minimum\Simplex.cs</NewMemberFileName>
+        </TypeIdentifier>
+        <Lollipop Position="0.2" />
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAI=</HashCode>
+      <FileName>Minimum\Simplex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>

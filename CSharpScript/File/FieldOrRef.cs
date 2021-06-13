@@ -20,7 +20,7 @@ namespace CSharpScript.File
 		public FieldOrRef(MemberRef memberRef)
 		{
 			MemberRef = memberRef;
-			IsField = memberRef.Signature is FieldSig;
+			IsField = false;
 			Name = MemberRef.Name;
 			Parent = MemberRef.Class;
 			if (Parent.Flag == MemberRefParentFlag.TypeSpec)

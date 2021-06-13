@@ -33,6 +33,7 @@
     <ProjectReference Include="..\ColorFunction\ColorFunction.csproj" />
     <ProjectReference Include="..\NumericalAnalysis\NumericalAnalysis.csproj" />
     <ProjectReference Include="..\TestFramework\TestFramework.csproj" />
+    <ProjectReference Include="..\Wolfram\Wolfram.csproj" />
   </ItemGroup>
 
 </Project>

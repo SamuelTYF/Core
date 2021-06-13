@@ -19,5 +19,6 @@ namespace NumericalAnalysis.Minimum
 			Error = error;
 		}
 		public abstract double Run(out double e);
+		public virtual string GetName() => "IMinimum";
     }
 }

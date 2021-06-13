@@ -21,5 +21,11 @@ namespace Tikz
                     Parsers[mi.Name] = mi.CreateDelegate<TikzParser>();
             }
         }
+        public ITikzPackage(TikzParser[] parsers)
+        {
+            Parsers = new();
+            foreach (TikzParser p in parsers)
+                Parsers[p.Method.Name] = p;
+        }
     }
 }

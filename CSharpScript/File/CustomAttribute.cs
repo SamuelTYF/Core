@@ -140,11 +140,9 @@ namespace CSharpScript.File
 					if (HasFlag(item4, item3.FieldList[j].Constant.Value))
 						list2.Add($"{item3}.{item3.FieldList[j].Name}");
 				}
-				if (list2.Length == 0)
-					return $"({item3})0x{BitConverter.ToInt64(item4, 0):X}";
-				return string.Join("|", list2);
-			}
-			case ElementType.ELEMENT_TYPE_STRING:
+                return list2.Length == 0 ? $"({item3})0x{BitConverter.ToInt64(item4, 0):X}" : string.Join("|", list2);
+            }
+            case ElementType.ELEMENT_TYPE_STRING:
 				return (arg.Value == null) ? "null" : $"\"{arg.Value}\"";
 			case ElementType.ELEMENT_TYPE_ENUM:
 			{

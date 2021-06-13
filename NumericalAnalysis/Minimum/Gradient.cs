@@ -34,5 +34,6 @@ namespace NumericalAnalysis.Minimum
 			while (e >= Error);
 			return Value;
 		}
+		public override string GetName() => "Gradient";
 	}
 }

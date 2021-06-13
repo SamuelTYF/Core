@@ -42,8 +42,10 @@ namespace Automata.IDE
                 }
                 else if (path.EndsWith(".amss"))
                 {
-                    using StreamReader streamReader2 = new(path);
-                    AMSSBox.Text = streamReader2.ReadToEnd();
+                    using FileStream fs = new FileInfo(path).OpenRead();
+                    byte[] bs = new byte[fs.Length];
+                    fs.Read(bs, 0, bs.Length);
+                    AMSSBox.Text = System.Text.Encoding.UTF8.GetString(bs);
                 }
                 else
                 {
@@ -63,8 +65,10 @@ namespace Automata.IDE
                     using (StreamReader streamReader3 = new(path2))
                         AMSBox.Text = streamReader3.ReadToEnd();
                     checkToolStripMenuItem.PerformClick();
-                    using (StreamReader srr = new(path3))
-                        AMSSBox.Text = srr.ReadToEnd();
+                    using FileStream fs = new FileInfo(path3).OpenRead();
+                    byte[] bs = new byte[fs.Length];
+                    fs.Read(bs, 0, bs.Length);
+                    AMSSBox.Text = System.Text.Encoding.UTF8.GetString(bs);
                     Assembly assembly = Assembly.LoadFrom(path4);
                     HostBox.Items.Clear();
                     int index = 0;

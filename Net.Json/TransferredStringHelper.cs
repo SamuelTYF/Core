@@ -92,9 +92,8 @@ namespace Net.Json
 			BuildTramsferredFunctions();
 			string s = "";
 			for (int i = 0; i < str.Length; i++)
-				if (str[i] == '\\')
-					if (++i < str.Length)
-						TramsferredFunctions[str[i]](str, ref s, ref i);
+				if (str[i] == '\\' && ++i < str.Length)
+					TramsferredFunctions[str[i]](str, ref s, ref i);
 				else s += str[i];
 			return s;
 		}

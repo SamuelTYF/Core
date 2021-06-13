@@ -26,7 +26,7 @@ namespace CSharpScript.DomTree
 		public static ILBody ParseBody(MethodDef def, int start, int length)
 		{
 			CorILMethod method = def.Method;
-			AVL<int, ILCode> aVL = new AVL<int, ILCode>();
+			AVL<int, ILCode> aVL = new();
 			Instruction[] instructions = method.MethodBody.Instructions;
 			foreach (Instruction instruction in instructions)
 			{
@@ -52,7 +52,7 @@ namespace CSharpScript.DomTree
 					{
 					case ExceptionHandlingFlags.COR_ILEXCEPTION_CLAUSE_EXCEPTION:
 					{
-						ILCatch iLCatch = new ILCatch(exceptionClause.HandlerOffset, exceptionClause.HandlerLength);
+						ILCatch iLCatch = new(exceptionClause.HandlerOffset, exceptionClause.HandlerLength);
 						iLCatch.Type = exceptionClause.Type;
 						iLCatch.Parent = iLTry;
 						iLCatch.Load(Select(aVL, iLCatch.Info));
@@ -62,7 +62,7 @@ namespace CSharpScript.DomTree
 					}
 					case ExceptionHandlingFlags.COR_ILEXCEPTION_CLAUSE_FINALLY:
 					{
-						ILFinally iLFinally = new ILFinally(exceptionClause.HandlerOffset, exceptionClause.HandlerLength);
+						ILFinally iLFinally = new(exceptionClause.HandlerOffset, exceptionClause.HandlerLength);
 						iLFinally.Parent = iLTry;
 						iLFinally.Load(Select(aVL, iLFinally.Info));
 						aVL[exceptionClause.HandlerOffset] = iLFinally;
@@ -73,7 +73,7 @@ namespace CSharpScript.DomTree
 					}
 					case ExceptionHandlingFlags.COR_ILEXCEPTION_CLAUSE_FAULT:
 					{
-						ILFault iLFault = new ILFault(exceptionClause.HandlerOffset, exceptionClause.HandlerLength);
+						ILFault iLFault = new(exceptionClause.HandlerOffset, exceptionClause.HandlerLength);
 						iLFault.Parent = iLTry;
 						iLFault.Load(Select(aVL, iLFault.Info));
 						aVL[exceptionClause.HandlerOffset] = iLFault;
@@ -87,15 +87,13 @@ namespace CSharpScript.DomTree
 					}
 				}
 			}
-			ILBody iLBody = new ILBody(start, length);
+			ILBody iLBody = new(start, length);
 			iLBody.Query = aVL;
 			iLBody.Load(Select(aVL, iLBody.Info));
 			aVL[start] = iLBody;
 			return iLBody;
 		}
-		public override string Print(int tabs = 0)
-		{
-			return string.Join("\n", Array.ConvertAll(Codes, (ILCode code) => code.Print(tabs + 1)));
-		}
-	}
+        public override string Print(int tabs = 0) 
+			=> string.Join("\n", Array.ConvertAll(Codes, (ILCode code) => code.Print(tabs + 1)));
+    }
 }

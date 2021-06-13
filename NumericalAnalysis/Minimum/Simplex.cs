@@ -69,5 +69,6 @@ namespace NumericalAnalysis.Minimum
 			while (e >= Error);
 			return PS[0].F;
 		}
+		public override string GetName() => "Simplex";
 	}
 }

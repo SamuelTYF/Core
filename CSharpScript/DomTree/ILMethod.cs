@@ -16,9 +16,7 @@ namespace CSharpScript.DomTree
 			Body = body;
 			Body.Method = this;
 		}
-		public override string Print(int tabs = 0)
-		{
-			return ".params\n\t" + string.Join(",\n\t", (IEnumerable<Param>)Params) + "\n.locals\n\t" + string.Join(",\n\t", (IEnumerable<LocalVar>)LocalVars) + "\n.code\n" + Body.Print();
-		}
-	}
+        public override string Print(int tabs = 0)
+			=> ".params\n\t" + string.Join(",\n\t", (IEnumerable<Param>)Params) + "\n.locals\n\t" + string.Join(",\n\t", (IEnumerable<LocalVar>)LocalVars) + "\n.code\n" + Body.Print();
+    }
 }

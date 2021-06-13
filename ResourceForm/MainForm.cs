@@ -1,10 +1,8 @@
 ﻿using Hook;
 using System;
 using Collection;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -13,21 +11,15 @@ namespace ResourceForm
     public partial class MainForm : Form
     {
         public HookManager Hook;
-
         public static readonly byte[] Byte16 = new byte[16]
         {
         48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
         65, 66, 67, 68, 69, 70
         };
-
         public static readonly byte[] EmptyPostionByteArray = new byte[10] { 48, 48, 48, 48, 48, 48, 48, 48, 32, 32 };
-
         public static readonly byte[] BlankArray = new byte[4] { 32, 32, 32, 32 };
-
         public bool[] WhiteList = new bool[256];
-
         public long PositionOffset = 0L;
-
         public int Last;
 		public MainForm()
 		{
@@ -45,13 +37,11 @@ namespace ResourceForm
 			Hook.Register(new Action<long>(RegisterOffset));
 			Hook.Register(new Func<long>(GetTicks));
 		}
-
 		private void openToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			if (openFileDialog1.ShowDialog() == DialogResult.OK)
 				OpenFile(openFileDialog1.FileName);
 		}
-
 		public byte[] GetPosition(long Position)
 		{
 			byte[] array = new byte[10];

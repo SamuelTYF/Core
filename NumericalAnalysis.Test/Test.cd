@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="NumericalAnalysis.Test.IMinimum_Test">
+    <Position X="6" Y="2.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAACAAAAAAAAAAI=</HashCode>
+      <FileName>IMinimum_Test.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TestFramework.ITest">
+    <Position X="2.75" Y="2.25" Width="2.25" />
+    <TypeIdentifier />
+  </Class>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>

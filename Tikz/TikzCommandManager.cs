@@ -1,6 +1,5 @@
 ﻿using Collection;
 using System.Drawing;
-using System.Drawing.Imaging;
 using Net.Xml;
 namespace Tikz
 {

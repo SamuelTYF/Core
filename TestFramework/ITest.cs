@@ -1,4 +1,6 @@
-﻿namespace TestFramework
+﻿using System.IO;
+
+namespace TestFramework
 {
     public abstract class ITest
     {
@@ -11,5 +13,10 @@
             TaskCount = taskcount;
         }
         public abstract void Run(UpdateTaskProgress update);
+        public void Save(object value,string file)
+        {
+            using StreamWriter sw = new(file);
+            sw.WriteLine(value);
+        }
     }
 }

@@ -8,7 +8,7 @@ namespace CSharpScript.File
 		public string TypeName;
 		public string TypeNamespace;
 		public TypeDefOrRef Extends;
-		public List<GenericParam> GenericParams = new List<GenericParam>();
+		public List<GenericParam> GenericParams = new();
 		public Field[] FieldList;
 		public MethodDef[] MethodList;
 		public Event[] Events;
@@ -19,9 +19,9 @@ namespace CSharpScript.File
 		public string FullName;
 		public int Hash;
 		public string QualifiedName;
-		public List<TypeDefOrRef> Interfaces = new List<TypeDefOrRef>();
-		public List<TypeDef> NestedClasses = new List<TypeDef>();
-		public List<CustomAttribute> CustomAttributes = new List<CustomAttribute>();
+		public List<TypeDefOrRef> Interfaces = new();
+		public List<TypeDef> NestedClasses = new();
+		public List<CustomAttribute> CustomAttributes = new();
 		public DeclSecurity DeclSecurity;
 		public ClassLayout ClassLayout;
 		public ExportedType ExportedType;
@@ -67,11 +67,8 @@ namespace CSharpScript.File
 			else
 				FullName = TypeName;
 		}
-		public override string ToString()
-		{
-			return FullName;
-		}
-		public string GetInformation()
+        public override string ToString() => FullName;
+        public string GetInformation()
 		{
 			string text = "";
 			if (CustomAttributes.Length != 0)
@@ -87,5 +84,13 @@ namespace CSharpScript.File
 				text = text + ":" + string.Join(",", Interfaces);
 			return text;
 		}
+		public MethodDef[] GetMethod(string name)
+        {
+			List<MethodDef> methods = new();
+			foreach (MethodDef method in MethodList)
+				if (method.Name == name)
+					methods.Add(method);
+			return methods.ToArray();
+        }
 	}
 }

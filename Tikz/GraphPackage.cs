@@ -5,6 +5,10 @@ namespace Tikz
 {
     public class GraphPackage:ITikzPackage
     {
+        public GraphPackage()
+        {
+
+        }
         public static Bitmap Triangle(XmlNode node, TikzCommandManager _)
         {
             Point[] ps = new Point[node.Nodes.Length];

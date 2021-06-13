@@ -21,7 +21,7 @@ namespace CSharpScript.File
 				PermissionSet = new PermissionSet(metadata.BlobHeap.Values[Row.PermissionSet], ref index, metadata, ref Success);
 				metadata.BlobHeap.ParsedValues[Row.PermissionSet] = this;
 				if (Success)
-					Resolved = true;
+					Resolved = true;                                          
 			}
 		}
 	}

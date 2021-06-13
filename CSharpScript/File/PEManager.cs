@@ -21,6 +21,7 @@ namespace CSharpScript.File
 		{
 			using FileStream stream = new FileInfo(fname).OpenRead();
 			PEFile pEFile = new(this, stream);
+			if (pEFile.OptionalHeader.DataDirectories.CLRRuntimeHeader.Size == 0) return null;
 			if (pEFile.MetadataRoot.TildeHeap.AssemblyTable.Count == 0)
 				throw new Exception();
 			int hash = pEFile.MetadataRoot.TildeHeap.AssemblyTable.Assemblys[0].Hash;

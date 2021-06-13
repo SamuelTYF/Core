@@ -120,18 +120,22 @@ namespace TestFramework
             SubTaskCount = 0;
             foreach (FileInfo fi in new DirectoryInfo(Environment.CurrentDirectory).EnumerateFiles("*.dll"))
             {
-                Assembly assembly = Assembly.LoadFrom(fi.FullName);
-                foreach (Type t in assembly.GetTypes())
-                    if (t.BaseType == ITest)
-                    {
-                        ITest test = t.GetConstructor(Array.Empty<Type>()).Invoke(null) as ITest;
-                        listView1.Items.Add(new ListViewItem(test.TestName)
+                try
+                {
+                    Assembly assembly = Assembly.LoadFrom(fi.FullName);
+                    foreach (Type t in assembly.GetTypes())
+                        if (t.BaseType == ITest)
                         {
-                            SubItems = { "Prepared", $"0/{test.TaskCount}", "" },
-                            Tag = test
-                        });
-                        SubTaskCount += test.TaskCount;
-                    }
+                            ITest test = t.GetConstructor(Array.Empty<Type>()).Invoke(null) as ITest;
+                            listView1.Items.Add(new ListViewItem(test.TestName)
+                            {
+                                SubItems = { "Prepared", $"0/{test.TaskCount}", "" },
+                                Tag = test
+                            });
+                            SubTaskCount += test.TaskCount;
+                        }
+                }
+                catch (Exception) { }
             }
             Run();
             if (RunningResult) Application.Exit();

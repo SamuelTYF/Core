@@ -6,9 +6,6 @@ namespace CSharpScript.DomTree
 			: base(offset, length, ILCodeFlag.Nop)
 		{
 		}
-		public override string Print()
-		{
-			return "nop";
-		}
-	}
+        public override string Print() => "nop";
+    }
 }
