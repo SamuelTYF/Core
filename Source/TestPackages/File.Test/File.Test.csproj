@@ -1,25 +1,26 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0-windows</TargetFramework>
-    <UseWindowsForms>true</UseWindowsForms>
+    <TargetFramework>net6.0-windows10.0.20348.0</TargetFramework>
     <StartupObject>File.Test.Program</StartupObject>
-    <Platforms>AnyCPU;x64</Platforms>
+    <Authors>Pumpkin</Authors>
+    <Company>Pumpkin</Company>
+    <ApplicationIcon />
+    <StartupObject />
+    <Platforms>x64</Platforms>
+    <Copyright>Pumpkin</Copyright>
   </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DefineConstants />
-    <PlatformTarget>x64</PlatformTarget>
-    <OutputPath>D:\Core\Debug\</OutputPath>
-  </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <DefineConstants />
     <PlatformTarget>x64</PlatformTarget>
     <OutputPath>D:\Core\Debug\</OutputPath>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <DefineConstants />
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>D:\Core\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <DefineConstants />
     <PlatformTarget>x64</PlatformTarget>
     <OutputPath>D:\Core\Release\</OutputPath>

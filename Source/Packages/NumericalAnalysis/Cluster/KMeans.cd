@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="NumericalAnalysis.Cluster.KMeans">
+    <Position X="3" Y="0.5" Width="4.75" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="NumericalAnalysis.Cluster.KMeans.Point">
+        <TypeIdentifier>
+          <NewMemberFileName>Cluster\KMeans.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="NumericalAnalysis.Cluster.KMeans.Kernel">
+        <TypeIdentifier>
+          <NewMemberFileName>Cluster\KMeans.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAEAAABAAAAAgAAAAAQAAAAAAAAAAAAAABAAAAAAAAI=</HashCode>
+      <FileName>Cluster\KMeans.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>

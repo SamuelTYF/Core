@@ -1,0 +1,13 @@
+\contentsline {section}{\numberline {1}HMM}{1}{}%
+\contentsline {subsection}{\numberline {1.1}Trainsition Possibility}{2}{}%
+\contentsline {subsection}{\numberline {1.2}Emission Possibility}{2}{}%
+\contentsline {section}{\numberline {2}Forward}{2}{}%
+\contentsline {section}{\numberline {3}Backward}{3}{}%
+\contentsline {section}{\numberline {4}Single State Possibility}{3}{}%
+\contentsline {section}{\numberline {5}Double State Possibility}{3}{}%
+\contentsline {section}{\numberline {6}Issues}{4}{}%
+\contentsline {subsection}{\numberline {6.1}Evaluatation}{4}{}%
+\contentsline {subsection}{\numberline {6.2}Prediction/Decoding}{4}{}%
+\contentsline {subsection}{\numberline {6.3}Viterbi}{5}{}%
+\contentsline {subsection}{\numberline {6.4}Learning}{5}{}%
+\contentsline {subsection}{\numberline {6.5}Maximum}{5}{}%

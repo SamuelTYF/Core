@@ -1,0 +1,6 @@
+SetInputCount(256)
+RegisterMode(Stop)
+LockModes()
+RegisterFunction(Init)
+SetInitFunction(Init)
+SetEndCheck(true)

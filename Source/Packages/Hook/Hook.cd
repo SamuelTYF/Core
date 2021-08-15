@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="Hook.Arg">
+    <Position X="10" Y="4.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Arg.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Hook.HookManager">
+    <Position X="7.25" Y="4" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAABAAQAAAAAAAAAAAABAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>HookManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Hook.Manager">
+    <Position X="7.25" Y="1" Width="7.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAARAAiAAAAAAABAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Manager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Struct Name="Hook.COPYDATASTRUCT">
+    <Position X="12" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAEAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAA=</HashCode>
+      <FileName>COPYDATASTRUCT.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>

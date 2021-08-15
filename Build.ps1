@@ -1,4 +1,4 @@
-& "D:\VS 2019\MSBuild\Current\Bin\MSBuild.exe" -t:rebuild
+& "D:\VS 2022\MSBuild\Current\Bin\amd64\MSBuild.exe" -t:rebuild
 
 if (Test-Path(".\Test\")) {
     Remove-Item .\Test\ -Recurse

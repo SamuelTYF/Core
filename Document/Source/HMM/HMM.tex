@@ -1,0 +1,206 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{indentfirst}
+\title{HMM}
+\date{\today}
+\author{Pumpkin}
+
+\begin{document}
+    \maketitle
+    \tableofcontents
+
+    \section{HMM}
+
+        In Hidden Markov Model, current state only depends on last state.
+
+        \begin{equation}
+            P(x_{t+1}|x_t,x_{t-1},\cdots ,x_1,x_0)=P(x_{t+1}|x_t\cdots x_0)
+        \end{equation}
+
+        A HMM Model can be written as $\lambda(S,O,A,B,\Pi)$
+
+        Where
+
+        \begin{itemize}
+            \item [$S$] is State Space(Implicit)
+            \item [$O$] is Output Space(Explicit)
+            \item [$A$] is Trainsition Possibility
+            \item [$B$] is Emission Possibility
+            \item [$\Pi$] is Inital State Possibility
+        \end{itemize}
+
+        \subsection{Trainsition Possibility}
+
+            Trainsition Possibility $A=S\times S$ represents the Possibility of current state with refenrence to last state.
+
+            \begin{equation}
+                A_{ij}=P(s_{t+1}=i|s_t=j)
+            \end{equation}
+
+        \subsection{Emission Possibility}
+
+            Emission Possibility $B=S\times O$ represents the Possibility of current output with refenrence to current state.
+
+            \begin{equation}
+                B_i(o)=P(o|s=j)
+            \end{equation}
+    
+    \section{Forward}
+
+        \begin{equation}
+            \begin{split}
+                \alpha_t(i)&=P(o_t,o_{t-1},\cdots,o_1,o_0,s_t=i)\\
+                &=\sum_{j\in S} P(o_t,o_{t-1},\cdots,o_1,o_0,s_{t-1}=j,s_t=i)\\
+                &=\sum_{j\in S} P(o_t,s_t=i|s_{t-1}=j)*P(o_{t-1},\cdots,o_1,o_0,s_{t-1}=j)\\
+                &=\sum_{j\in S} P(s_t=i|s_{t-1}=j)*P(o_t|s_t=i)*\alpha_{t-1}(j)\\
+                &=\left(\sum_{j\in S} \alpha_{t-1}(j)*A_{ji}\right)*B_i(o_t)
+            \end{split}
+        \end{equation}
+
+        \begin{equation}
+            \alpha_0(i)=P(s_0=i)=\Pi_i
+        \end{equation}
+
+    \section{Backward}
+
+        \begin{equation}
+            \begin{split}
+                \beta_t(i)&=P(o_{t+1},o_{t+2},\cdots,o_{T-2},o_{T-1},s_t=i)\\
+                &=\sum_{j\in S} P(o_{t+1},o_{t+2},\cdots,o_{T-2},o_{T-1},s_{t+1}=j,s_t=i)\\
+                &=\sum_{j\in S} P(o_{t+1},s_t=i|s_{t+1}=j)*P(o_{t+2},\cdots,o_{T-2},o_{T-1},s_{t+1}=j)\\
+                &=\sum_{j\in S} P(s_t=i|s_{t+1}=j)*P(o_{t+1}|s_{t+1}=j)*\beta_{t+1}(j)\\
+                &=\sum_{j\in S} A_{ij}*B_{j}(o_{t+1})*\beta_{t+1}(j)
+            \end{split}
+        \end{equation}
+
+        \begin{equation}
+            \beta_{T-1}(i)=P(s_{T-1}=i)=1
+        \end{equation}
+
+    \section{Single State Possibility}
+
+        \begin{equation}
+            \begin{split}
+                &P(s_t=i,O)\\
+                &=P(o_t,o_{t-1},\cdots,o_1,o_0,s_t=i)*P(o_{t+1},o_{t+2},\cdots,o_{T-2},o_{T-1},s_t=i)\\
+                &=\alpha_t(i)*\beta_t(i)
+            \end{split}
+        \end{equation}
+
+        \begin{equation}
+            \begin{split}
+                \gamma_t(i)&=P(s_t=i|O)\\
+                &=\frac{P(s_t=i,O)}{\sum_{j\in S} P(s_t=j,O)}\\
+                &=\frac{\alpha_t(i)*\beta_t(i)}{\sum_{j\in S}\alpha_t(j)*\beta_t(j)}
+            \end{split}
+        \end{equation}
+    
+    \section{Double State Possibility}
+
+        \begin{equation}
+            \begin{split}
+                &P(s_t=i,s_{t+1}=j,O)\\
+                &=P(o_t,o_{t-1},\cdots,o_1,o_0,s_t=i)*P(o_{t+1},s_{t+1}=j|s_t=i)\\
+                &*P(o_{t+2},o_{t+2},\cdots,o_{T-2},o_{T-1},s_{t+1}=j)\\
+                &=\alpha_t(i)*A_{ij}*B_j(o_{t+1})*\beta_{t+1}(j)
+            \end{split}
+        \end{equation}
+
+        \begin{equation}
+            \begin{split}
+                \xi_t(i,j)&=P(s_t=i,s_{t+1}=j|O)\\
+                &=\frac{P(s_t=i,s_{t+1}=j,O)}{\sum_{m\in S}\sum_{n\in S} P(s_t=m,s_{t+1}=n,O)}\\
+                &=\frac{\alpha_t(i)*A_{ij}*B_j(o_{t+1})*\beta_{t+1}(j)}{\sum_{m\in S}\sum_{n\in S} \alpha_t(i)*A_{ij}*B_j(o_{t+1})*\beta_{t+1}(j)}
+            \end{split}
+        \end{equation}
+
+        \begin{equation}
+            \xi_{T-1}(i,j)=P(s_{T-1}=i,s_T=j|O)=\alpha_{T-1}(i)*A_{ij}
+        \end{equation}
+
+    \section{Issues}
+
+        \subsection{Evaluatation}
+
+            Evaluate the probability of observation sequence
+
+            \begin{equation}
+                \begin{split}
+                    &P(O|\lambda)\\
+                    &=\sum_{i\in S} P(o_{T-1},o_{T-2},\cdots,o_1,o_0,s_{T-1}=i)\\
+                    &=\sum_{i\in S} \alpha_{T-1}(i)\\
+                    &=\sum_{i\in S} P(o_0,s_0=i,o_1,o_2,\cdots,o_{T-2},o_{T-1})\\
+                    &=\sum_{i\in S} P(o_0|s_0=i)*P(s_0=i,o_1,o_2,\cdots,o_{T-2},o_{T-1})\\
+                    &=\sum_{i\in S} \beta_{0}(i)*B_{i}(o_0)
+                \end{split}
+            \end{equation}
+
+        \subsection{Prediction/Decoding}
+
+            Find the state sequence with the greatest possibility
+
+            \begin{equation}
+                S'=\arg\max_S P(O|S,\lambda)
+            \end{equation}
+
+            \subsection{Viterbi}
+
+                \begin{equation}
+                    \begin{split}
+                        \delta_t(i)&=\max_{S'\in S^t} P(O|S',\lambda)\\
+                        &=\left(\max_{s\in S} A_{si}*\delta_{t-1}(s)\right)*B_i(o_t)\\
+                        \delta_0(i)&=\Pi_i*B_i(o_0)\\
+                        \phi_t(i)&=\arg\max_{s\in S} A_{si}*\delta_{t-1}(s)\\
+                        S'_{T-1}&=\arg\max_{s\in S} \delta_{T-1}(s)\\
+                        S'_{t-1}&=\phi_t(S_t) \quad t\in [1,T-1]
+                    \end{split}
+                \end{equation}
+
+        \subsection{Learning}
+
+            Learning the parameters of HMM to fit the output sequences
+
+            \begin{equation}
+                \lambda'=\arg\max_\lambda \sum_{d\in D} P(O^{(d)}|\lambda)
+            \end{equation}
+
+            \begin{equation}
+                A'_{ij}=\frac{\sum\limits_{d\in D}\sum\limits_{t=0}^{T-1} \xi_t^{(d)}(i,j)}{\sum\limits_{d\in D}\sum\limits_{t=0}^{T-1} \gamma_t^{(d)}(i)}\\
+            \end{equation}
+            \begin{equation}
+                B'_i(j)=\frac{\sum\limits_{d\in D}\sum\limits_{t=0}^{T-1} I(o_t^{(d)}=j) \gamma_t^{(d)}(i)}{\sum\limits_{d\in D}\sum\limits_{t=0}^{T-1} \gamma_t^{(d)}(i)}\\
+            \end{equation}
+            \begin{equation}
+                \Pi'_i=\frac{\sum\limits_{d\in D} \gamma_0^{(d)}(i)}{D}
+            \end{equation}
+
+        \subsection{Maximum}
+
+            Find the output sequence with the greatest probability
+
+            Output elements are independent of each other
+
+            \begin{equation}
+                O_t=\arg\max_{o_t\in O} P(o_t)
+            \end{equation}
+
+            \begin{equation}
+                \begin{split}
+                    P(o_t)
+                    &=\sum_{i\in S} P(o_t|s_t=i)*P(s_t=i)\\
+                    &=\sum_{i\in S} B_i(o_t)*P(s_t=i)
+                \end{split}
+            \end{equation}
+
+            \begin{equation}
+                \begin{split}
+                    P(s_t=i)
+                    &=\sum_{j\in S} P(s_t=i|s_{t-1}=j)*P(s_{t-1}=j)\\
+                    &=\sum_{j\in S} A_{ji}P(s_{t-1}=j)\\
+                    P(s_0=i)&=\Pi_i
+                \end{split}
+            \end{equation}
+
+\end{document}

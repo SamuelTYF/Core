@@ -1,0 +1,6 @@
+@imm16@:<0x>{[0123456789abcdef],1,4}
+@imm16@:<0x>{[0123456789abcdef],1,8}
+@reg16@:(<ax>|<bx>|<cx>|<dx>)
+@reg32@:(<eax>|<ebx>|<ecx>|<edx>)
+@mov16@:<mov> @reg16@\,@imm16@
+@mov32@:<mov> @reg32@\,@imm32@

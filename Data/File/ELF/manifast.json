@@ -1,0 +1,12 @@
+{
+    "struct":[{   
+        "name":"ELF_Header",
+        "size":52
+    }],
+    "enum":[
+        {
+            "name":"Type32",
+            "type":"ushort"
+        }
+    ]
+}

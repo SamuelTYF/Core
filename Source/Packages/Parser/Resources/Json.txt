@@ -1,0 +1,144 @@
+{
+	" ":{
+		"type":"Space",
+		"min":0,
+		"select":false
+	},
+	"bool":{
+		"type":"Option",
+		"options":[
+			{
+				"type":"Key",
+				"key":"false"
+			},
+			{
+				"type":"Key",
+				"key":"true"
+			}
+		],
+		"empty":false
+	},
+	"uint":{
+		"type":"Join",
+		"task":{
+			"type":"Symbol",
+			"key":"0123456789"
+		},
+		"min":1,
+		"select":false
+	},
+	"int":{
+		"type":"Option",
+		"options":[
+			{
+				"type":"Symbol",
+				"key":"+-"
+			}
+		],
+		"task":"uint",
+		"empty":true
+	},
+	"string":{
+		"type":"Stream",
+		"tasks":[
+			{
+				"type":"Symbol",
+				"key":"\""
+			},
+			{
+				"type":"Value",
+				"key":"\""
+			},
+			{
+				"type":"Symbol",
+				"key":"\""
+			}
+		]
+	},
+	"array":{
+		"type":"Stream",
+		"tasks":[
+			{
+				"type":"Symbol",
+				"key":"["
+			},
+			" ",
+			{
+				"type":"Join",
+				"task":"json",
+				"sperater":{
+					"type":"Stream",
+					"tasks":[
+						" ",
+						{
+							"type":"Symbol",
+							"key":","
+						},
+						" "
+					]
+				}
+			},
+			" ",
+			{
+				"type":"Symbol",
+				"key":"]"
+			}
+		]
+	},
+	"dic":{
+		"type":"Stream",
+		"tasks":[
+			{
+				"type":"Symbol",
+				"key":"{"
+			},
+			" ",
+			{
+				"type":"Join",
+				"task":{
+					"type":"Stream",
+					"tasks":[
+						"string",
+						" ",
+						{
+							"type":"Symbol",
+							"key":":"
+						},
+						" ",
+						"json"
+					]
+				},
+				"sperater":{
+					"type":"Stream",
+					"tasks":[
+						" ",
+						{
+							"type":"Symbol",
+							"key":","
+						},
+						" "
+					]
+				},
+				"empty":true
+			},
+			" ",
+			{
+				"type":"Symbol",
+				"key":"}"
+			}
+		]
+	},
+	"json":{
+		"type":"Option",
+		"options":[
+			"bool",
+			"int",
+			"string",
+			"array",
+			"dic",
+			"json"
+		],
+		"empty":false,
+		"select":false
+	}
+}

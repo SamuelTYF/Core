@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows10.0.20348.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <BaseOutputPath>D:\Core</BaseOutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="2D\Point2D.cs" />
+    <Compile Include="2D\PointGenerator2D.cs" />
+    <Compile Include="Assess.cs" />
+    <Compile Include="ITemperatureControl.cs" />
+    <Compile Include="IPoint.cs" />
+    <Compile Include="IPointGenerator.cs" />
+    <Compile Include="Manager.cs" />
+    <Compile Include="OL\PointGenerator2D.cs" />
+    <Compile Include="OL\PointOL.cs" />
+    <Compile Include="RandomHelper.cs" />
+    <Compile Include="TemperatureControl.cs" />
+  </ItemGroup>
+
+</Project>

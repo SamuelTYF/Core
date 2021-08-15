@@ -1,0 +1,13 @@
+@using@:<using>
+@Assembly@:~[\.\;\ \{]
+@Assemblies@:{@Assembly@,\.}
+@using Assembly@:@using@ @Assemblies@\;
+@public@:<public>
+@type@:{@Assembly@,\.}
+@method.name@:~[\ \(]
+@paramter.name@:~[\,\)\ ]
+@paramter@:@type@ @paramter.name@
+@paramters@:{@paramter@,(~ \,~ )}
+@delegate@:@public@ <delegate> @type@ @method.name@~ \(~ @paramters@~ \)\;
+@namespace@:<namespace> @Assemblies@~ \{~ {(@namespace@|@delegate@)}~ \}
+@cs@:{(@using Assembly@|@namespace@), }
