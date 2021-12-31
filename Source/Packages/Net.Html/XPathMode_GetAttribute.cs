@@ -1,5 +1,4 @@
 using Collection;
-using System.Collections.Generic;
 namespace Net.Html
 {
     public sealed class XPathMode_GetAttribute
@@ -7,7 +6,7 @@ namespace Net.Html
         public string Key;
         public XPathMode_GetAttribute(string key)
             => Key = key;
-        public IEnumerable<object> Search(IEnumerable<object> nodes)
+        public System.Collections.Generic.IEnumerable<object> Search(System.Collections.Generic.IEnumerable<object> nodes)
         {
             foreach (HtmlNode node in nodes)
                 yield return new HtmlNode(node)
@@ -15,7 +14,7 @@ namespace Net.Html
                     Text = node.Info[Key, 0],
                     Name = "Info",
                     Parent = node,
-                    Nodes = new Collection.List<HtmlNode>(),
+                    Nodes = new List<HtmlNode>(),
                     Info = new TrieTree<string>()
                 };
         }

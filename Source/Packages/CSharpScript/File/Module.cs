@@ -11,7 +11,7 @@ namespace CSharpScript.File
 		public Guid EncBaseId;
 		public ModuleRow Row;
 		public int Token;
-		public List<CustomAttribute> CustomAttributes = new List<CustomAttribute>();
+		public List<CustomAttribute> CustomAttributes = new();
 		public Module(ModuleRow row)
 		{
 			ModuleRow moduleRow = (Row = row);

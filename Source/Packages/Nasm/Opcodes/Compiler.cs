@@ -9,10 +9,6 @@ namespace Nasm.Opcodes
         public long Address;
         public long RunningAddress;
         public List<Opcode> RebuildCodes;
-        public Compiler()
-        {
-
-        }
         public byte[] Run(long address,params Opcode[] codes)
         {
             Labels = new();

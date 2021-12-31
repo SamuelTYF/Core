@@ -6,14 +6,14 @@ namespace CSharpScript.File
 	public class PEManager
 	{
 		public AVL<int, PEFile> PEFiles;
-		public AVL<int, Stack<AssemblyRef>> AssemblyRefWaitingList;
+		public AVL<int, Collection.Stack<AssemblyRef>> AssemblyRefWaitingList;
 		public static readonly string[] Assemblies = new string[6] { "mscorlib.dll", "System.dll", "System.Configuration.dll", "System.Core.dll", "System.Data.dll", "System.Drawing.dll" };
 		public PEFile Mscorlib;
 		public InternalTypes InternalTypes;
 		public PEManager()
 		{
 			PEFiles = new AVL<int, PEFile>();
-			AssemblyRefWaitingList = new AVL<int, Stack<AssemblyRef>>();
+			AssemblyRefWaitingList = new();
 			Mscorlib = Load("C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\mscorlib.dll");
 			InternalTypes = new InternalTypes(Mscorlib.MetadataRoot);
 		}
@@ -29,7 +29,7 @@ namespace CSharpScript.File
 			PEFiles[pEFile.MetadataRoot.TildeHeap.AssemblyTable.Assemblys[0].NullTokenName.GetHashCode()] = pEFile;
 			if (AssemblyRefWaitingList.ContainsKey(hash))
 			{
-				Stack<AssemblyRef> stack = AssemblyRefWaitingList[hash];
+                Collection.Stack<AssemblyRef> stack = AssemblyRefWaitingList[hash];
 				while (stack.Count != 0)
 				{
 					AssemblyRef assemblyRef = stack.Pop();

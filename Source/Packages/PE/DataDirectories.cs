@@ -40,9 +40,6 @@ namespace PE
 			CLRRuntimeHeader = (long)(array[112] | ((ulong)array[113] << 8) | ((ulong)array[114] << 16) | ((ulong)array[115] << 24) | ((ulong)array[116] << 32) | ((ulong)array[117] << 40) | ((ulong)array[118] << 48) | ((ulong)array[119] << 56));
 			Reserved = (long)(array[120] | ((ulong)array[121] << 8) | ((ulong)array[122] << 16) | ((ulong)array[123] << 24) | ((ulong)array[124] << 32) | ((ulong)array[125] << 40) | ((ulong)array[126] << 48) | ((ulong)array[127] << 56));
 		}
-		public override string ToString()
-		{
-			return $"ExportTable:\t{ExportTable:X}\n" + $"ImportTable:\t{ImportTable:X}\n" + $"ResourceTable:\t{ResourceTable:X}\n" + $"ExceptionTable:\t{ExceptionTable:X}\n" + $"CertificateTable:\t{CertificateTable:X}\n" + $"BaseRelocationTable:\t{BaseRelocationTable:X}\n" + $"Debug:\t{Debug:X}\n" + $"Architecture:\t{Architecture:X}\n" + $"GlobalPtr:\t{GlobalPtr:X}\n" + $"TLSTable:\t{TLSTable:X}\n" + $"LoadConfigTable:\t{LoadConfigTable:X}\n" + $"BoundImport:\t{BoundImport:X}\n" + $"IAT:\t{IAT:X}\n" + $"DelayImportDescriptor:\t{DelayImportDescriptor:X}\n" + $"CLRRuntimeHeader:\t{CLRRuntimeHeader:X}\n" + $"Reserved:\t{Reserved:X}\n";
-		}
-	}
+        public override string ToString() => $"ExportTable:\t{ExportTable:X}\n" + $"ImportTable:\t{ImportTable:X}\n" + $"ResourceTable:\t{ResourceTable:X}\n" + $"ExceptionTable:\t{ExceptionTable:X}\n" + $"CertificateTable:\t{CertificateTable:X}\n" + $"BaseRelocationTable:\t{BaseRelocationTable:X}\n" + $"Debug:\t{Debug:X}\n" + $"Architecture:\t{Architecture:X}\n" + $"GlobalPtr:\t{GlobalPtr:X}\n" + $"TLSTable:\t{TLSTable:X}\n" + $"LoadConfigTable:\t{LoadConfigTable:X}\n" + $"BoundImport:\t{BoundImport:X}\n" + $"IAT:\t{IAT:X}\n" + $"DelayImportDescriptor:\t{DelayImportDescriptor:X}\n" + $"CLRRuntimeHeader:\t{CLRRuntimeHeader:X}\n" + $"Reserved:\t{Reserved:X}\n";
+    }
 }

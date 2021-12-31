@@ -11,8 +11,8 @@ namespace Automata
         public AutomataInstance Result;
         public void Init()
         {
-            TempBytes = new List<byte>();
-            TempStrings = new List<string>();
+            TempBytes = new();
+            TempStrings = new();
             Kernel = new AutomataKernel();
             Result = null;
         }

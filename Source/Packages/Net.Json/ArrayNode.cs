@@ -68,8 +68,8 @@ namespace Net.Json
 		{
 			List<string> ls = new();
 			foreach(Node node in Nodes)
-				ls.Add($"{suffix}\n{node.FormatPrint(suffix + "\n")}");
-			return $"[\n{string.Join(",\n", ls)}\n]";
+				ls.Add($"{suffix}\t{node.FormatPrint(suffix + "\t")}");
+			return $"[\n{string.Join(",\n", ls)}\n{suffix}]";
 		}
 	}
 }

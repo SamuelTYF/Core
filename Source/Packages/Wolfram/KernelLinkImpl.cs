@@ -120,41 +120,32 @@ namespace Wolfram.NETLink
 		}
 
 		internal Exception LastExceptionDuringCallPacketHandling
-		{
-			get
-			{
-				return lastExceptionDuringCallPacketHandling;
-			}
-			set
-			{
-				lastExceptionDuringCallPacketHandling = value;
-			}
-		}
+        {
+            get => lastExceptionDuringCallPacketHandling;
+            set => lastExceptionDuringCallPacketHandling = value;
+        }
 
-		internal bool IsManual
-		{
-			get
-			{
-				return isManual;
-			}
-			set
-			{
-				if (value && !isManual)
-					try
-					{
-						PutFunction("NETLink`Package`prepareForManualReturn", 1);
-						PutSymbol("$CurrentLink");
-						Flush();
-					}
-					catch (MathLinkException)
-					{
-						ClearError();
-					}
-				isManual = value;
-			}
-		}
+        internal bool IsManual
+        {
+            get => isManual;
+            set
+            {
+                if (value && !isManual)
+                    try
+                    {
+                        PutFunction("NETLink`Package`prepareForManualReturn", 1);
+                        PutSymbol("$CurrentLink");
+                        Flush();
+                    }
+                    catch (MathLinkException)
+                    {
+                        ClearError();
+                    }
+                isManual = value;
+            }
+        }
 
-		public virtual event PacketHandler PacketArrived;
+        public virtual event PacketHandler PacketArrived;
 
 		public KernelLinkImpl()
 		{

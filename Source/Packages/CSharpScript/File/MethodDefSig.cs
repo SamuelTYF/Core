@@ -19,9 +19,7 @@ namespace CSharpScript.File
 			ReturnType = TypeSig.AnalyzeType(bs, ref index, metadata);
 			ParamTypes = TypeSig.AnalyzeTypes(bs, ref index, ParamCount, metadata);
 		}
-		public override string ToString()
-		{
-			return string.Format("{0}({1})", ReturnType, string.Join(",", (IEnumerable<TypeSig>)ParamTypes));
-		}
-	}
+        public override string ToString() 
+			=> $"{ReturnType}({string.Join(",", (IEnumerable<TypeSig>)ParamTypes)})";
+    }
 }

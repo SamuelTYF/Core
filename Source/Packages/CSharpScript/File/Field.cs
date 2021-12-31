@@ -14,7 +14,7 @@ namespace CSharpScript.File
 		public Constant Constant;
 		public FieldRVA FieldToken;
 		public MarshalSpec NativeType;
-		public List<CustomAttribute> CustomAttributes = new List<CustomAttribute>();
+		public List<CustomAttribute> CustomAttributes = new();
 		public FieldMarshal FieldMarshal;
 		public FieldLayout FieldLayout;
 		public Field(FieldRow row)
@@ -30,11 +30,8 @@ namespace CSharpScript.File
 			int index = 0;
 			Signature = FieldSig.AnalyzeFieldSig(bs, ref index, metadata);
 		}
-		public override string ToString()
-		{
-			return $"{Signature.Type} {Parent}.{Name}";
-		}
-		public string GetInformation()
+        public override string ToString() => $"{Signature.Type} {Parent}.{Name}";
+        public string GetInformation()
 		{
 			string text = "";
 			if (CustomAttributes.Length != 0)

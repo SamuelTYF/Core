@@ -5,15 +5,26 @@
     <Nullable>enable</Nullable>
     <BaseOutputPath>D:\Core</BaseOutputPath>
   </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <DefineConstants />
     <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>D:\Core\Debug\</OutputPath>
   </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <DefineConstants />
     <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>D:\Core\Debug\</OutputPath>
   </PropertyGroup>
-
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <DefineConstants />
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>D:\Core\Release\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <DefineConstants />
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>D:\Core\Release\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="2D\Point2D.cs" />
     <Compile Include="2D\PointGenerator2D.cs" />

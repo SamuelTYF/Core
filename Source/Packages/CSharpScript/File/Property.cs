@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Collection;
 namespace CSharpScript.File
 {
@@ -15,7 +14,7 @@ namespace CSharpScript.File
 		public int Index;
 		public TypeDef Parent;
 		public bool IsThis;
-		public Collection.List<CustomAttribute> CustomAttributes = new Collection.List<CustomAttribute>();
+		public List<CustomAttribute> CustomAttributes = new();
 		public Property(PropertyRow row)
 		{
 			PropertyRow propertyRow = (Row = row);
@@ -32,14 +31,11 @@ namespace CSharpScript.File
 			if (Flags.HasFlag(PropertyAttributes.HasDefault))
 				throw new Exception();
 		}
-		public override string ToString()
-		{
-			return $"{Type.Type} {Parent}.{Name}";
-		}
-		public string GetThisInformation()
+        public override string ToString() => $"{Type.Type} {Parent}.{Name}";
+        public string GetThisInformation()
 		{
 			if (Setter != null)
-				return "this[" + string.Join(",", (IEnumerable<Param>)Setter.Method.ParamList) + "]";
+				return "this[" + string.Join(",", (System.Collections.Generic.IEnumerable<Param>)Setter.Method.ParamList) + "]";
 			string text = $"this[{Getter.Method.ParamList[0]}";
 			for (int i = 1; i < Getter.Method.ParamList.Length - 1; i++)
 			{
@@ -47,13 +43,8 @@ namespace CSharpScript.File
 			}
 			return text + "]";
 		}
-		public string GetSetterInformation()
-		{
-			if (Setter.Method.CustomAttributes.Length == 0)
-				return "set;";
-			return "\n" + string.Join("\n", Setter.Method.CustomAttributes) + "\nset;";
-		}
-		public string GetGetterInformation()
+        public string GetSetterInformation() => Setter.Method.CustomAttributes.Length == 0 ? "set;" : "\n" + string.Join("\n", Setter.Method.CustomAttributes) + "\nset;";
+        public string GetGetterInformation()
 		{
 			if (Getter.Method.CustomAttributes.Length == 0)
 				return "get;";

@@ -8,7 +8,12 @@ namespace File.SV
         public static IEnumerable<SVLine> Read(StreamReader sr)
 		{
 			while (!sr.EndOfStream)
-				yield return new(sr.ReadLine().Split(','));
+			{
+				string s = sr.ReadLine();
+				string[] ss = s.Split(',');
+				if (s.Length == 0) yield break;
+				else yield return new(ss);
+			}
 		}
 		public static SVFile Read(Stream stream)
 		{

@@ -11,7 +11,7 @@ namespace NumericalAnalysis.Root
 		{
 			Name = name;
 			Length = length;
-			Data = new List<T[]>();
+			Data = new();
 		}
 		public void Register(params T[] values)
 		{

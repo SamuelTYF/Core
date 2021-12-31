@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Collection;
 namespace Parser
 {
@@ -58,7 +57,7 @@ namespace Parser
 			joinParseResult.EndIndex = s.Index;
 			return joinParseResult;
 		}
-		public override IEnumerable<IParseResult> Parses(IStringArg s)
+		public override System.Collections.Generic.IEnumerable<IParseResult> Parses(IStringArg s)
 		{
 			JoinParseResult r = new(this,s);
 			if (IsOptional)
@@ -82,7 +81,7 @@ namespace Parser
 			}
 			if (s.NotOver)
 			{
-				Collection.List<IParseResult> taskResults = r.TaskResults;
+				List<IParseResult> taskResults = r.TaskResults;
 				IParseResult value;
 				IParseResult tr3 = (value = Task.Parse(s));
 				taskResults.Add(value);
@@ -91,14 +90,14 @@ namespace Parser
 			}
 			while (s.NotOver)
 			{
-				Collection.List<IParseResult> speraterResults = r.SperaterResults;
+				List<IParseResult> speraterResults = r.SperaterResults;
 				IParseResult value;
 				IParseResult sr = (value = Sperater.Parse(s));
 				speraterResults.Add(value);
 				bool fail = false;
 				if (sr.Success)
 				{
-					Collection.List<IParseResult> taskResults2 = r.TaskResults;
+					List<IParseResult> taskResults2 = r.TaskResults;
 					IParseResult tr3 = (value = Task.Parse(s));
 					taskResults2.Add(value);
 					if (tr3.Success)
@@ -131,7 +130,7 @@ namespace Parser
 			r.EndIndex = s.Index;
 			yield return r;
 		}
-		public IEnumerable<IParseResult> Parses(IStringArg s, JoinParseResult r)
+		public System.Collections.Generic.IEnumerable<IParseResult> Parses(IStringArg s, JoinParseResult r)
 		{
 			r.Count++;
 			foreach (IParseResult sr in Sperater.GetEnumerator(s))

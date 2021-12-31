@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using Collection;
 namespace CSharpScript.File
@@ -13,12 +12,12 @@ namespace CSharpScript.File
 		public MethodDefSig Signature;
 		public Param ReturnParam;
 		public Param[] ParamList;
-		public Collection.List<GenericParam> GenericParams = new Collection.List<GenericParam>();
+		public List<GenericParam> GenericParams = new();
 		public int Index;
 		public TypeDef Parent;
 		public MethodDefRow Row;
 		public int Token;
-		public Collection.List<CustomAttribute> CustomAttributes = new Collection.List<CustomAttribute>();
+		public List<CustomAttribute> CustomAttributes = new();
 		public DeclSecurity DeclSecurity;
 		public MethodImpl Base;
 		public ImplMap DLLImport;
@@ -86,13 +85,10 @@ namespace CSharpScript.File
 				text = text + string.Join("\n", CustomAttributes) + "\n";
 			if (DeclSecurity != null)
 				text += $"{DeclSecurity.PermissionSet}\n";
-			return string.Format("{0}{1} {2}.{3}({4})", text, (ReturnParam == null) ? "Void" : ReturnParam.ToString(), Parent, Name, string.Join(", ", (IEnumerable<Param>)ParamList));
+			return string.Format("{0}{1} {2}.{3}({4})", text, (ReturnParam == null) ? "Void" : ReturnParam.ToString(), Parent, Name, string.Join(", ", (System.Collections.Generic.IEnumerable<Param>)ParamList));
 		}
-		public string GetFullInformation()
-		{
-			return (!HasMethodBody) ? GetInformation() : (GetInformation() + "\n" + Method.ToString());
-		}
-		public void Read(Stream stream, MetadataRoot metadata)
+        public string GetFullInformation() => (!HasMethodBody) ? GetInformation() : (GetInformation() + "\n" + Method.ToString());
+        public void Read(Stream stream, MetadataRoot metadata)
 		{
 			if (HasMethodBody)
 			{

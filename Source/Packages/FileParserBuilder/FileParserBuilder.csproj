@@ -8,14 +8,25 @@
     <Company>Pumpkin</Company>
     <Platforms>x64</Platforms>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <DefineConstants />
     <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>D:\Core\Debug\</OutputPath>
   </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <DefineConstants />
     <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>D:\Core\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <DefineConstants />
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>D:\Core\Release\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <DefineConstants />
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>D:\Core\Release\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Net.Json\Net.Json.csproj" />

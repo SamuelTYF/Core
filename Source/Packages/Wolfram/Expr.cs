@@ -266,20 +266,20 @@ namespace Wolfram.NETLink
 				head = SYM_STRING;
 				return;
 			}
-			if (obj is bool)
+			if (obj is bool boolvalue)
 			{
-				val = (((bool)obj) ? "True" : "False");
+				val = (boolvalue ? "True" : "False");
 				type = 4;
 				head = SYM_SYMBOL;
 				return;
 			}
-			if (obj is Expr)
+			if (obj is Expr expr)
 			{
-				((Expr)obj).prepareFromLoopback();
-				type = ((Expr)obj).type;
-				head = ((Expr)obj).head;
-				args = ((Expr)obj).args;
-				val = ((Expr)obj).val;
+				expr.prepareFromLoopback();
+				type = expr.type;
+				head = expr.head;
+				args = expr.args;
+				val = expr.val;
 				return;
 			}
 			if (obj is Array || obj.GetType() == typeof(Array))
@@ -412,20 +412,17 @@ namespace Wolfram.NETLink
 		public Expr(object head, params object[] args)
 		{
 			type = 100;
-			this.head = ((head is Expr) ? ((Expr)head) : new Expr(head));
+			this.head = ((head is Expr expr) ? expr : new Expr(head));
 			this.args = new Expr[args.Length];
 			for (int i = 0; i < args.Length; i++)
 			{
-				this.args[i] = ((args[i] is Expr) ? ((Expr)args[i]) : new Expr(args[i]));
+				this.args[i] = ((args[i] is Expr exprarg) ? exprarg : new Expr(args[i]));
 			}
 		}
 
-		public static Expr CreateFromLink(IMathLink ml)
-		{
-			return createFromLink(ml, allowLoopback: true);
-		}
+        public static Expr CreateFromLink(IMathLink ml) => createFromLink(ml, allowLoopback: true);
 
-		~Expr()
+        ~Expr()
 		{
 			disposer();
 		}
@@ -559,17 +556,11 @@ namespace Wolfram.NETLink
 			return result;
 		}
 
-		public static bool operator ==(Expr x, Expr y)
-		{
-			return x?.Equals(y) ?? ((object)y == null);
-		}
+        public static bool operator ==(Expr x, Expr y) => x?.Equals(y) ?? (y is null);
 
-		public static bool operator !=(Expr x, Expr y)
-		{
-			return !(x == y);
-		}
+        public static bool operator !=(Expr x, Expr y) => !(x == y);
 
-		public override bool Equals(object obj)
+        public override bool Equals(object obj)
 		{
 			if (obj == null || GetType() != obj.GetType())
 				return false;

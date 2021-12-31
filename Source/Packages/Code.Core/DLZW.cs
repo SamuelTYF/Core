@@ -63,7 +63,7 @@ namespace Code.Core
 		}
 		public void StartDecode(Stream stream)
 		{
-			Indexes = new List<byte[]>(16);
+			Indexes = new(16);
 			for (int i = 0; i < 256; i++)
 				Indexes.Add(new byte[1] { (byte)i });
 			Reader = new BitStreamReader(stream);

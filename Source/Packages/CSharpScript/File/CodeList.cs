@@ -12,7 +12,7 @@ namespace CSharpScript.File
 		public CodeList(CodeList last = null)
 		{
 			Last = last;
-			Codes = new List<CSharpCode>();
+			Codes = new();
 			LastCode = last?.Codes.Length ?? 0;
 			LastStack = 0;
 			Stack = 0;

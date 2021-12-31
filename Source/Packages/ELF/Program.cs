@@ -9,7 +9,6 @@ namespace ELF
         {
             //using Stream stream = new FileInfo(@"D:\OS\Test\bin\Debug\netcoreapp2.0\cosmos\Test.bin").OpenRead();
             using Stream stream = new FileInfo(@"D:\OS\Test\bin\Debug\netcoreapp2.0\cosmos\1.obj").OpenRead();
-
             new ELF(stream);
         }
     }

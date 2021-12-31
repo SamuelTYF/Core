@@ -22,7 +22,7 @@ namespace Code.Core
 			}
 			K = k;
 			D = n + k;
-			Indexs = new List<List<int>>();
+			Indexs = new();
 			foreach (int p in CheckPoints)
 			{
 				List<int> indexs = new();

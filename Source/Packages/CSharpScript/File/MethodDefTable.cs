@@ -28,10 +28,8 @@ namespace CSharpScript.File
 			if (MethodDefs != null)
 			{
 				for (int i = 0; i < MethodDefs.Length - 1; i++)
-				{
 					MethodDefs[i].ResolveSignature(metadata, MethodDefs[i + 1].Row.ParamList);
-				}
-				MethodDefs[MethodDefs.Length - 1].ResolveSignature(metadata, metadata.TildeHeap.ParamTable.Count + 1);
+				MethodDefs[^1].ResolveSignature(metadata, metadata.TildeHeap.ParamTable.Count + 1);
 			}
 		}
 	}

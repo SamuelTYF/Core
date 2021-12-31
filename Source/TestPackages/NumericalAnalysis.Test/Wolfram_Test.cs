@@ -20,9 +20,8 @@ namespace NumericalAnalysis.Test
                 new Command("List",new Symbol("x"),1,10));
             command.ToLink(link);
             link.EndPacket();
-            PacketType pt=link.WaitForAnswer();
+            link.WaitForAnswer();
             update(2);
-            Ensure.IsTrue(pt==PacketType.Return);
             Expr exp = link.GetExpr();
             Ensure.Equal(exp.Length, 10);
             update(3);
@@ -32,9 +31,10 @@ namespace NumericalAnalysis.Test
                 new Command("List", new Symbol("x"), 1, 10));
             command.ToLink(link);
             link.EndPacket();
-            pt = link.WaitForAnswer();
+            link.WaitForAnswer();
             exp = link.GetExpr();
             link.EvaluateToImage(exp, 1600, 900).Save("1.jpg");
+            link.Close();
         }
     }
 }

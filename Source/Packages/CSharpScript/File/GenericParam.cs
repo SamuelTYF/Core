@@ -10,8 +10,8 @@ namespace CSharpScript.File
 		public string Name;
 		public GenericParamRow Row;
 		public int Token;
-		public List<GenericParamConstraint> Constraints = new List<GenericParamConstraint>();
-		public List<GenericParamConstraint> RealConstraints = new List<GenericParamConstraint>();
+		public List<GenericParamConstraint> Constraints = new();
+		public List<GenericParamConstraint> RealConstraints = new();
 		public bool Covariant;
 		public bool Contravariant;
 		public bool IsClass;
@@ -61,7 +61,7 @@ namespace CSharpScript.File
 		}
 		public string GetConstraint()
 		{
-			List<string> list = new List<string>();
+			List<string> list = new();
 			if (IsClass)
 				list.Add("struct");
 			if (IsStruct)

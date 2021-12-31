@@ -454,10 +454,7 @@ namespace CSharpScript.DomTree
 				throw new Exception();
 			}
 		}
-		public override string Print(int tabs = 0)
-		{
-			return Info.Offset + "".PadLeft(tabs, '\t') + Print();
-		}
-		public abstract string Print();
+        public override string Print(int tabs = 0) => Info.Offset + "".PadLeft(tabs, '\t') + Print();
+        public abstract string Print();
 	}
 }

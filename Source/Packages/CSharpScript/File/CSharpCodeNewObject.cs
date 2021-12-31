@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Collection;
 namespace CSharpScript.File
 {
@@ -8,13 +7,12 @@ namespace CSharpScript.File
 		public TypeDefOrRef Type;
 		public MethodDefOrRef Method;
 		public CSharpCode[] Params;
-		public Collection.List<CSharpCode> Dups;
+		public List<CSharpCode> Dups;
 		public CSharpCodeNewObject(TypeDefOrRef type, MethodDefOrRef method, CodeList list)
 		{
 			Type = type;
 			Method = method;
-			int num = 0;
-			num = method.Flag switch
+			int num = method.Flag switch
 			{
 				MethodDefOrRefFlag.MethodDef => method.MethodDef.ParamList.Length, 
 				MethodDefOrRefFlag.MemberRef => (method.MemberRef.Signature as MethodDefSig).ParamCount, 
@@ -25,12 +23,10 @@ namespace CSharpScript.File
 			{
 				Params[num2] = list.Pop();
 			}
-			Dups = new Collection.List<CSharpCode>();
+			Dups = new List<CSharpCode>();
 		}
 		public override string Print(int tabs = 0)
-		{
-			return GetTabs(tabs) + string.Format("new {0}({1})", Type, string.Join(",", (IEnumerable<CSharpCode>)Params)) + PrintDup(tabs);
-		}
+		=> GetTabs(tabs) + $"new {Type}({string.Join(",", (System.Collections.Generic.IEnumerable<CSharpCode>)Params)})" + PrintDup(tabs);
 		public string PrintDup(int tabs)
 		{
 			if (Dups.Length == 0)

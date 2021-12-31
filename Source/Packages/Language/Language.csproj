@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows10.0.20348.0</TargetFramework>
+    <Authors>Pumpkin</Authors>
+    <Company>Pumpkin</Company>
+    <ApplicationIcon />
+    <OutputType>Library</OutputType>
+    <StartupObject />
+    <Platforms>x64</Platforms>
+    <Copyright>Pumpkin</Copyright>
+    <BaseOutputPath>D:\Core\Debug</BaseOutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Collection\Collection.csproj" />
+  </ItemGroup>
+</Project>

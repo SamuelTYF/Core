@@ -7,14 +7,8 @@ namespace CSharpScript.DomTree
 		public List<ILCatch> Catches;
 		public ILFinally Finally;
 		public ILFault Fault;
-		public ILTry(int offset, int length)
-			: base(offset, length, ILCodeFlag.ILTry)
-		{
-			Catches = new List<ILCatch>();
-		}
-		public override string Print(int tabs = 0)
-		{
-			return "try\n".PadLeft(tabs + 4, '\t') + string.Join("\n", Array.ConvertAll(Codes, (ILCode code) => code.Print(tabs + 1)));
-		}
-	}
+        public ILTry(int offset, int length)
+            : base(offset, length, ILCodeFlag.ILTry) => Catches = new();
+        public override string Print(int tabs = 0) => "try\n".PadLeft(tabs + 4, '\t') + string.Join("\n", Array.ConvertAll(Codes, (ILCode code) => code.Print(tabs + 1)));
+    }
 }

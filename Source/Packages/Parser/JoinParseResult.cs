@@ -10,8 +10,8 @@ namespace Parser
 			: base(parser,s)
 		{
 			Count = 0;
-			TaskResults = new List<IParseResult>();
-			SperaterResults = new List<IParseResult>();
+			TaskResults = new();
+			SperaterResults = new();
 		}
         public override ParsedObject GetParsedObject(IStringArg s)
         {

@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0-windows10.0.20348.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <BaseOutputPath>D:\Core</BaseOutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="BootRecordDescriptor.cs" />
+    <Compile Include="DateAndTime.cs" />
+    <Compile Include="DictionaryRecord.cs" />
+    <Compile Include="DictionaryRecordFlag.cs" />
+    <Compile Include="DigitsZonedDateTime.cs" />
+    <Compile Include="ISOStreamReader.cs" />
+    <Compile Include="LB16.cs" />
+    <Compile Include="LB32.cs" />
+    <Compile Include="PrimaryVolumeDescriptor.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="SupplementaryVolumeDescriptor.cs" />
+    <Compile Include="VolumeDescriptor.cs" />
+    <Compile Include="VolumeDescriptorType.cs" />
+    <Compile Include="VolumeRoot.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Collection\Collection.csproj" />
+  </ItemGroup>
+
+</Project>

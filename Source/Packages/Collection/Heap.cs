@@ -1,8 +1,10 @@
 using Collection.Serialization;
 using System;
+using System.Collections;
+
 namespace Collection
 {
-    public class Heap<T> : ISerializable where T : IComparable<T>
+    public class Heap<T> : System.Collections.Generic.IEnumerable<T>, ISerializable where T : IComparable<T>
     {
         public List<T> Values;
         public int Mode;
@@ -60,8 +62,8 @@ namespace Collection
         }
         public T Pop()
         {
-            T result = Values[1];
-            Swap(1, Length--);
+            Swap(1, Length--);            
+            T result = Values.Pop();
             Down(1);
             return result;
         }
@@ -73,6 +75,12 @@ namespace Collection
         }
         public void Write(Formatter formatter)
             => formatter.Write(Values.ToArray());
+        public System.Collections.Generic.IEnumerator<T> GetEnumerator()
+        {
+            for (int i = 1; i < Length; i++)
+                yield return Values[i];
+        }
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         public Heap(Formatter formatter) => Length = (Values = new(formatter.Read() as T[])).Length - 1;
     }
     public class Heap<TKey, TValue> where TKey : IComparable<TKey>

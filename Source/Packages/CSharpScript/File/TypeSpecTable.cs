@@ -8,7 +8,7 @@ namespace CSharpScript.File
 		public TypeSpecTable(byte[] bs, ref int index, int count, bool isStringLong, bool isGuidLong, bool isBlobLong)
 		{
 			Count = count;
-			TypeSpecs = new List<TypeSpec>();
+			TypeSpecs = new();
 			for (int i = 0; i < count; i++)
 				TypeSpecs.Add(new TypeSpec(i + 1, TildeHeap.Read(bs, ref index, isBlobLong)));
 		}

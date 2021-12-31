@@ -58,25 +58,19 @@ namespace CSharpScript.File
 			}
 			throw new Exception();
 		}
-		public override string ToString()
-		{
-			return Flag switch
-			{
-				MethodDefOrRefFlag.MethodDef => MethodDef.ToString(), 
-				MethodDefOrRefFlag.MemberRef => MemberRef.ToString(), 
-				MethodDefOrRefFlag.MethodSpec => MethodSpec.ToString(), 
-				_ => throw new Exception(), 
-			};
-		}
-		public string Name()
-		{
-			return Flag switch
-			{
-				MethodDefOrRefFlag.MethodDef => MethodDef.Name, 
-				MethodDefOrRefFlag.MemberRef => MemberRef.Name, 
-				MethodDefOrRefFlag.MethodSpec => MethodSpec.Method.Name() + "<" + string.Join(",", (IEnumerable<TypeSig>)MethodSpec.Instantiation.GenericTypes) + ">", 
-				_ => throw new Exception(), 
-			};
-		}
-	}
+        public override string ToString() => Flag switch
+        {
+            MethodDefOrRefFlag.MethodDef => MethodDef.ToString(),
+            MethodDefOrRefFlag.MemberRef => MemberRef.ToString(),
+            MethodDefOrRefFlag.MethodSpec => MethodSpec.ToString(),
+            _ => throw new Exception(),
+        };
+        public string Name() => Flag switch
+        {
+            MethodDefOrRefFlag.MethodDef => MethodDef.Name,
+            MethodDefOrRefFlag.MemberRef => MemberRef.Name,
+            MethodDefOrRefFlag.MethodSpec => MethodSpec.Method.Name() + "<" + string.Join(",", (IEnumerable<TypeSig>)MethodSpec.Instantiation.GenericTypes) + ">",
+            _ => throw new Exception(),
+        };
+    }
 }

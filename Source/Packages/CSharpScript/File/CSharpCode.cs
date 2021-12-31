@@ -7,8 +7,7 @@ namespace CSharpScript.File
 		public static CSharpCode Parse(ILCode[] source)
 		{
 			int index = 0;
-			int target;
-			return Parse(source, ref index, source[source.Length - 1].Info.Offset + 1, out target, new CodeList());
+			return Parse(source, ref index, source[^1].Info.Offset + 1, out _, new CodeList());
 		}
 		public static CSharpCode Parse(ILCode[] source, ref int index, int end, out int target, CodeList Codes, bool dup = false)
 		{
@@ -46,7 +45,7 @@ namespace CSharpScript.File
 				case ILCodeFlag.Call:
 					if ((iLCode as ILInstructionCode_Call).Method.ToString() == "System.Object..ctor")
 					{
-						if (!(Codes.Pop() is CSharpCodeGetThis))
+						if (Codes.Pop() is not CSharpCodeGetThis)
 							throw new Exception();
 						Codes.Add(new CSharpCodeNormalConstructor());
 					}
@@ -142,7 +141,7 @@ namespace CSharpScript.File
 					if (iLInstructionCode_Br.Condition == Condition.brfalse)
 					{
 						CSharpCode condition = new CSharpCodeSingleOperator(Codes.Pop(), SingleOperator.@true);
-						CodeList codeList = new CodeList(Codes);
+						CodeList codeList = new(Codes);
 						CSharpCode cSharpCode = Parse(source, ref index, iLInstructionCode_Br.TargetIndex, out var target3, codeList);
 						int lastStack = codeList.LastStack;
 						switch (target3)
@@ -153,14 +152,14 @@ namespace CSharpScript.File
 							Codes.Add(cSharpCode);
 							break;
 						case -1:
-							cSharpCode = new CSharpCodeIf(condition, cSharpCode, Parse(source, ref index, end, out target2, codeList = new CodeList(Codes)));
+							cSharpCode = new CSharpCodeIf(condition, cSharpCode, Parse(source, ref index, end, out _, codeList = new CodeList(Codes)));
 							if (codeList.LastStack != lastStack)
 								throw new Exception();
 							Codes.Update(lastStack);
 							Codes.Add(cSharpCode);
 							break;
 						default:
-							cSharpCode = new CSharpCodeIf(condition, cSharpCode, Parse(source, ref index, target3, out target2, codeList = new CodeList(Codes)));
+							cSharpCode = new CSharpCodeIf(condition, cSharpCode, Parse(source, ref index, target3, out _, codeList = new CodeList(Codes)));
 							if (codeList.LastStack != lastStack)
 								throw new Exception();
 							Codes.Update(lastStack);
@@ -172,7 +171,7 @@ namespace CSharpScript.File
 					if (iLInstructionCode_Br.Condition == Condition.brtrue)
 					{
 						CSharpCode condition2 = new CSharpCodeSingleOperator(Codes.Pop(), SingleOperator.@true);
-						CodeList codeList2 = new CodeList(Codes);
+						CodeList codeList2 = new(Codes);
 						CSharpCode cSharpCode = Parse(source, ref index, iLInstructionCode_Br.TargetIndex, out var target4, codeList2);
 						int lastStack2 = codeList2.LastStack;
 						switch (target4)
@@ -183,14 +182,14 @@ namespace CSharpScript.File
 							Codes.Add(cSharpCode);
 							break;
 						case -1:
-							cSharpCode = new CSharpCodeIf(condition2, Parse(source, ref index, end, out target2, codeList2 = new CodeList(Codes)), cSharpCode);
+							cSharpCode = new CSharpCodeIf(condition2, Parse(source, ref index, end, out _, codeList2 = new CodeList(Codes)), cSharpCode);
 							if (codeList2.LastStack != lastStack2)
 								throw new Exception();
 							Codes.Update(lastStack2);
 							Codes.Add(cSharpCode);
 							break;
 						default:
-							cSharpCode = new CSharpCodeIf(condition2, Parse(source, ref index, target4, out target2, codeList2 = new CodeList(Codes)), cSharpCode);
+							cSharpCode = new CSharpCodeIf(condition2, Parse(source, ref index, target4, out _, codeList2 = new CodeList(Codes)), cSharpCode);
 							if (codeList2.LastStack != lastStack2)
 								throw new Exception();
 							Codes.Update(lastStack2);
@@ -214,12 +213,12 @@ namespace CSharpScript.File
 					CSharpCode cSharpCode = Codes.Top();
 					if (cSharpCode is CSharpCodeNewObject)
 					{
-						(cSharpCode as CSharpCodeNewObject).Dups.Add(Parse(source, ref index, end, out target2, new CodeList(), dup: true));
+						(cSharpCode as CSharpCodeNewObject).Dups.Add(Parse(source, ref index, end, out _, new CodeList(), dup: true));
 						break;
 					}
 					if (cSharpCode is CSharpCodeNewArray)
 					{
-						(cSharpCode as CSharpCodeNewArray).Register(Parse(source, ref index, end, out target2, new CodeList(), dup: true));
+						(cSharpCode as CSharpCodeNewArray).Register(Parse(source, ref index, end, out _, new CodeList(), dup: true));
 						break;
 					}
 					throw new Exception();

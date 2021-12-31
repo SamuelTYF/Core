@@ -6,9 +6,6 @@ namespace CSharpScript.DomTree
 			: base(offset, length, ILCodeFlag.ArgList)
 		{
 		}
-		public override string Print()
-		{
-			return "arglist";
-		}
-	}
+        public override string Print() => "arglist";
+    }
 }

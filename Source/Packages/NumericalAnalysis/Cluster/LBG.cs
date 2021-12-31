@@ -15,9 +15,9 @@ namespace NumericalAnalysis.Cluster
 		public LBG(int k, int nmax, double epsilon)
 		{
 			K = k;
-			Datas = new List<List<double>>();
-			Sets = new List<int>();
-			Vectors = new List<List<double>>();
+			Datas = new();
+			Sets = new();
+			Vectors = new();
 			NMax = nmax;
 			Epislon = epsilon;
 			N = 1;
@@ -37,7 +37,7 @@ namespace NumericalAnalysis.Cluster
 		}
 		public void Run(Action<List<List<double>>, double> callback)
 		{
-			List<List<double>> vectors = new();
+            List<List<double>> vectors = new();
 			vectors.Add(new List<double>(new double[K]));
 			List<int> counts = new();
 			counts.Add(0);
@@ -114,7 +114,7 @@ namespace NumericalAnalysis.Cluster
 				for (int j = 0; j < Datas.Length; j++)
 					nD += Distance(vectors[Sets[j]], Datas[j]);
 				nD /= K * Datas.Length;
-				List<List<double>> _vectors = new();
+                List<List<double>> _vectors = new();
 				for (int i = 0; i < N; i++)
 					if (counts[i] != 0)
 						_vectors.Add(vectors[i]);

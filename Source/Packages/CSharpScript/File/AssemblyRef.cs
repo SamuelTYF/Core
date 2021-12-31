@@ -48,7 +48,7 @@ namespace CSharpScript.File
                 return Assembly.Name != Name ? throw new Exception() : true;
             }
             if (!manager.AssemblyRefWaitingList.ContainsKey(Hash))
-				manager.AssemblyRefWaitingList[Hash] = new Stack<AssemblyRef>();
+				manager.AssemblyRefWaitingList[Hash] = new();
 			manager.AssemblyRefWaitingList[Hash].Insert(this);
 			return false;
 		}

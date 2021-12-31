@@ -46,11 +46,13 @@ namespace TestFramework
                 ITest test = item.Tag as ITest;
                 item.SubItems[1].Text = "Running";
                 item.ForeColor = Color.Blue;
-                test.UpdateInfo = (object value) =>
-                {
-                    item.SubItems[3].Tag = value;
-                    item.SubItems[3].Text = $"{value}";
-                };
+                test.UpdateInfo =
+                    TestBoxOn? (object value) => richTextBox1.AppendText($"{value}\n"):
+                    (object value) =>
+                    {
+                        item.SubItems[3].Tag = value;
+                        item.SubItems[3].Text = $"{value}";
+                    };
                 int runningcount = 0;
                 try
                 {
@@ -84,7 +86,11 @@ namespace TestFramework
         private void startToolStripMenuItem_Click(object sender, EventArgs e)
             => Run();
         private void TestForm_SizeChanged(object sender, EventArgs e)=>TestName.Width= Result.Width=Progress.Width=Info.Width = Width / 4;
-        private void TestForm_Load(object sender, EventArgs e) => TestName.Width = Result.Width = Progress.Width=Info.Width= Width / 4;
+        private void TestForm_Load(object sender, EventArgs e)
+        {
+            TestName.Width = Result.Width = Progress.Width = Info.Width =listView1.Width / 4;
+            splitContainer1.SplitterDistance = splitContainer1.Width;
+        }
         private void exceptionToolStripMenuItem_Click(object sender, EventArgs e) => DebugForm.Display("Error", listView1.SelectedItems[0].SubItems[1].Tag);
         private void loadAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -146,6 +152,22 @@ namespace TestFramework
                 if (!item.Selected)
                     item.Remove();
             Run();
+        }
+        public bool TestBoxOn = false;
+        private void textBoxToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(TestBoxOn)
+            {
+                splitContainer1.SplitterDistance = splitContainer1.Width;
+                TestName.Width = Result.Width = Progress.Width = Info.Width = listView1.Width / 4;
+                TestBoxOn = false;
+            }
+            else
+            {
+                splitContainer1.SplitterDistance = splitContainer1.Width / 2;
+                TestName.Width = Result.Width = Progress.Width = Info.Width = listView1.Width / 4;
+                TestBoxOn = true;
+            }
         }
     }
 }

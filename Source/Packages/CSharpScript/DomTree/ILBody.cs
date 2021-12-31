@@ -13,7 +13,7 @@ namespace CSharpScript.DomTree
 		}
 		public static ILCode[] Select(AVL<int, ILCode> query, ILCodeInfo info)
 		{
-			List<ILCode> list = new List<ILCode>();
+			List<ILCode> list = new();
 			int i = info.Offset;
 			ILCode iLCode;
 			for (int num = i + info.Length; i < num; i += iLCode.Info.Length)
@@ -26,7 +26,7 @@ namespace CSharpScript.DomTree
 		public static ILBody ParseBody(MethodDef def, int start, int length)
 		{
 			CorILMethod method = def.Method;
-			AVL<int, ILCode> aVL = new();
+			Collection.AVL<int, ILCode> aVL = new();
 			Instruction[] instructions = method.MethodBody.Instructions;
 			foreach (Instruction instruction in instructions)
 			{

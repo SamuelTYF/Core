@@ -16,7 +16,7 @@ namespace Automata
                 throw new Exception();
             }
         }
-        public HashTable() => Values = new List<(T, int)>();
+        public HashTable() => Values = new();
         public void Clear() => Values.Clear();
         public int Register(T value, int hash)
         {

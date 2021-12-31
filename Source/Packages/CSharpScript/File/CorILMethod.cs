@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.IO;
 using Collection;
 namespace CSharpScript.File
@@ -26,7 +25,7 @@ namespace CSharpScript.File
 			byte[] array = new byte[MethodHeader.CodeSize];
 			stream.Read(array, 0, array.Length);
 			MethodBody = new MethodBody(array, metadata);
-			Collection.List<ExceptionHeader> list = new();
+			List<ExceptionHeader> list = new();
 			if (MethodHeader.MethodHeaderTypeValues.HasFlag(MethodHeaderTypeValues.CorILMethod_MoreSects))
 			{
 				array = new byte[(4294901760u - stream.Position) & 3];
@@ -45,7 +44,7 @@ namespace CSharpScript.File
 		{
 			string text = $"MethodHeader:\n{MethodHeader}\n";
 			if (LocalVars.Length != 0)
-				text = text + "Locals:\n" + string.Join(",\n", (IEnumerable<LocalVar>)LocalVars) + "\n";
+				text = text + "Locals:\n" + string.Join(",\n", (System.Collections.Generic.IEnumerable<LocalVar>)LocalVars) + "\n";
 			text += $"MethodBody:\n{MethodBody}\n";
 			if (ExceptionHeaders.Length != 0)
 				text = text + "ExceptionHeaders:\n" + string.Join("\n", ExceptionHeaders);

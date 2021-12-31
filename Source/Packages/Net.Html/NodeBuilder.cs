@@ -1,12 +1,12 @@
 using System;
-using System.Collections.Generic;
+using Collection;
 namespace Net.Html
 {
     public class NodeBuilder : IDisposable
     {
-        public Collection.List<string> Source;
+        public List<string> Source;
         public int P;
-        public NodeBuilder(Collection.List<string> source) => Source = source;
+        public NodeBuilder(List<string> source) => Source = source;
         public void Dispose() => GC.SuppressFinalize(this);
         public HtmlNode Search()
         {
@@ -25,7 +25,7 @@ namespace Net.Html
                 htmlNode.Nodes.Add(item);
             return htmlNode;
         }
-        internal IEnumerable<HtmlNode> Search(HtmlNode parent, string ps)
+        internal System.Collections.Generic.IEnumerable<HtmlNode> Search(HtmlNode parent, string ps)
         {
             string text = Source[++P];
             while (text != ps)
@@ -44,7 +44,7 @@ namespace Net.Html
                         Text = text
                     }; 
                     string text3 = "</" + text2 + ">";
-                    Collection.List<HtmlNode> Nodes = new();
+                    List<HtmlNode> Nodes = new();
                     if (text[^2] == '/')
                         yield return htmlNode;
                     else

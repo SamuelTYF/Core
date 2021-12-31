@@ -11,7 +11,7 @@ namespace Parser
 			: base(name, tree)
 		{
 			Key = key;
-			Characters = new List<char>(key.ToCharArray());
+			Characters = new(key.ToCharArray());
 		}
 		public override IParser Install()
 		{

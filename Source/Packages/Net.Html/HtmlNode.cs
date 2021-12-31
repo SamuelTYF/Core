@@ -1,6 +1,5 @@
 using Collection;
 using System;
-using System.Collections.Generic;
 namespace Net.Html
 {
     public class HtmlNode
@@ -9,12 +8,12 @@ namespace Net.Html
         public string Name;
         public TrieTree<string> Info;
         public HtmlNode Parent;
-        public Collection.List<HtmlNode> Nodes;
+        public List<HtmlNode> Nodes;
         public HtmlNode(HtmlNode parent)
         {
             Parent = parent;
             Info = new TrieTree<string>();
-            Nodes = new Collection.List<HtmlNode>();
+            Nodes = new List<HtmlNode>();
         }
         public HtmlNode GetNode(params int[] index)
         {
@@ -37,7 +36,7 @@ namespace Net.Html
             return htmlNode;
         }
         public override string ToString() => Text;
-        public IEnumerable<HtmlNode> Select(Func<HtmlNode, bool> IsSeleted)
+        public System.Collections.Generic.IEnumerable<HtmlNode> Select(Func<HtmlNode, bool> IsSeleted)
         {
             if (IsSeleted(this))
                 yield return this;

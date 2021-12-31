@@ -1,8 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0-windows10.0.20348.0</TargetFramework>
     <Nullable>enable</Nullable>
+    <BaseOutputPath>D:\Core</BaseOutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -12,5 +13,20 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Backward.cs" />
+    <Compile Include="CommonPossibility.cs" />
+    <Compile Include="DoubleStatePossibility.cs" />
+    <Compile Include="EmissionPossibility.cs" />
+    <Compile Include="Forward.cs" />
+    <Compile Include="ForwardPredict.cs" />
+    <Compile Include="HMM.cs" />
+    <Compile Include="Learner.cs" />
+    <Compile Include="OutputSequence.cs" />
+    <Compile Include="StatePossibility.cs" />
+    <Compile Include="TrainsitionPossibility.cs" />
+    <Compile Include="Viterbi.cs" />
+  </ItemGroup>
 
 </Project>

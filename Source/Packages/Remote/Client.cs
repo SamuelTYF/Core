@@ -10,7 +10,7 @@ namespace Remote
 	{
 		private readonly ModuleTools Tools;
 		private readonly int _MaxConnectNumber;
-		private readonly Stack<ClientModule> Modules;
+		private readonly Collection.Stack<ClientModule> Modules;
 		private bool StartConnect;
 		private int RunningCount;
 		private readonly IPAddress IP;
@@ -19,9 +19,9 @@ namespace Remote
 		{
 			Tools = tools ?? new ModuleTools_Normal();
 			_MaxConnectNumber = MaxConnectNumber;
-			Modules = new Stack<ClientModule>();
+			Modules = new();
 			IP = Dns.GetHostAddresses(Server)[0];
-			IPEndPoint = new IPEndPoint(IP, Port);
+			IPEndPoint = new(IP, Port);
 		}
         public void Insert(ClientModule module) => Modules.Insert(module);
         public void ModuleComplete() => RunningCount--;

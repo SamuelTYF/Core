@@ -1,8 +1,8 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text;
+using Collection;
 namespace Net.Html
 {
     public static class Code
@@ -59,7 +59,7 @@ namespace Net.Html
             memoryStream.Position = 0L;
             return memoryStream;
         }
-        public static IEnumerable<string> Pretreatment_First(StreamReader Source)
+        public static System.Collections.Generic.IEnumerable<string> Pretreatment_First(StreamReader Source)
         {
             string text = "";
             while (!Source.EndOfStream)
@@ -84,7 +84,7 @@ namespace Net.Html
                 }
             }
         }
-        public static IEnumerable<string> Pretreatment_Second(IEnumerable<string> Source, params string[] sign)
+        public static System.Collections.Generic.IEnumerable<string> Pretreatment_Second(System.Collections.Generic.IEnumerable<string> Source, params string[] sign)
         {
             string[] Start = new string[sign.Length];
             string[] End = new string[sign.Length];
@@ -123,15 +123,15 @@ namespace Net.Html
                     return i;
             return -1;
         }
-        public static Collection.List<string> Work_Normal(string url, string Referer = null, string Host = null, string UserAgent = null, CookieContainer Cookie = null, Encoding Encoding = null)
+        public static List<string> Work_Normal(string url, string Referer = null, string Host = null, string UserAgent = null, CookieContainer Cookie = null, Encoding Encoding = null)
             => new(Pretreatment_Second(Pretreatment_First(new StreamReader(GetCodeStream(url, Referer, Host, UserAgent, Cookie), Encoding ?? Encoding.Default)), "script", "style"));
-        public static Collection.List<string> Work_String(string str)
+        public static List<string> Work_String(string str)
             => new(Pretreatment_Second(Pretreatment_First(new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(str)))), "script", "style"));
-        public static Collection.List<string> Work_Bytes(byte[] b)
+        public static List<string> Work_Bytes(byte[] b)
             => new(Pretreatment_Second(Pretreatment_First(new StreamReader(new MemoryStream(b))), "script", "style"));
-        public static Collection.List<string> Work_Stream(Stream s)
+        public static List<string> Work_Stream(Stream s)
             => new(Pretreatment_Second(Pretreatment_First(new StreamReader(s)), "script", "style"));
-        public static Collection.List<string> Work_StreamReader(StreamReader sr)
+        public static List<string> Work_StreamReader(StreamReader sr)
             => new(Pretreatment_Second(Pretreatment_First(sr), "script", "style"));
     }
 }

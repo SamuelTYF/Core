@@ -12,11 +12,11 @@ namespace CSharpScript.File
 		}
 		public static CustomMod[] TryAnaylzeCustomModes(byte[] bs, ref int index, MetadataRoot metadata)
 		{
-			List<CustomMod> list = new List<CustomMod>();
+			List<CustomMod> list = new();
 			while (index < bs.Length)
 			{
 				ElementType elementType = (ElementType)bs[index++];
-				if (elementType == ElementType.ELEMENT_TYPE_CMOD_OPT || elementType == ElementType.ELEMENT_TYPE_CMOD_REQD)
+				if (elementType is ElementType.ELEMENT_TYPE_CMOD_OPT or ElementType.ELEMENT_TYPE_CMOD_REQD)
 				{
 					list.Add(new CustomMod(elementType, new TypeDefOrRefOrSpecEncoded(bs, ref index, metadata)));
 					continue;

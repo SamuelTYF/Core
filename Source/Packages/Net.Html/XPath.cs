@@ -6,7 +6,7 @@ namespace Net.Html
 {
     public class XPath
     {
-        public Collection.List<IXPathMode> Modes;
+        public List<IXPathMode> Modes;
         public static readonly AutomataInstance Instance;
         static XPath()
         {
@@ -20,8 +20,8 @@ namespace Net.Html
             return xPathHost.XPath;
         }
         public XPath(params IXPathMode[] modes)
-            => Modes = new Collection.List<IXPathMode>(modes);
-        public XPath(Collection.List<IXPathMode> modes)
+            => Modes = new List<IXPathMode>(modes);
+        public XPath(List<IXPathMode> modes)
             => Modes = modes;
         public IEnumerable<object> Search(params HtmlNode[] node)
         {
