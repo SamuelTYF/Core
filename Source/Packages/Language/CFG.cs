@@ -73,15 +73,5 @@ namespace Language
             }
             return newu;
         }
-        public CFG<T> RemoveEpsilonExpression()
-        {
-            bool[] empty = FindEmptyVariable();
-            CFG<T> cfg = new(Alphabet, Variables, Start.Index);
-            foreach(CFGTransition<T> transition in Transitions.List)
-                if(transition.To.Count!=0)
-                {
-
-                }
-        }
     }
 }

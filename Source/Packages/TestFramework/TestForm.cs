@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+
 namespace TestFramework
 {
     public partial class TestForm : Form
@@ -36,40 +39,62 @@ namespace TestFramework
         public void Run()
         {
             int ErrorCount = 0;
-            progressBar1.Value = 0;
-            progressBar1.Maximum = SubTaskCount;
-            progressBar1.Minimum = 0;
+            progressBar1.Invoke(() =>
+            {
+                progressBar1.Value = 0;
+                progressBar1.Maximum = SubTaskCount;
+                progressBar1.Minimum = 0;
+            });
             int value = 0;
             RunningResult = true;
-            foreach (ListViewItem item in listView1.Items)
+            List<ListViewItem> items = new();
+            listView1.Invoke(() => {
+                foreach (ListViewItem item in listView1.Items)
+                    items.Add(item);
+            });
+            foreach (ListViewItem item in items)
             {
                 ITest test = item.Tag as ITest;
-                item.SubItems[1].Text = "Running";
-                item.ForeColor = Color.Blue;
+                listView1.Invoke(() =>
+                {
+                    item.SubItems[1].Text = "Running";
+                    item.ForeColor = Color.Blue;
+                });
                 test.UpdateInfo =
-                    TestBoxOn? (object value) => richTextBox1.AppendText($"{value}\n"):
+                    TestBoxOn ? (object value) => richTextBox1.Invoke(()=> richTextBox1.AppendText($"{value}\n")):
                     (object value) =>
                     {
-                        item.SubItems[3].Tag = value;
-                        item.SubItems[3].Text = $"{value}";
+                        listView1.Invoke(() =>
+                        {
+                            item.SubItems[3].Tag = value;
+                            item.SubItems[3].Text = $"{value}";
+                        });
                     };
                 int runningcount = 0;
                 try
                 {
                     test.Run((count) =>
+                        listView1.Invoke(() =>
+                        {
+                            item.SubItems[2].Text = $"{runningcount = count}/{test.TaskCount}";
+                            progressBar1.Value = value + count;
+                        })
+                    );
+                    listView1.Invoke(() =>
                     {
-                        item.SubItems[2].Text = $"{runningcount = count}/{test.TaskCount}";
-                        progressBar1.Value = value + count;
+                        item.SubItems[1].Text = "Success";
+                        item.ForeColor = Color.Green;
                     });
-                    item.SubItems[1].Text = "Success";
-                    item.ForeColor = Color.Green;
                 }
                 catch (Exception e)
                 {
                     ErrorCount++;
-                    item.SubItems[1].Text = "Fail";
-                    item.SubItems[1].Tag = e;
-                    item.ForeColor = Color.Red;
+                    listView1.Invoke(() =>
+                    {
+                        item.SubItems[1].Text = "Fail";
+                        item.SubItems[1].Tag = e;
+                        item.ForeColor = Color.Red;
+                    });
                     RunningResult = false;
                 }
                 value += test.TaskCount;
@@ -79,9 +104,9 @@ namespace TestFramework
             => backgroundWorker1.RunWorkerAsync();
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            runToolStripMenuItem.Enabled = false;
+            Invoke(()=>runToolStripMenuItem.Enabled = false);
             Run();
-            runToolStripMenuItem.Enabled = true;
+            Invoke(() => runToolStripMenuItem.Enabled = true);
         }
         private void startToolStripMenuItem_Click(object sender, EventArgs e)
             => Run();

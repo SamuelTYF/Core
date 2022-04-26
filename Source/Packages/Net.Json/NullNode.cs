@@ -21,7 +21,9 @@ namespace Net.Json
 				}
 				if (num == 4)
 				{
-                    return !arg.NotOver || arg.Top() is ' ' or ',' or ']' or '}'
+					while (arg.Top() is ' ' or '\t' or '\n' or '\r')
+						arg.Pop();
+					return !arg.NotOver || arg.Top() is ',' or ']' or '}'
                         ? new NullNode()
                         :throw new Exception();
                 }

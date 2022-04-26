@@ -1,0 +1,6 @@
+@Char@:[0123456789]
+@Add@:(\(@E@@AddS@)
+@AddS@:(\)|(\|@E@@AddS@))
+@E@:(@Char@|@Add@|(@Char@@EE@)|(@Add@@EE@))
+@EE@:(@Char@|@Add@|(@Char@@EE@)|(@Add@@EE@)|(@Char@@EE@@EE@)|(@Add@@EE@@EE@)|\*)
+@RE@:@E@$

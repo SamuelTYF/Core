@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows10.0.22000.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <PlatformTarget>x64</PlatformTarget>
+    <BaseOutputPath>D:\Core</BaseOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Data\Entry.cs" />
+    <Compile Include="Data\EntryTables\Cache.cs" />
+    <Compile Include="Data\EntryTables\EntryBlock.cs" />
+    <Compile Include="Data\EntryTables\EntryTable.cs" />
+    <Compile Include="Data\EntryType.cs" />
+    <Compile Include="Data\Key.cs" />
+    <Compile Include="Data\Table.cs" />
+    <Compile Include="Logging\Logger.cs" />
+    <Compile Include="Logging\LoggingModel.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="File\" />
+  </ItemGroup>
+
+</Project>

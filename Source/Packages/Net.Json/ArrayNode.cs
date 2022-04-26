@@ -5,7 +5,7 @@ namespace Net.Json
 {
 	public class ArrayNode : Node
 	{
-		public Node[] Nodes;
+		public List<Node> Nodes;
 		public override Node this[object key]
 		{
 			get
@@ -25,7 +25,7 @@ namespace Net.Json
 				Nodes[num] = value;
 			}
 		}
-        public ArrayNode(Node[] nodes) => Nodes = nodes;
+        public ArrayNode(params Node[] nodes) => Nodes = new(nodes);
         protected internal new static Node Parse(StringArg arg)
 		{
 			arg.Pop();

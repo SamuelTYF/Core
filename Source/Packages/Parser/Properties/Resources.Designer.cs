@@ -19,7 +19,7 @@ namespace Parser.Properties {
     // 类通过类似于 ResGen 或 Visual Studio 的工具自动生成的。
     // 若要添加或移除成员，请编辑 .ResX 文件，然后重新运行 ResGen
     // (以 /str 作为命令选项)，或重新生成 VS 项目。
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resources {
@@ -61,9 +61,19 @@ namespace Parser.Properties {
         }
         
         /// <summary>
-        ///   查找类似 @using@:using
-        ///@Assemble@:~[\.\;\ ]
-        ///@Assembles@:{@Assemble@,\.} 的本地化字符串。
+        ///   查找类似 @using@:&lt;using&gt;
+        ///@Assembly@:~[\.\;\ \{]
+        ///@Assemblies@:{@Assembly@,\.}
+        ///@using Assembly@:@using@ @Assemblies@\;
+        ///@public@:&lt;public&gt;
+        ///@type@:{@Assembly@,\.}
+        ///@method.name@:~[\ \(]
+        ///@paramter.name@:~[\,\)\ ]
+        ///@paramter@:@type@ @paramter.name@
+        ///@paramters@:{@paramter@,(~ \,~ )}
+        ///@delegate@:@public@ &lt;delegate&gt; @type@ @method.name@~ \(~ @paramters@~ \)\;
+        ///@namespace@:&lt;namespace&gt; @Assemblies@~ \{~ {(@namespace@|@delegate@)}~ \}
+        ///@cs@:{(@using Assembly@|@namespace@), } 的本地化字符串。
         /// </summary>
         public static string CSharp {
             get {
@@ -74,18 +84,18 @@ namespace Parser.Properties {
         /// <summary>
         ///   查找类似 @Name@:\@~[\@]\@
         ///@Space@:\ 
+        ///@ZeroSpace@:&lt;\~\ &gt; 
         ///@Key@:\&lt;{@Symbol@}\&gt;
-        ///@Symbol.Special@:[\\\@\(\)\[\]\{\}\&lt;\&gt;\~\|\,\.\:\;\ ]
-        ///@Symbol@:([abcdefghijklmnopqrstuvwxyz]|(\\@Symbol.Special@))
+        ///@Symbol.Special@:[\\\@\(\)\[\]\{\}\&lt;\&gt;\~\|\,\.\:\;\*\$\ ]
+        ///@Symbol@:([0123456789abcdefghijklmnopqrstuvwxyz]|(\\@Symbol.Special@))
         ///@Symbol.Group@:\[{@Symbol@}\]
         ///@Value@:\~@Symbol.Group@
-        ///@IParser@:(@Name@|@Symbol@|@Symbol.Group@|@Value@|@Option@|@Join.1@|@Join.2@|@Space@|@Key@|@Stream@)
+        ///@IParser@:(@Name@|@Symbol@|@Symbol.Group@|@Value@|@Option@|@Join.1@|@Join.2@|@Join@|@Space@|@ZeroSpace@|@Key@|@Stream@|@EndCheck@)
         ///@Option@:\({@IParser@,\|}\)
         ///@Stream@:\({@IParser@}\)
         ///@Join.1@:\{@IParser@\}
         ///@Join.2@:\{@IParser@\,@IParser@\}
-        ///@Parser@:@Name@\:{@IParser@}
-        ///@Parsers@:{@Parser@, } 的本地化字符串。
+        ///@uint [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         public static string Grammar_Parser {
             get {
@@ -165,15 +175,28 @@ namespace Parser.Properties {
         ///        &quot;type&quot;:&quot;Symbol&quot;,
         ///        &quot;key&quot;:&quot; &quot;
         ///    },
+        ///    &quot;ZeroSpace&quot;:{
+        ///        &quot;type&quot;:&quot;Key&quot;,
+        ///        &quot;key&quot;:&quot;~ &quot;
+        ///    },
         ///    &quot;Key&quot;:{
-        ///        &quot;type&quot;:&quot;Stream&quot;,
-        ///        &quot;tasks&quot;:[
-        ///            {
-        ///                 [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///       [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         public static string Parser {
             get {
                 return ResourceManager.GetString("Parser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 @Char@:[0123456789]
+        ///@Add@:\(@E@@Add1@
+        ///@Add1@:(\)|\|@Add1@)
+        ///@E@:(@Char@|@Add@) 的本地化字符串。
+        /// </summary>
+        public static string RE_Simple {
+            get {
+                return ResourceManager.GetString("RE_Simple", resourceCulture);
             }
         }
     }

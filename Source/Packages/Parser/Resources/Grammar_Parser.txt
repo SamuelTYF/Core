@@ -2,16 +2,17 @@
 @Space@:\ 
 @ZeroSpace@:<\~\ > 
 @Key@:\<{@Symbol@}\>
-@Symbol.Special@:[\\\@\(\)\[\]\{\}\<\>\~\|\,\.\:\;\ ]
+@Symbol.Special@:[\\\@\(\)\[\]\{\}\<\>\~\|\,\.\:\;\*\$\ ]
 @Symbol@:([0123456789abcdefghijklmnopqrstuvwxyz]|(\\@Symbol.Special@))
 @Symbol.Group@:\[{@Symbol@}\]
 @Value@:\~@Symbol.Group@
-@IParser@:(@Name@|@Symbol@|@Symbol.Group@|@Value@|@Option@|@Join.1@|@Join.2@|@Join@|@Space@|@ZeroSpace@|@Key@|@Stream@)
+@IParser@:(@Name@|@Symbol@|@Symbol.Group@|@Value@|@Option@|@Join.1@|@Join.2@|@Join@|@Space@|@ZeroSpace@|@Key@|@Stream@|@EndCheck@)
 @Option@:\({@IParser@,\|}\)
 @Stream@:\({@IParser@}\)
 @Join.1@:\{@IParser@\}
 @Join.2@:\{@IParser@\,@IParser@\}
 @uint@:{[0123456789],0,10}
 @Join@:\{@IParser@\,@uint@\,@uint@\}
+@EndCheck@:\$
 @Parser@:@Name@\:{@IParser@}
 @Parsers@:{@Parser@, }

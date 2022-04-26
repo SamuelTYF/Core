@@ -22,6 +22,12 @@ namespace Net.Json
 			foreach (var (key, value) in Nodes)
 				Dictionary[key, 0] = value;
 		}
+		public ObjectNode(params (string, Node)[] Nodes)
+		{
+			Dictionary = new TrieTree<Node>();
+			foreach (var (key, value) in Nodes)
+				Dictionary[key, 0] = value;
+		}
 		protected internal new static Node Parse(StringArg arg)
 		{
 			List<(string, Node)> list = new();

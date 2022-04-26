@@ -24,6 +24,7 @@ namespace Parser
 			FromJsons["Stream"] = StreamParserTreeNode.FromJson;
 			FromJsons["Option"] = OptionParserTreeNode.FromJson;
 			FromJsons["Join"] = JoinParserTreeNode.FromJson;
+			FromJsons["EndCheck"] = JoinParserTreeNode.FromJson;
 			NullParserTreeNode.FromJson("null", null, this);
 		}
 		public void FromJson(ObjectNode node)

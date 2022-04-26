@@ -25,6 +25,7 @@ namespace Parser
             FromParsedObjects["Join"] = Join;
             FromParsedObjects["Key"] = Key;
             FromParsedObjects["Stream"] = Stream;
+            FromParsedObjects["EndCheck"] = EndCheck;
         }
         public static ParsedObject GetParsedObject(string grammar)
         {
@@ -131,6 +132,12 @@ namespace Parser
             for (int i = 0; i < tasks.Length; i++)
                 tasks[i] = Parse($"{name}[{i}]", obj.Objects[i], tree);
             new StreamParserTreeNode(name, tasks, tree).Main = false;
+            return name;
+        }
+        public static string EndCheck(string name, ParsedObject obj, TrieTree<IParserTreeNode> tree)
+        {
+            if (obj.Objects.Length!=0) throw new System.Exception();
+            new EndCheckParserTreeNode(name, tree).Main = false;
             return name;
         }
         public static string Print(TrieTree<IParserTreeNode> tree)

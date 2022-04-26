@@ -43,7 +43,7 @@
     },
     "Symbol.Special":{
         "type":"Symbol",
-        "key":"\\@()[]{}<>~|,.:; "
+        "key":"\\@()[]{}<>~|,.:;*$ "
     },
     "Symbol":{
         "type":"Option",
@@ -106,7 +106,8 @@
             "Space",
             "ZeroSpace",
             "Key",
-            "Stream"
+            "Stream",
+            "EndCheck"
         ],
         "empty":false,
         "select":false
@@ -213,6 +214,10 @@
                 "key":"}"
             }
         ]
+    },
+    "EndCheck":{
+        "type":"Symbol",
+        "key":"$"
     },
     "Parser":{
         "type":"Stream",

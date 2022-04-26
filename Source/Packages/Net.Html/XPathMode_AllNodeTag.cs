@@ -5,16 +5,18 @@ namespace Net.Html
     {
         public string Tag;
         public XPathMode_AllNodeTag(string tag) => Tag = tag;
+        public IEnumerable<object> Search(HtmlNode node)
+        {
+            if (node.Name == Tag)
+                yield return node;
+            foreach(HtmlNode result in Search(node.Nodes))
+                yield return result;
+        }
         public IEnumerable<object> Search(IEnumerable<object> nodes)
         {
             foreach (HtmlNode node in nodes)
-            {
-                foreach (HtmlNode node2 in node.Nodes)
-                    if (node2.Name == Tag)
-                        yield return node2;
-                foreach (HtmlNode item in Search(node.Nodes))
-                    yield return item;
-            }
+                foreach (HtmlNode result in Search(node))
+                    yield return result;
         }
     }
 }

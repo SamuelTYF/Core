@@ -13,11 +13,11 @@ namespace Parser_Test
             var tree = GrammarParser.GetTree(GrammarParser.GetParsedObject(Parser.Properties.Resources.Grammar_Parser));
             Save(GrammarParser.Print(tree), "GrammarParser.txt");
             update(1);
-            using VisualStringArg arg = new(Parser.Properties.Resources.Grammar_Parser);
+            using VisualStringArg arg = new(Parser.Properties.Resources.RE_Simple);
             IParser parser = tree["@Parsers@"].Install();
             IParseResult result = parser.Parse(arg);
             Ensure.IsTrue(result.Success);
-            Ensure.Equal(result.EndIndex, Parser.Properties.Resources.Grammar_Parser.Length);
+            Ensure.Equal(result.EndIndex, Parser.Properties.Resources.RE_Simple.Length);
             update(2);
             ParsedObject obj = result.GetParsedObject(arg);
             update(3);
