@@ -1,0 +1,9 @@
+private static readonly HashSet<string> Keys=new(new string[]{
+	"public",
+	"private",
+	"class",
+	"int",
+	"void",
+	"using",
+	"namespace"
+});

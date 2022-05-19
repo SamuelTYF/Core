@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace HMM
 {
     /// <summary>
-    /// 3-Tuple including TrainsitionPossibility, EmissionPossibility and InitalPossibility
+    /// 3-Tuple including Transition Possibility, Emission Possibility and Initial Possibility
     /// </summary>
     public class HMM
     {

@@ -1,0 +1,20 @@
+public class _Tokenizer:ITokenizer<TToken>
+{
+	public _Tokenizer(Encoding encoding,int length=1<<10):base(encoding,length){}
+	public _Tokenizer(int length = 1 << 10) : base(length) { }
+	public override TToken Get()
+	{
+		TToken token;
+		while(true)
+		{
+			char symbol = Peek();
+			switch (State)
+			{
+				//StateCode
+				default:
+					return Error(symbol);
+			}
+		}
+	}
+	//Method
+}

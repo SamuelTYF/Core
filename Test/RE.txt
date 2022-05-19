@@ -1,0 +1,7 @@
+@Add@:(\(@E@@AddS@)
+@AddS@:(\)|(\|@E@@AddS@))
+@Char@:[\0\1\2\3\4\5\6\7\8\9]
+@E@:(@Char@|@Add@|(@Char@@EE@)|(@Add@@EE@))
+@EE@:(@Char@|@Add@|(@Char@@EE@)|(@Add@@EE@)|(@Char@@EE@@EE@)|(@Add@@EE@@EE@)|\*)
+@RE@:(@E@)
+

@@ -1,0 +1,106 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows10.0.22000.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <OutputType>Exe</OutputType>
+    <PlatformTarget>x64</PlatformTarget>
+    <BaseOutputPath>D:\Core</BaseOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="CSharp\Code\CodeBuilder.cs" />
+    <Compile Include="CSharp\CSharp_Parser.cs" />
+    <Compile Include="CSharp\CSharp_Tokenizer.cs" />
+    <Compile Include="CSharp\Metadata\Command_Call.cs" />
+    <Compile Include="CSharp\Metadata\Command_Constant.cs" />
+    <Compile Include="CSharp\Metadata\Command_Get.cs" />
+    <Compile Include="CSharp\Metadata\Command_If.cs" />
+    <Compile Include="CSharp\Metadata\Command_Load.cs" />
+    <Compile Include="CSharp\Metadata\Command_Operator2.cs" />
+    <Compile Include="CSharp\Metadata\Command_Set.cs" />
+    <Compile Include="CSharp\Metadata\Helper.cs" />
+    <Compile Include="CSharp\Metadata\ICommand.cs" />
+    <Compile Include="CSharp\Metadata\INamespace.cs" />
+    <Compile Include="CSharp\Metadata\Parameter.cs" />
+    <Compile Include="CSharp\Metadata\ParsingFile.cs" />
+    <Compile Include="CSharp\Metadata\IField.cs" />
+    <Compile Include="CSharp\Metadata\IMethod.cs" />
+    <Compile Include="CSharp\Metadata\InternalField.cs" />
+    <Compile Include="CSharp\Metadata\InternalMethod.cs" />
+    <Compile Include="CSharp\Metadata\InternalType.cs" />
+    <Compile Include="CSharp\Metadata\InternalNamespace.cs" />
+    <Compile Include="CSharp\Metadata\IType.cs" />
+    <Compile Include="CSharp\Metadata\UserField.cs" />
+    <Compile Include="CSharp\Metadata\UserMethod.cs" />
+    <Compile Include="CSharp\Metadata\UserNamespace.cs" />
+    <Compile Include="CSharp\Metadata\UserType.cs" />
+    <Compile Include="CSharp\Metadata\Variable.cs" />
+    <Compile Include="CSharp\Searching\ISearchingObject.cs" />
+    <Compile Include="CSharp\Searching\SearchingNode_Method.cs" />
+    <Compile Include="CSharp\Searching\SearchingNode_Namespace.cs" />
+    <Compile Include="CSharp\Searching\SearchingNode_File.cs" />
+    <Compile Include="CSharp\Searching\SearchingNode_Parameter.cs" />
+    <Compile Include="CSharp\Searching\SearchingNode_Root.cs" />
+    <Compile Include="CSharp\Searching\SearchingNode_Type.cs" />
+    <Compile Include="CSharp\Searching\SearchingResult.cs" />
+    <Compile Include="CSharp\Searching\SearchingValue.cs" />
+    <Compile Include="Helper.cs" />
+    <Compile Include="Parser\Closure.cs" />
+    <Compile Include="Parser\Delta.cs" />
+    <Compile Include="Parser\Entity.cs" />
+    <Compile Include="Parser\First.cs" />
+    <Compile Include="CSharp\Token.cs" />
+    <Compile Include="IParser.cs" />
+    <Compile Include="ITokenizer.cs" />
+    <Compile Include="Parser\LALR.cs" />
+    <Compile Include="Parser\LALR_Tokenizer.cs" />
+    <Compile Include="Parser\State.cs" />
+    <Compile Include="Parser\Symbol.cs" />
+    <Compile Include="Parser\Token.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Tokenizor\Automata\DFA.cs" />
+    <Compile Include="Tokenizor\Automata\mDFA.cs" />
+    <Compile Include="Tokenizor\Automata\mNFA.cs" />
+    <Compile Include="Tokenizor\Automata\NFA.cs" />
+    <Compile Include="Tokenizor\CharRange.cs" />
+    <Compile Include="Tokenizor\Automata\ENFA.cs" />
+    <Compile Include="Tokenizor\Code_Config.cs" />
+    <Compile Include="Tokenizor\RE.cs" />
+    <Compile Include="Tokenizor\Token.cs" />
+    <Compile Include="Tokenizor\IRE_Block.cs" />
+    <Compile Include="Tokenizor\RE_Parser.cs" />
+    <Compile Include="Tokenizor\RE_Tokenizer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Resources\CSharp_LALR.txt" />
+    <None Include="Resources\CSharp_LALR_Init.txt" />
+    <None Include="Resources\CSharp_LALR_Method.txt" />
+    <None Include="Resources\CSharp_Token.txt" />
+    <None Include="Resources\CSharp_Token_Method.txt" />
+    <None Include="Resources\LALR_Token.txt" />
+    <None Include="Resources\Parser.txt" />
+    <None Include="Resources\RE_LALR.txt" />
+    <None Include="Resources\RE_LALR_Init.txt" />
+    <None Include="Resources\RE_LALR_Method.txt" />
+    <None Include="Resources\RE_Token.txt" />
+    <None Include="Resources\Test_Code.txt" />
+    <None Include="Resources\Test_LALR.txt" />
+    <None Include="Resources\Tokenizer.txt" />
+  </ItemGroup>
+
+</Project>

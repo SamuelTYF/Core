@@ -1,0 +1,4 @@
+File=new();
+Root=new();
+Root.LoadAssembly(typeof(string).Assembly);
+Root.Lock();

@@ -1,0 +1,51 @@
+>>>
+[\x01-\x27\x2C\x2E-\x5A\x5E-\x7B\x7D\x7E-\xFFFF]
+token=new Token(Value[0]);
+
+>>>
+[\[\-\]\(\|\)\*\+\\]
+token=new Token(Value);
+
+>>>
+\\[\[\-\]\(\|\)\*\+\\]
+token=new Token(Value[1]);
+
+>>>
+\\d[0-9]+
+token=new Token((char)int.Parse(Value.ToString()[2..]));
+
+>>>
+\\x[0-9a-zA-Z]+
+token=new Token((char)int.Parse(Value.ToString()[2..],System.Globalization.NumberStyles.HexNumber));
+
+>>>
+\\a
+token=new Token('\a')
+
+>>>
+\\b
+token=new Token('\b')
+
+>>>
+\\t
+token=new Token('\t')
+
+>>>
+\\n
+token=new Token('\n')
+
+>>>
+\\v
+token=new Token('\v')
+
+>>>
+\\f
+token=new Token('\f')
+
+>>>
+\\r
+token=new Token('\r')
+
+>>>
+\\s
+token=new Token(' ')

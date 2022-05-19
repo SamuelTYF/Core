@@ -6,7 +6,7 @@ if (Test-Path(".\Test\")) {
 
 New-Item .\Test\ -ItemType Directory
 
-foreach ($fi in Get-ChildItem(".\Debug\net5.0-windows")) {
+foreach ($fi in Get-ChildItem(".\Debug\net6.0-windows10.0.22000.0")) {
     switch ($fi.Extension) {
         ".pdb" {
             $fi
@@ -32,7 +32,7 @@ foreach ($fi in Get-ChildItem(".\TestResources")) {
     Copy-Item $fi -Destination $l
 }
 
-Remove-Item .\Debug\net5.0-windows -Recurse
+Remove-Item .\Debug\net6.0-windows10.0.22000.0 -Recurse
 
 $location=Get-Location
 

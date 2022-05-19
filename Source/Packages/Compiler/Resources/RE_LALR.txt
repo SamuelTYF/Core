@@ -1,0 +1,77 @@
+>>>
+<Start>-><R>'EOF'
+return new(Values[0],CharBlocks.ToArray());
+
+>>>
+<R>->
+value=new RE_Block();
+
+>>>
+<R>-><R><S>
+value=Values[0];
+(value as RE_Block).Values.Add(Values[1]);
+
+>>>
+<R>-><R><E>
+value=Values[0];
+(value as RE_Block).Values.Add(Values[1]);
+
+>>>
+<E>-><S>'*'
+value=new RE_Closure(Values[0]);
+
+>>>
+<E>-><S>'+'
+value=new RE_PositiveClosure(Values[0]);
+
+>>>
+<S>->'Char'
+value=new RE_Char(Values[0].Value);
+CharBlocks.Add(value);
+
+>>>
+<S>-><OB>
+value=Values[0];
+
+>>>
+<S>-><CS>
+value=Values[0];
+
+>>>
+<OB>->'('<R><OB'>
+value=Values[2];
+(value as RE_Optional).Values.Add(Values[1]);
+
+>>>
+<OB'>->')'
+value=new RE_Optional();
+
+>>>
+<OB'>->'|'<R><OB'>
+value=Values[2];
+(value as RE_Optional).Values.Add(Values[1]);
+
+>>>
+<CS>->'[''Char'<CS'>
+value=Values[2];
+(value as RE_CharSet).Insert(Values[1].Value);
+
+>>>
+<CS>->'[''Char''-''Char'<CS'>
+value=Values[4];
+(value as RE_CharSet).Insert(Values[1].Value,Values[3].Value);
+
+>>>
+<CS'>->']'
+value=new RE_CharSet();
+CharBlocks.Add(value);
+
+>>>
+<CS'>->'Char'<CS'>
+value=Values[1];
+(value as RE_CharSet).Insert(Values[0].Value);
+
+>>>
+<CS'>->'Char''-''Char'<CS'>
+value=Values[3];
+(value as RE_CharSet).Insert(Values[0].Value,Values[2].Value);

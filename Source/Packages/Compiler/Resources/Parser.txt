@@ -1,0 +1,37 @@
+public class _Parser:IParser<TToken, TValue, TResult>
+{
+    public static readonly int[,] VariableTable={
+        //VariableTable
+    };
+    public override TResult Parse(ITokenizer<TToken> tokenizer)
+    {
+        Init();
+        //Init
+        TToken token = tokenizer.Get();
+        int symbol = 0;
+        bool mode = true;
+        TToken[] tokens;
+        TValue[] values;
+        TValue value;
+        while (true)
+        {
+            if (mode)
+            {
+                switch (StateStack.Peek())
+                {
+                    //ShiftCode
+                    default:
+                        return Error(token);
+                }
+            }
+            else
+            {
+                int vt=VariableTable[StateStack.Peek(),symbol];
+                if(vt<0)return Error(token);
+                StateStack.Push(vt);
+				mode = true;
+            }
+        }
+    }
+    //Method
+}

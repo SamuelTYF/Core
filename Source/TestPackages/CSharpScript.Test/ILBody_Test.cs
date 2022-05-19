@@ -33,8 +33,7 @@ namespace CSharpScript.Test
             Ensure.NotNull(type);
             MethodDef method = type.GetMethod("Try")[0];
             ILMethod ilmethod=ILCode.Parse(method);
-            using StreamWriter sw = new("Try.txt");
-            sw.WriteLine(ilmethod.Print());
+            UpdateInfo(ilmethod.Print());
         }
     }
 }

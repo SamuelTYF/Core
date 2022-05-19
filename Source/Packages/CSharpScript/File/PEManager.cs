@@ -14,7 +14,7 @@ namespace CSharpScript.File
 		{
 			PEFiles = new AVL<int, PEFile>();
 			AssemblyRefWaitingList = new();
-			Mscorlib = Load("C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\mscorlib.dll");
+			Mscorlib = Load(@"C:\Windows\Microsoft.NET\Framework64\v4.0.30319\mscorlib.dll");
 			InternalTypes = new InternalTypes(Mscorlib.MetadataRoot);
 		}
 		public PEFile Load(string fname)

@@ -1,0 +1,11 @@
+>>>Terminal
+'[\x20-\x26\x28-\xFFFF]*'
+token=Token.Terminal(Value.ToString()[1..^1]);
+
+>>>Define Symbol
+\->
+token=new("Define");
+
+>>>Variable
+<[\x20-\x3D\x3F-\xFFFF]*>
+token=Token.Variable(Value.ToString()[1..^1]);

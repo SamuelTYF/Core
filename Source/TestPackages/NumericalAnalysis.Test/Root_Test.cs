@@ -19,8 +19,8 @@ namespace NumericalAnalysis.Test
                 for (int i = 0; i < values.Length; i++)
                     values[i] = _R.Next(10);
                 f1 = new(values);
-                UpdateInfo(f1);
             } while (f1[-10] * f1[10] > 0);
+            UpdateInfo(f1);
             update(1);
             double x = Newton.FindRoot(f1, 10);
             UpdateInfo(x);
