@@ -8,7 +8,7 @@ namespace Compiler.Tokenizor
 		public RE_Tokenizer(int length = 1 << 10) : base(length) { }
 		public override Token Get()
 		{
-			char Temp_Char='\0';
+			char Temp_Char = '\0';
 			int Temp_Int = 0;
 			while (true)
 			{

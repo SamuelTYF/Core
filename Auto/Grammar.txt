@@ -1,0 +1,463 @@
+﻿>>>
+<Start>-><File>'EOF'
+File.Build(new(Root));
+return File;
+
+>>>
+<Space>->' '
+
+>>>
+<Space>->
+
+>>>
+<File>-><FileHeader><FileBody>
+
+>>>
+<FileHeader>->
+
+>>>
+<FileHeader>-><FileHeader><UsingNamespace><Space>
+
+>>>
+<UsingNamespace>->'using'' '<NamespaceName>';'
+UsingNamespace();
+
+>>>
+<NamespaceName>->'Symbol'
+NamespaceName=new();
+NamespaceName.Add(Values[0].Value_String);
+
+>>>
+<NamespaceName>-><NamespaceName>'.''Symbol'
+NamespaceName.Add(Values[2].Value_String);
+
+>>>
+<FileBody>->
+Namespace=new();
+Namespace.Errors=File.Errors;
+
+>>>
+<FileBody>-><FileBody><DefineNamespace><Space>
+File.InsertNamespace(Namespace);
+Namespace=new();
+Namespace.Errors=File.Errors;
+
+>>>
+<DefineNamespace>->'namespace'' '<NamespaceName><Space>'{'<NamespaceItem>'}'
+DefineNamespace();
+
+>>>
+<NamespaceItem>-><Space>
+Type=new();
+Type.Errors=File.Errors;
+
+>>>
+<NamespaceItem>-><NamespaceItem><DefineClass><Space>
+Namespace.InsertType(Type);
+Type=new();
+Type.Errors=File.Errors;
+
+>>>
+<DefineClass>-><ClassProperty>'class'' ''Symbol'<Space>'{'<ClassItem>'}'
+Type.Name=Values[3].Value_String;
+Type.UpdateAttributes(Values[0] as List<string>);
+
+>>>
+<ClassProperty>->
+value=new List<string>();
+
+>>>
+<ClassProperty>-><ClassProperty>'public'' '
+value=Values[0];
+(value as List<string>).Add(Values[1].Type);
+
+>>>
+<ClassProperty>-><ClassProperty>'static'' '
+value=Values[0];
+(value as List<string>).Add(Values[1].Type);
+
+>>>
+<ClassItem>-><Space>
+Field=new();
+Method=new();
+
+>>>
+<ClassItem>-><ClassItem><Field><Space>
+Type.InsertField(Field);
+Field=new();
+
+>>>
+<ClassItem>-><ClassItem><Method><Space>
+Type.InsertMethod(Method);
+Method=new();
+
+>>>
+<Field>-><ClassItemProperty><Type>' ''Symbol'';'
+Field.Name=Values[3].Value_String;
+Field.TypeFullName=Values[1] as string[];
+Field.UpdateAttributes(Values[0] as List<string>);
+
+>>>
+<ClassItemProperty>->
+value=new List<string>();
+
+>>>
+<ClassItemProperty>-><ClassItemProperty>'public'' '
+value=Values[0];
+(value as List<string>).Add(Values[1].Type);
+
+>>>
+<ClassItemProperty>-><ClassItemProperty>'static'' '
+value=Values[0];
+(value as List<string>).Add(Values[1].Type);
+
+>>>
+<Type>->'void'
+value=new string[]{"System","Void"};
+
+>>>
+<Type>-><InternalType>
+value=Values[0];
+
+>>>
+<Type>-><UserType>
+value=(Values[0] as List<string>).ToArray();
+
+>>>
+<InternalType>->'char'
+value=new string[]{"System","Char"};
+
+>>>
+<InternalType>->'byte'
+value=new string[]{"System","Byte"};
+
+>>>
+<InternalType>->'int'
+value=new string[]{"System","Int32"};
+
+>>>
+<InternalType>->'double'
+value=new string[]{"System","Double"};
+
+>>>
+<InternalType>->'string'
+value=new string[]{"System","String"};
+
+>>>
+<UserType>->'Symbol'
+value=new List<string>();
+(value as List<string>).Add(Values[0].Value_String);
+
+>>>
+<UserType>-><UserType>'.''Symbol'
+value=Values[0];
+(value as List<string>).Add(Values[2].Value_String);
+
+>>>
+<Method>-><MethodHeader>';'
+Method.IsAbstract=true;
+
+>>>
+<Method>-><MethodHeader><LambdaBody>';'
+Method.Lambda=true;
+
+>>>
+<Method>-><MethodHeader><MethodBody>
+
+>>>
+<MethodHeader>-><ClassItemProperty><Type>' ''Symbol''('<Params>')'
+Method.ReturnTypeFullName=Values[1] as string[];
+Method.Name=Values[3].Value_String;
+Method.UpdateAttributes(Values[0] as List<string>);
+
+>>>
+<Params>-><Space>
+
+>>>
+<Params>-><UserParams>
+
+>>>
+<UserParams>-><Space><Param><Space>
+
+>>>
+<UserParams>-><UserParams>','<Space><Param><Space>
+
+>>>
+<Param>-><Type>' ''Symbol'
+value=new Parameter(Values[0] as string[],Values[2].Value_String);
+Method.InsertParameter(value as Parameter);
+
+>>>
+<MethodBody>-><Space>'{'<MethodCommands>'}'
+
+>>>
+<MethodCommands>-><Space>
+
+>>>
+<MethodCommands>-><MethodCommands><Command><Space>
+Method.Commands.Add(Values[1] as ICommand);
+
+>>>
+<LambdaBody>->'=>'<Space><S0>
+Method.Commands.Add(Values[2] as ICommand);
+
+>>>
+<E0>-><S1>'='<Space><S0>
+value=new Command_Set(Values[0] as ICommand,Values[3] as ICommand);
+
+>>>
+<E1>-><S2>'?'<Space><S1>':'<Space><S1>
+value=new Command_If3(Values[0] as ICommand,Values[3] as ICommand,Values[6] as ICommand);
+
+>>>
+<E2>-><S2>'||'<Space><S3>
+value=new Command_Or(Values[0] as ICommand,Values[3] as ICommand);
+
+>>>
+<E3>-><S3>'&&'<Space><S4>
+value=new Command_And(Values[0] as ICommand,Values[3] as ICommand);
+
+>>>
+<E4>-><S4>'=='<Space><S5>
+value=new Command_CompareOperator(Values[0] as ICommand,Values[3] as ICommand,"==");
+
+>>>
+<E4>-><S4>'!='<Space><S5>
+value=new Command_CompareOperator(Values[0] as ICommand,Values[3] as ICommand,"!=");
+
+>>>
+<E5>-><S6>'<'<Space><S6>
+value=new Command_CompareOperator(Values[0] as ICommand,Values[3] as ICommand,"<");
+
+>>>
+<E5>-><S6>'>'<Space><S6>
+value=new Command_CompareOperator(Values[0] as ICommand,Values[3] as ICommand,">");
+
+>>>
+<E6>-><S6>'+'<Space><S7>
+value=new Command_Operator2(Values[0] as ICommand,Values[3] as ICommand,"+");
+
+>>>
+<E6>-><S6>'-'<Space><S7>
+value=new Command_Operator2(Values[0] as ICommand,Values[3] as ICommand,"-");
+
+>>>
+<E7>-><S7>'*'<Space><S8>
+value=new Command_Operator2(Values[0] as ICommand,Values[3] as ICommand,"*");
+
+>>>
+<E7>-><S7>'/'<Space><S8>
+value=new Command_Operator2(Values[0] as ICommand,Values[3] as ICommand,"/");
+
+>>>
+<E7>-><S7>'%'<Space><S8>
+value=new Command_Operator2(Values[0] as ICommand,Values[3] as ICommand,"%");
+
+>>>
+<E8>->'('<S0>')'
+value=Values[1];
+
+>>>
+<E8>-><S8>'('<FunctionParams>')'
+value=new Command_Call(Values[0] as ICommand,(Values[2] as List<ICommand>).ToArray());
+
+>>>
+<E8>-><S8R>'.''Symbol'
+value=new Command_Get(Values[0] as ICommand,Values[2].Value_String);
+
+>>>
+<E9>->'UInt32'
+value=new Command_Constant_UInt32(Values[0].Value_UInt32.Value);
+
+>>>
+<E9>->'Int32'
+value=new Command_Constant_Int32(Values[0].Value_Int32.Value);
+
+>>>
+<E9>->'Double'
+value=new Command_Constant_Double(Values[0].Value_Double.Value);
+
+>>>
+<E9>->'Char'
+value=new Command_Constant_Char(Values[0].Value_Char.Value);
+
+>>>
+<E9>->'String'
+value=new Command_Constant_String(Values[0].Value_String);
+
+>>>
+<E9>->'true'
+value=new Command_Constant_Boolean(true);
+
+>>>
+<E9>->'false'
+value=new Command_Constant_Boolean(false);
+
+>>>
+<R9>-><Type>
+value=new Command_Load(Values[0] as string[]);
+
+>>>
+<R9>-><Type>' ''Symbol'
+Method.RegisterVariable(Values[0] as string[],Values[2].Value_String);
+value=new Command_Load(Values[2].Value_String);
+
+>>>
+<S0>-><S1>
+value=Values[0];
+
+>>>
+<S0>-><E0>
+value=Values[0];
+
+>>>
+<S1>-><S2>
+value=Values[0];
+
+>>>
+<S1>-><E1>
+value=Values[0];
+
+>>>
+<S2>-><S3>
+value=Values[0];
+
+>>>
+<S2>-><E2>
+value=Values[0];
+
+>>>
+<S3>-><S4>
+value=Values[0];
+
+>>>
+<S3>-><E3>
+value=Values[0];
+
+>>>
+<S4>-><S5>
+value=Values[0];
+
+>>>
+<S4>-><E4>
+value=Values[0];
+
+>>>
+<S5>-><S6>
+value=Values[0];
+
+>>>
+<S5>-><E5>
+value=Values[0];
+
+>>>
+<S6>-><S7>
+value=Values[0];
+
+>>>
+<S6>-><E6>
+value=Values[0];
+
+>>>
+<S7>-><S8>
+value=Values[0];
+
+>>>
+<S7>-><E7>
+value=Values[0];
+
+>>>
+<S8>-><S8R>
+value=Values[0];
+
+>>>
+<S8>-><R9>
+value=Values[0];
+
+>>>
+<S8R>-><E8>
+value=Values[0];
+
+>>>
+<S8R>-><E9>
+value=Values[0];
+
+>>>
+<FunctionParams>->
+value=new List<ICommand>();
+
+>>>
+<FunctionParams>-><UserFunctionParams>
+value=Values[0];
+
+>>>
+<UserFunctionParams>-><FunctionParam>
+value=new List<ICommand>();
+(value as List<ICommand>).Add(Values[0] as ICommand);
+
+>>>
+<UserFunctionParams>-><UserFunctionParams>','<Space><FunctionParam>
+value=Values[0];
+(value as List<ICommand>).Add(Values[3] as ICommand);
+
+>>>
+<FunctionParam>-><S0>
+value=Values[0];
+
+>>>
+<Command>-><S0>';'
+value=Values[0];
+
+>>>
+<Command>-><ForCommand>
+value=Values[0];
+
+>>>
+<Command>-><WhileCommand>
+value=Values[0];
+
+>>>
+<Command>-><DoWhileCommand>
+value=Values[0];
+
+>>>
+<Command>-><IfCommand2>
+value=Values[0];
+
+>>>
+<ForCommand>->'for''('<Space><S0>';'<Space><S0>';'<Space><S0>')'<Space><CommandBody>
+value=new Command_For(Values[3] as ICommand,Values[6] as ICommand,Values[9] as ICommand,(Values[12] as List<ICommand>).ToArray());
+
+>>>
+<WhileCommand>->'while''('<Space><S0>')'<Space><CommandBody>
+value=new Command_While(Values[3] as ICommand,(Values[6] as List<ICommand>).ToArray());
+
+>>>
+<DoWhileCommand>->'do'<Space><CommandBody><Space>'while'<Space>'('<Space><S0>')'';'
+value=new Command_DoWhile(Values[8] as ICommand,(Values[2] as List<ICommand>).ToArray());
+
+>>>
+<IfCommand2>->'if''('<Space><S0>')'<Space><CommandBody><Space>'else'<Space><CommandBody>
+value=new Command_If2(Values[3] as ICommand,(Values[6] as List<ICommand>).ToArray(),(Values[10] as List<ICommand>).ToArray());
+
+>>>
+<CommandBody>->';'
+value=new List<ICommand>();
+
+>>>
+<CommandBody>-><Command>
+value=new List<ICommand>();
+(value as List<ICommand>).Add(Values[0] as ICommand);
+
+>>>
+<CommandBody>->'{'<CommandBlock>'}'
+value=Values[1];
+
+>>>
+<CommandBlock>-><Space>
+value=new List<ICommand>();
+
+>>>
+<CommandBlock>-><CommandBlock><Command><Space>
+value=Values[0];
+(value as List<ICommand>).Add(Values[1] as ICommand);

@@ -63,19 +63,17 @@ namespace Compiler.Properties {
         /// <summary>
         ///   查找类似 &gt;&gt;&gt;
         ///&lt;Start&gt;-&gt;&lt;File&gt;&apos;EOF&apos;
-        ///return Values[0];
+        ///File.Build(new(Root));
+        ///return File;
         ///
         ///&gt;&gt;&gt;
         ///&lt;Space&gt;-&gt;&apos; &apos;
-        ///value=null
         ///
         ///&gt;&gt;&gt;
         ///&lt;Space&gt;-&gt;
-        ///value=null
         ///
         ///&gt;&gt;&gt;
         ///&lt;File&gt;-&gt;&lt;FileHeader&gt;&lt;FileBody&gt;
-        ///
         ///
         ///&gt;&gt;&gt;
         ///&lt;FileHeader&gt;-&gt;
@@ -85,21 +83,19 @@ namespace Compiler.Properties {
         ///
         ///&gt;&gt;&gt;
         ///&lt;UsingNamespace&gt;-&gt;&apos;using&apos;&apos; &apos;&lt;NamespaceName&gt;&apos;;&apos;
+        ///UsingNamespace();
         ///
         ///&gt;&gt;&gt;
         ///&lt;NamespaceName&gt;-&gt;&apos;Symbol&apos;
+        ///NamespaceName=new();
+        ///NamespaceName.Add(Values[0].Value_String);
         ///
         ///&gt;&gt;&gt;
         ///&lt;NamespaceName&gt;-&gt;&lt;NamespaceName&gt;&apos;.&apos;&apos;Symbol&apos;
+        ///NamespaceName.Add(Values[2].Value_String);
         ///
         ///&gt;&gt;&gt;
-        ///&lt;FileBody&gt;-&gt;&lt;DefineNamespace&gt;
-        ///
-        ///&gt;&gt;&gt;
-        ///&lt;FileBody&gt;-&gt;&lt;DefineNamespace&gt;&lt;Space&gt;&lt;FileBody&gt;
-        ///
-        ///&gt;&gt;&gt;
-        ///&lt;DefineNamespace&gt;-&gt;&apos;namespace&apos;&apos; &apos;&lt;Namesp [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///&lt;FileBody&gt;- [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         public static string CSharp_LALR {
             get {
@@ -108,7 +104,10 @@ namespace Compiler.Properties {
         }
         
         /// <summary>
-        ///   查找类似  的本地化字符串。
+        ///   查找类似 File=new();
+        ///Root=new();
+        ///Root.LoadAssembly(typeof(string).Assembly,typeof(Console).Assembly);
+        ///Root.Lock(); 的本地化字符串。
         /// </summary>
         public static string CSharp_LALR_Init {
             get {
@@ -117,7 +116,21 @@ namespace Compiler.Properties {
         }
         
         /// <summary>
-        ///   查找类似  的本地化字符串。
+        ///   查找类似 private ParsingFile File;
+        ///private List&lt;string&gt; NamespaceName;
+        ///private void UsingNamespace()
+        ///{
+        ///    string name=string.Join(&quot;.&quot;, NamespaceName);
+        ///    if (File.Usings.ContainsKey(name)) File.Errors.Add($&quot;Found Using Conflict&quot;);
+        ///    else File.Usings[name] = NamespaceName.ToArray();
+        ///}
+        ///private void DefineNamespace()
+        ///{
+        ///    string[] names = NamespaceName.ToArray();
+        ///    Namespace.Name=string.Join(&quot;.&quot;,NamespaceName);
+        ///    for(int i=NamespaceName.Count-2;i&gt;=0;i--)
+        ///    {
+        ///        UserNamespace @namespace = n [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         public static string CSharp_LALR_Method {
             get {
@@ -126,25 +139,34 @@ namespace Compiler.Properties {
         }
         
         /// <summary>
-        ///   查找类似 &gt;&gt;&gt;命名
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string CSharp_String_Token {
+            get {
+                return ResourceManager.GetString("CSharp_String_Token", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 &gt;&gt;&gt;鍛藉悕
         ///[a-zA-Z][0-9a-zA-Z_]*
         ///token = Keys.Contains(Value.ToString()) ? (new(Value.ToString())) : Token.Symbol(Value.ToString());
         ///
-        ///&gt;&gt;&gt;强制命名
+        ///&gt;&gt;&gt;寮哄埗鍛藉悕
         ///@[0-9a-zA-Z]+
         ///if(Keys.Contains(Value.ToString()[1..]))token = Token.Symbol(Value.ToString()[1..]);else return Error(symbol);
         ///
-        ///&gt;&gt;&gt;间隔
+        ///&gt;&gt;&gt;闂撮殧
         ///[\t\n\r\s]+
-        ///token = new(&quot;Space&quot;);
+        ///token = new(&quot; &quot;);
         ///
-        ///&gt;&gt;&gt;符号
+        ///&gt;&gt;&gt;绗﹀彿
         ///([\+\-\*/&lt;&gt;=!^@\|;,\(\)\[\]{}?:%.]|&lt;=|&gt;=|==|!=|\+\+|\-\-|@@|\|\||??|.?|=&gt;)
         ///token = new(Value.ToString());
         ///
-        ///&gt;&gt;&gt;有符号整数
+        ///&gt;&gt;&gt;鏈夌鍙锋暣鏁?
         ///(|\-)0*(0|[1-9][0-9]*)
-        ///token = Token.Int32(int.Parse(Value.ToString( [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///token = Token.Int32(int.Parse(Value.ToStri [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         public static string CSharp_Token {
             get {
@@ -158,7 +180,9 @@ namespace Compiler.Properties {
         ///	&quot;private&quot;,
         ///	&quot;class&quot;,
         ///	&quot;int&quot;,
-        ///	&quot;void&quot;
+        ///	&quot;void&quot;,
+        ///	&quot;using&quot;,
+        ///	&quot;namespace&quot;
         ///}); 的本地化字符串。
         /// </summary>
         public static string CSharp_Token_Method {
@@ -229,16 +253,16 @@ namespace Compiler.Properties {
         ///(value as RE_Block).Values.Add(Values[1]);
         ///
         ///&gt;&gt;&gt;
-        ///&lt;R&gt;-&gt;&lt;R&gt;&lt;E&gt;
+        ///&lt;R&gt;-&gt;&lt;R&gt;&lt;C&gt;
         ///value=Values[0];
         ///(value as RE_Block).Values.Add(Values[1]);
         ///
         ///&gt;&gt;&gt;
-        ///&lt;E&gt;-&gt;&lt;S&gt;&apos;*&apos;
+        ///&lt;C&gt;-&gt;&lt;S&gt;&apos;*&apos;
         ///value=new RE_Closure(Values[0]);
         ///
         ///&gt;&gt;&gt;
-        ///&lt;E&gt;-&gt;&lt;S&gt;&apos;+&apos;
+        ///&lt;C&gt;-&gt;&lt;S&gt;&apos;+&apos;
         ///value=new RE_PositiveClosure(Values[0]);
         ///
         ///&gt;&gt;&gt;
@@ -278,40 +302,25 @@ namespace Compiler.Properties {
         }
         
         /// <summary>
-        ///   查找类似 &gt;&gt;&gt;
+        ///   查找类似 &gt;&gt;&gt; Unicode characters excepts EOF and keywords
         ///[\x01-\x27\x2C\x2E-\x5A\x5E-\x7B\x7D\x7E-\xFFFF]
         ///token=new Token(Value[0]);
         ///
-        ///&gt;&gt;&gt;
+        ///&gt;&gt;&gt; keywords
         ///[\[\-\]\(\|\)\*\+\\]
         ///token=new Token(Value);
         ///
-        ///&gt;&gt;&gt;
+        ///&gt;&gt;&gt; escape char of keywords
         ///\\[\[\-\]\(\|\)\*\+\\]
         ///token=new Token(Value[1]);
         ///
-        ///&gt;&gt;&gt;
+        ///&gt;&gt;&gt; decimal representation of a character code
         ///\\d[0-9]+
         ///token=new Token((char)int.Parse(Value.ToString()[2..]));
         ///
-        ///&gt;&gt;&gt;
+        ///&gt;&gt;&gt; hex representation of a character code
         ///\\x[0-9a-zA-Z]+
-        ///token=new Token((char)int.Parse(Value.ToString()[2..],System.Globalization.NumberStyles.HexNumber));
-        ///
-        ///&gt;&gt;&gt;
-        ///\\a
-        ///token=new Token(&apos;\a&apos;)
-        ///
-        ///&gt;&gt;&gt;
-        ///\\b
-        ///token=new Token(&apos;\b&apos;)
-        ///
-        ///&gt;&gt;&gt;
-        ///\\t
-        ///token=new Token(&apos;\t&apos;)
-        ///
-        ///&gt;&gt;&gt;
-        ///\\ [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///token=new Token((char)int.Parse(Value.ToString()[2..],Sys [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         public static string RE_Token {
             get {
@@ -323,8 +332,11 @@ namespace Compiler.Properties {
         ///   查找类似 using System;
         ///namespace Test
         ///{
-        ///    public static class Program
+        ///    public class Program
         ///    {
+        ///        public static int MainVersion;
+        ///        public static int MajorVersion;
+        ///        public static int SubVersion;
         ///        public void Test()
         ///        {
         ///            Console.WriteLine(0);
@@ -334,10 +346,7 @@ namespace Compiler.Properties {
         ///            Console.WriteLine(0b101);
         ///            Console.WriteLine(0.1e001);
         ///            Console.WriteLine(-12.1e-12);
-        ///            Console.WriteLine(@&quot;12\t\0\\&quot;);
-        ///            Console.WriteLine(&apos;\&apos;&apos;);
-        ///            Console.WriteLine(&apos;&quot;&apos;);
-        ///       [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///            C [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         public static string Test_Code {
             get {

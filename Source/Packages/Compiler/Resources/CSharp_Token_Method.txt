@@ -5,5 +5,68 @@ private static readonly HashSet<string> Keys=new(new string[]{
 	"int",
 	"void",
 	"using",
-	"namespace"
+	"namespace",
+	"static"
 });
+private int CharState;
+public char? GetChar()
+{
+    char token='\0';
+    int value=0;
+    while (true)
+    {
+        char symbol = Peek();
+        switch (CharState)
+        {
+            case 0:
+                if (symbol is '\0') return null;
+                else if (symbol is >= ' ' and <= '!' or >= '#' and <= '&' or >= '(' and <= '[' or >= ']' and <= '\uffff') { token = symbol; CharState = 1; Index++; }
+                else if (symbol is '\\') { CharState = 2; Index++; }
+                else return null;
+                break;
+            case 1:
+                return token;
+                break;
+            case 2:
+                if (symbol is '"') { token = '"'; CharState = 1; Index++; }
+                else if (symbol is '0') { token = '\0'; CharState = 1; Index++; }
+                else if (symbol is '\\') { token = '\\'; CharState = 1; Index++; }
+                else if (symbol is 'a') { token = '\a'; CharState = 1; Index++; }
+                else if (symbol is 'b') { token = '\b'; CharState = 1; Index++; }
+                else if (symbol is 'f') { token = '\f'; CharState = 1; Index++; }
+                else if (symbol is 'n') { token = '\n'; CharState = 1; Index++; }
+                else if (symbol is 'r') { token = '\r'; CharState = 1; Index++; }
+                else if (symbol is 't') { token = '\t'; CharState = 1; Index++; }
+                else if (symbol is 'u') { value = 0; CharState = 3; Index++; }
+                else if (symbol is 'v') { token = '\v'; CharState = 1; Index++; }
+                else return null;
+                break;
+            case 3:
+                if (symbol is >= '0' and <= '9') { value = (value << 4) | (symbol ^ 48); CharState = 4; Index++; }
+                else if (symbol is >= 'A' and <= 'F') { value = (value << 4) | (10 + symbol - 'A'); CharState = 4; Index++; }
+                else if (symbol is >= 'a' and <= ‘f') { value = (value << 4) | (10 + symbol - 'a'); CharState = 4; Index++; }
+                else return null;
+                break;
+            case 4:
+                if (symbol is >= '0' and <= '9') { value = (value << 4) | (symbol ^ 48); CharState = 5; Index++; }
+                else if (symbol is >= 'A' and <= 'F') { value = (value << 4) | (10 + symbol - 'A'); CharState = 5; Index++; }
+                else if (symbol is >= 'a' and <= ‘f') { value = (value << 4) | (10 + symbol - 'a'); CharState = 5; Index++; }
+                else return null;
+                break;
+            case 5:
+                if (symbol is >= '0' and <= '9') { value = (value << 4) | (symbol ^ 48); CharState = 6; Index++; }
+                else if (symbol is >= 'A' and <= 'F') { value = (value << 4) | (10 + symbol - 'A'); CharState = 6; Index++; }
+                else if (symbol is >= 'a' and <= ‘f') { value = (value << 4) | (10 + symbol - 'a'); CharState = 6; Index++; }
+                else return null;
+                break;
+            case 6:
+                if (symbol is >= '0' and <= '9') { value = (value << 4) | (symbol ^ 48); token = (char)value; CharState = 1; Index++; }
+                else if (symbol is >= 'A' and <= 'F') { value = (value << 4) | (10 + symbol - 'A'); CharState = 1; Index++; }
+                else if (symbol is >= 'a' and <= ‘f') { value = (value << 4) | (10 + symbol - 'a'); CharState = 1; Index++; }
+                else return null;
+                break;
+            default:
+                return null;
+        }
+    }
+}

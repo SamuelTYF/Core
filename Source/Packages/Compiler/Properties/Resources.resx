@@ -127,6 +127,9 @@
   <data name="CSharp_LALR_Method" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CSharp_LALR_Method.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
   </data>
+  <data name="CSharp_String_Token" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CSharp_String_Token.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
   <data name="CSharp_Token" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CSharp_Token.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
   </data>

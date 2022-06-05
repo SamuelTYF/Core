@@ -1,0 +1,25 @@
+﻿private ParsingFile File;
+private List<string> NamespaceName;
+private void UsingNamespace()
+{
+    string name=string.Join(".", NamespaceName);
+    if (File.Usings.ContainsKey(name)) File.Errors.Add($"Found Using Conflict");
+    else File.Usings[name] = NamespaceName.ToArray();
+}
+private void DefineNamespace()
+{
+    string[] names = NamespaceName.ToArray();
+    Namespace.Name=string.Join(".",NamespaceName);
+    for(int i=NamespaceName.Count-2;i>=0;i--)
+    {
+        UserNamespace @namespace = new();
+        @namespace.Namespaces[names[i]] = Namespace;
+        @namespace.Name = string.Join(".", names[0..i]);
+        Namespace = @namespace;
+    }
+}
+private UserNamespace Namespace;
+private UserType Type;
+private UserField Field;
+private UserMethod Method;
+private SearchingNode_Root Root;

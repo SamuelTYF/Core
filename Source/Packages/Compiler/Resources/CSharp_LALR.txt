@@ -34,11 +34,13 @@ NamespaceName.Add(Values[2].Value_String);
 >>>
 <FileBody>->
 Namespace=new();
+Namespace.Errors=File.Errors;
 
 >>>
 <FileBody>-><FileBody><DefineNamespace><Space>
 File.InsertNamespace(Namespace);
 Namespace=new();
+Namespace.Errors=File.Errors;
 
 >>>
 <DefineNamespace>->'namespace'' '<NamespaceName><Space>'{'<NamespaceItem>'}'
@@ -47,11 +49,13 @@ DefineNamespace();
 >>>
 <NamespaceItem>-><Space>
 Type=new();
+Type.Errors=File.Errors;
 
 >>>
 <NamespaceItem>-><NamespaceItem><DefineClass><Space>
 Namespace.InsertType(Type);
 Type=new();
+Type.Errors=File.Errors;
 
 >>>
 <DefineClass>-><ClassProperty>'class'' ''Symbol'<Space>'{'<ClassItem>'}'
@@ -120,8 +124,24 @@ value=Values[0];
 value=(Values[0] as List<string>).ToArray();
 
 >>>
+<InternalType>->'char'
+value=new string[]{"System","Char"};
+
+>>>
+<InternalType>->'byte'
+value=new string[]{"System","Byte"};
+
+>>>
 <InternalType>->'int'
 value=new string[]{"System","Int32"};
+
+>>>
+<InternalType>->'double'
+value=new string[]{"System","Double"};
+
+>>>
+<InternalType>->'string'
+value=new string[]{"System","String"};
 
 >>>
 <UserType>->'Symbol'
@@ -174,43 +194,120 @@ Method.InsertParameter(value as Parameter);
 <MethodCommands>-><Space>
 
 >>>
-<MethodCommands>-><MethodCommands><S0>';'<Space>
+<MethodCommands>-><MethodCommands><Command><Space>
 Method.Commands.Add(Values[1] as ICommand);
 
 >>>
-<LambdaBody>->'=>'<S0>
-Method.Commands.Add(Values[1] as ICommand);
+<LambdaBody>->'=>'<Space><S0>
+Method.Commands.Add(Values[2] as ICommand);
 
 >>>
-<E0>-><S1>'='<S0>
-value=new Command_Set(Values[0] as ICommand,Values[2] as ICommand);
+<E0>-><S1>'='<Space><S0>
+value=new Command_Set(Values[0] as ICommand,Values[3] as ICommand);
+
+>>>
+<E1>-><S2>'?'<Space><S1>':'<Space><S1>
+value=new Command_If3(Values[0] as ICommand,Values[3] as ICommand,Values[6] as ICommand);
+
+>>>
+<E2>-><S2>'||'<Space><S3>
+value=new Command_Or(Values[0] as ICommand,Values[3] as ICommand);
+
+>>>
+<E3>-><S3>'&&'<Space><S4>
+value=new Command_And(Values[0] as ICommand,Values[3] as ICommand);
+
+>>>
+<E4>-><S4>'=='<Space><S5>
+value=new Command_CompareOperator(Values[0] as ICommand,Values[3] as ICommand,"==");
+
+>>>
+<E4>-><S4>'!='<Space><S5>
+value=new Command_CompareOperator(Values[0] as ICommand,Values[3] as ICommand,"!=");
+
+>>>
+<E5>-><S6>'<'<Space><S6>
+value=new Command_CompareOperator(Values[0] as ICommand,Values[3] as ICommand,"<");
+
+>>>
+<E5>-><S6>'>'<Space><S6>
+value=new Command_CompareOperator(Values[0] as ICommand,Values[3] as ICommand,">");
+
+>>>
+<E6>-><S6>'+'<Space><S7>
+value=new Command_Operator2(Values[0] as ICommand,Values[3] as ICommand,"+");
+
+>>>
+<E6>-><S6>'-'<Space><S7>
+value=new Command_Operator2(Values[0] as ICommand,Values[3] as ICommand,"-");
+
+>>>
+<E7>-><S7>'*'<Space><S8>
+value=new Command_Operator2(Values[0] as ICommand,Values[3] as ICommand,"*");
+
+>>>
+<E7>-><S7>'/'<Space><S8>
+value=new Command_Operator2(Values[0] as ICommand,Values[3] as ICommand,"/");
+
+>>>
+<E7>-><S7>'%'<Space><S8>
+value=new Command_Operator2(Values[0] as ICommand,Values[3] as ICommand,"%");
+
+>>>
+<E8>->'('<S0>')'
+value=Values[1];
+
+>>>
+<E8>-><S8>'('<FunctionParams>')'
+value=new Command_Call(Values[0] as ICommand,(Values[2] as List<ICommand>).ToArray());
+
+>>>
+<E8>-><S8R>'.''Symbol'
+value=new Command_Get(Values[0] as ICommand,Values[2].Value_String);
+
+>>>
+<E9>->'UInt32'
+value=new Command_Constant_UInt32(Values[0].Value_UInt32.Value);
+
+>>>
+<E9>->'Int32'
+value=new Command_Constant_Int32(Values[0].Value_Int32.Value);
+
+>>>
+<E9>->'Double'
+value=new Command_Constant_Double(Values[0].Value_Double.Value);
+
+>>>
+<E9>->'Char'
+value=new Command_Constant_Char(Values[0].Value_Char.Value);
+
+>>>
+<E9>->'String'
+value=new Command_Constant_String(Values[0].Value_String);
+
+>>>
+<E9>->'true'
+value=new Command_Constant_Boolean(true);
+
+>>>
+<E9>->'false'
+value=new Command_Constant_Boolean(false);
+
+>>>
+<R9>-><Type>
+value=new Command_Load(Values[0] as string[]);
+
+>>>
+<R9>-><Type>' ''Symbol'
+Method.RegisterVariable(Values[0] as string[],Values[2].Value_String);
+value=new Command_Load(Values[2].Value_String);
+
+>>>
+<S0>-><S1>
+value=Values[0];
 
 >>>
 <S0>-><E0>
-value=Values[0];
-
->>>
-<S0>-><SP>
-value=Values[0];
-
->>>
-<EP>-><SP>'?'<S1>':'<S1>
-value=new Command_If(Values[0] as ICommand,Values[2] as ICommand,Values[4] as ICommand);
-
->>>
-<SP>-><EP>
-value=Values[0];
-
->>>
-<SP>-><S1>
-value=Values[0];
-
->>>
-<E1>-><S2>'+'<S1>
-value=new Command_Operator2(Values[0] as ICommand,Values[2] as ICommand,"+");
-
->>>
-<S1>-><E1>
 value=Values[0];
 
 >>>
@@ -218,19 +315,7 @@ value=Values[0];
 value=Values[0];
 
 >>>
-<E2>-><S3>'*'<S2>
-value=new Command_Operator2(Values[0] as ICommand,Values[2] as ICommand,"*");
-
->>>
-<E2>-><S3>'/'<S2>
-value=new Command_Operator2(Values[0] as ICommand,Values[2] as ICommand,"/");
-
->>>
-<E2>-><S3>'%'<S2>
-value=new Command_Operator2(Values[0] as ICommand,Values[2] as ICommand,"%");
-
->>>
-<S2>-><E2>
+<S1>-><E1>
 value=Values[0];
 
 >>>
@@ -238,65 +323,64 @@ value=Values[0];
 value=Values[0];
 
 >>>
-<E3>->'('<S0>')'
-value=Values[1];
-
->>>
-<S3>-><SR3>
+<S2>-><E2>
 value=Values[0];
 
 >>>
-<S3>-><R5>
+<S3>-><S4>
 value=Values[0];
 
 >>>
-<SR3>-><E3>
+<S3>-><E3>
 value=Values[0];
 
 >>>
-<SR3>-><E4>
+<S4>-><S5>
 value=Values[0];
 
 >>>
-<SR3>-><E5>
+<S4>-><E4>
 value=Values[0];
 
 >>>
-<E3>-><S3>'('<FunctionParams>')'
-value=new Command_Call(Values[0] as ICommand,(Values[2] as List<ICommand>).ToArray());
+<S5>-><S6>
+value=Values[0];
 
 >>>
-<E4>-><SR3>'.''Symbol'
-value=new Command_Get(Values[0] as ICommand,Values[2].Value_String);
+<S5>-><E5>
+value=Values[0];
 
 >>>
-<E5>->'UInt32'
-value=new Command_Constant_UInt32(Values[0].Value_UInt32.Value);
+<S6>-><S7>
+value=Values[0];
 
 >>>
-<E5>->'Int32'
-value=new Command_Constant<int>(Values[0].Value_Int32.Value);
+<S6>-><E6>
+value=Values[0];
 
 >>>
-<E5>->'Double'
-value=new Command_Constant<double>(Values[0].Value_Double.Value);
+<S7>-><S8>
+value=Values[0];
 
 >>>
-<E5>->'Char'
-value=new Command_Constant_Char(Values[0].Value_Char.Value);
+<S7>-><E7>
+value=Values[0];
 
 >>>
-<E5>->'String'
-value=new Command_Constant_String(Values[0].Value_String);
+<S8>-><S8R>
+value=Values[0];
 
 >>>
-<R5>-><Type>
-value=new Command_Load(Values[0] as string[]);
+<S8>-><R9>
+value=Values[0];
 
 >>>
-<R5>-><Type>' ''Symbol'
-Method.RegisterVariable(Values[0] as string[],Values[2].Value_String);
-value=new Command_Load(Values[2].Value_String);
+<S8R>-><E8>
+value=Values[0];
+
+>>>
+<S8R>-><E9>
+value=Values[0];
 
 >>>
 <FunctionParams>->
@@ -312,10 +396,68 @@ value=new List<ICommand>();
 (value as List<ICommand>).Add(Values[0] as ICommand);
 
 >>>
-<UserFunctionParams>-><UserFunctionParams>','<FunctionParam>
+<UserFunctionParams>-><UserFunctionParams>','<Space><FunctionParam>
 value=Values[0];
-(value as List<ICommand>).Add(Values[2] as ICommand);
+(value as List<ICommand>).Add(Values[3] as ICommand);
 
 >>>
 <FunctionParam>-><S0>
 value=Values[0];
+
+>>>
+<Command>-><S0>';'
+value=Values[0];
+
+>>>
+<Command>-><ForCommand>
+value=Values[0];
+
+>>>
+<Command>-><WhileCommand>
+value=Values[0];
+
+>>>
+<Command>-><DoWhileCommand>
+value=Values[0];
+
+>>>
+<Command>-><IfCommand2>
+value=Values[0];
+
+>>>
+<ForCommand>->'for''('<Space><S0>';'<Space><S0>';'<Space><S0>')'<Space><CommandBody>
+value=new Command_For(Values[3] as ICommand,Values[6] as ICommand,Values[9] as ICommand,(Values[12] as List<ICommand>).ToArray());
+
+>>>
+<WhileCommand>->'while''('<Space><S0>')'<Space><CommandBody>
+value=new Command_While(Values[3] as ICommand,(Values[6] as List<ICommand>).ToArray());
+
+>>>
+<DoWhileCommand>->'do'<Space><CommandBody><Space>'while'<Space>'('<Space><S0>')'';'
+value=new Command_DoWhile(Values[8] as ICommand,(Values[2] as List<ICommand>).ToArray());
+
+>>>
+<IfCommand2>->'if''('<Space><S0>')'<Space><CommandBody><Space>'else'<Space><CommandBody>
+value=new Command_If2(Values[3] as ICommand,(Values[6] as List<ICommand>).ToArray(),(Values[10] as List<ICommand>).ToArray());
+
+>>>
+<CommandBody>->';'
+value=new List<ICommand>();
+
+>>>
+<CommandBody>-><Command>
+value=new List<ICommand>();
+(value as List<ICommand>).Add(Values[0] as ICommand);
+
+>>>
+<CommandBody>->'{'<CommandBlock>'}'
+value=Values[1];
+
+>>>
+<CommandBlock>-><Space>
+value=new List<ICommand>();
+
+>>>
+<CommandBlock>-><CommandBlock><Command><Space>
+value=Values[0];
+(value as List<ICommand>).Add(Values[1] as ICommand);

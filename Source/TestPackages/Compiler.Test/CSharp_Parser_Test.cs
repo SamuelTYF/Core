@@ -1,4 +1,4 @@
-﻿using Compiler.CSharp;
+﻿using CSharpCompiler;
 using System.Text;
 using TestFramework;
 namespace Compiler.Test

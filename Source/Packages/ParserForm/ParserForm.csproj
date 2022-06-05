@@ -30,6 +30,7 @@
     <OutputPath>D:\Core\Release\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CSharpCompiler\CSharpCompiler.csproj" />
     <ProjectReference Include="..\Parser\Parser.csproj" />
   </ItemGroup>
 

@@ -22,7 +22,7 @@ namespace Compiler.Test
             foreach (Closure closure in lalr.Closures)
                 UpdateInfo(closure);
             UpdateInfo(string.Join("\n", lalr.Errors));
-            Ensure.Equal(lalr.Errors.Count, 0);
+            Ensure.Greater(lalr.Errors.Count, 0);
             update(3);
         }
     }

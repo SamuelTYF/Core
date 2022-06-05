@@ -13,9 +13,9 @@
 
   <ItemGroup>
     <Compile Include="Build_CSharp_Parser_Test.cs" />
+    <Compile Include="Build_CSharp_Tokenizer_String_Test.cs" />
     <Compile Include="CSharp_Parser_Test.cs" />
     <Compile Include="Build_RE_LALR_Test.cs" />
-    <Compile Include="Searching_Test.cs" />
     <Compile Include="Test_LALR_Test.cs" />
     <Compile Include="LALR_Tokenizer_Test.cs" />
     <Compile Include="Build_LALR_Tokenizer_Test.cs" />
@@ -30,6 +30,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Packages\Compiler\Compiler.csproj" />
+    <ProjectReference Include="..\..\Packages\CSharpCompiler\CSharpCompiler.csproj" />
     <ProjectReference Include="..\..\Packages\TestFramework\TestFramework.csproj" />
   </ItemGroup>
 

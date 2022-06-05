@@ -11,7 +11,7 @@ if(Keys.Contains(Value.ToString()[1..]))token = Token.Symbol(Value.ToString()[1.
 token = new(" ");
 
 >>>符号
-([\+\-\*/<>=!^@\|;,\(\)\[\]{}?:%.]|<=|>=|==|!=|\+\+|\-\-|@@|\|\||??|.?|=>)
+([\+\-\*/%<>=!^@\|&;,\(\)\[\]{}?:.]|<=|>=|==|!=|\+\+|\-\-|\+=|\-=|\|\||&&|.?|=>)
 token = new(Value.ToString());
 
 >>>有符号整数
@@ -81,3 +81,16 @@ token = Token.Char('\\');
 >>>转义字符
 '\\u[0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F]'
 token = Token.Char((char)int.Parse(Value.ToString()[3..6],System.Globalization.NumberStyles.HexNumber));
+
+>>>字符串
+"
+StringBuilder sb=new();
+char? c;
+do{
+    CharState=0;
+    c=GetChar();
+    if (c.HasValue) sb.Append(c.Value);
+    else return Error(symbol);
+}while(Peek()!='"');
+token = Token.String(sb.ToString());
+Index++;

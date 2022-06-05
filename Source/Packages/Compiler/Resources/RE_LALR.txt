@@ -12,16 +12,16 @@ value=Values[0];
 (value as RE_Block).Values.Add(Values[1]);
 
 >>>
-<R>-><R><E>
+<R>-><R><C>
 value=Values[0];
 (value as RE_Block).Values.Add(Values[1]);
 
 >>>
-<E>-><S>'*'
+<C>-><S>'*'
 value=new RE_Closure(Values[0]);
 
 >>>
-<E>-><S>'+'
+<C>-><S>'+'
 value=new RE_PositiveClosure(Values[0]);
 
 >>>

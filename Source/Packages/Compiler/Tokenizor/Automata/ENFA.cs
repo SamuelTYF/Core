@@ -63,7 +63,8 @@
         public int Start;
         public int? Terminal;
         public int End;
-        public EDelta(int start, int? terminal, int end)        {
+        public EDelta(int start, int? terminal, int end)
+        {
             Start = start;
             Terminal = terminal;
             End = end;

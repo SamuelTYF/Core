@@ -1,0 +1,47 @@
+>>>字符
+[\x20\x21\x23-\x26\x28-\x5B\x5D-\xFFFF]
+token = Values[0];
+
+>>>转义字符
+\\0
+token = '\0';
+
+>>>转义字符
+\\a
+token = '\a';
+
+>>>转义字符
+\\b
+token = '\b';
+
+>>>转义字符
+\\t
+token = '\t';
+
+>>>转义字符
+\\n
+token = '\n';
+
+>>>转义字符
+\\v
+token = '\v';
+
+>>>转义字符
+\\f
+token = '\f';
+
+>>>转义字符
+\\r
+token = '\r';
+
+>>>转义字符
+\\"
+token = '\"';
+
+>>>转义字符
+\\\\
+token = '\\';
+
+>>>转义字符
+\\u[0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F]
+token = (char)int.Parse(Value.ToString()[2..5],System.Globalization.NumberStyles.HexNumber)

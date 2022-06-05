@@ -46,7 +46,7 @@ namespace Compiler.Parser
                 }
                 else
                 {
-                    delta.Action = string.Join("\n\t\t", lines[2..].Where(line => line.Length > 1).ToArray());
+                    delta.Action = string.Join("\n", lines[2..].Where(line => line.Length > 1).ToArray());
                     Register(delta);
                 }
             }
@@ -337,7 +337,7 @@ namespace Compiler.Parser
             pattern = pattern.Replace("TToken", ttoken);
             pattern = pattern.Replace("TValue", tvalue);
             pattern = pattern.Replace("TResult", tresult);
-            pattern = pattern.Replace("//Init",init);
+            pattern = pattern.Replace("//Init",string.Join("\n\t\t",init.Split("\n")));
             List<string> variablerows = new();
             foreach (int?[] entities in VariableTable)
                 variablerows.Add($"{{{string.Join(",", entities.Select(entity => entity == null ? -1 : entity))}}}");
@@ -346,28 +346,88 @@ namespace Compiler.Parser
             for (int i = 0; i < Closures.Count; i++)
                 cases.Add(CreateTerminalCase(i));
             pattern = pattern.Replace("//ShiftCode", string.Join("\n\t\t\t\t\t", cases));
-            pattern = pattern.Replace("//Method", string.Join("\n\t\t", method.Split("\n")));
+            pattern = pattern.Replace("//Method", string.Join("\n\t", method.Split("\n")));
             return pattern;
         }
+        //public string CreateTerminalCase(int index)
+        //{
+        //    List<string> conditions = new();
+        //    Entity[] entities = TerminalTable[index];
+        //    for (int i = 0; i < entities.Length; i++)
+        //    {
+        //        List<string> cs = new();
+        //        if (entities[i] is Entity_Push push)
+        //        {
+        //            cs.Add("TokenStack.Push(token);");
+        //            cs.Add($"StateStack.Push({push.Index});");
+        //            cs.Add("mode = true;");
+        //            cs.Add("token = tokenizer.Get();");
+        //        }
+        //        else if (entities[i] is Entity_Reduce reduce)
+        //        {
+        //            Delta delta = reduce.Delta;
+        //            Symbol[] deltas = delta.Deltas;
+        //            string action = delta.Action.Replace("\r","");
+        //            bool need = action.Contains("value=");
+        //            int tokens = 0;
+        //            int values = 0;
+        //            for (int j = 0; j < deltas.Length; j++)
+        //                if (deltas[j].IsVariable)
+        //                    action = action.Replace($"Values[{j}]", $"values[{values++}]");
+        //                else
+        //                    action = action.Replace($"Values[{j}]", $"tokens[{tokens++}]");
+        //            if(tokens>0)
+        //                cs.Add($"tokens=PopToken({tokens});");
+        //            if(values>0)
+        //                cs.Add($"values=PopValue({values});");
+        //            cs.AddRange(action.Split("\n"));
+        //            if(need) cs.Add($"ValueStack.Push(value);");
+        //            else cs.Add($"ValueStack.Push(null);");
+        //            cs.Add($"symbol={delta.Start.Index};");
+        //            cs.Add("mode = false;");
+        //        }
+        //        else continue;
+        //        conditions.Add($"if(token.Type==\"{Terminals[i].Name}\")\n\t\t\t\t\t\t{{\n\t\t\t\t\t\t\t{string.Join("\n\t\t\t\t\t\t\t", cs)}\n\t\t\t\t\t\t}}");
+        //    }
+        //    conditions.Add("return Error(token);");
+        //    return $"case {index}:\n\t\t\t\t\t\t{string.Join("\n\t\t\t\t\t\telse ", conditions)}\n\t\t\t\t\tbreak;";
+        //}
         public string CreateTerminalCase(int index)
         {
             List<string> conditions = new();
             Entity[] entities = TerminalTable[index];
+            List<int>[] pushs = new List<int>[Closures.Count];
+            List<int>[] reduces = new List<int>[Deltas.Count];
+            Delta[] _deltas = new Delta[Deltas.Count];
+            for (int i = 0; i < Closures.Count; i++) pushs[i] = new();
+            for (int i = 0; i < Deltas.Count; i++) reduces[i] = new();
             for (int i = 0; i < entities.Length; i++)
-            {
-                List<string> cs = new();
-                if (entities[i] is Entity_Push push)
-                {
-                    cs.Add("TokenStack.Push(token);");
-                    cs.Add($"StateStack.Push({push.Index});");
-                    cs.Add("mode = true;");
-                    cs.Add("token = tokenizer.Get();");
-                }
+                if (entities[i] is Entity_Push push) pushs[push.Index].Add(i);
                 else if (entities[i] is Entity_Reduce reduce)
                 {
-                    Delta delta = reduce.Delta;
+                    reduces[reduce.Delta.Index].Add(i);
+                    _deltas[reduce.Delta.Index] = reduce.Delta;
+                }
+            for (int i = 0; i < Closures.Count; i++)
+                if (pushs[i].Count>0)
+                {
+                    List<string> cs = new();
+                    cs.Add("TokenStack.Push(token);");
+                    cs.Add($"StateStack.Push({i});");
+                    cs.Add("mode = true;");
+                    cs.Add("token = tokenizer.Get();");
+                    List<string> terminals = new();
+                    foreach (int t in pushs[i])
+                        terminals.Add($"\"{Terminals[t].Name}\"");
+                    conditions.Add($"if(token.Type is {string.Join(" or ",terminals)})\n\t\t\t\t\t\t{{\n\t\t\t\t\t\t\t{string.Join("\n\t\t\t\t\t\t\t", cs)}\n\t\t\t\t\t\t}}");
+                }
+            for (int i = 0; i < Deltas.Count; i++)
+                if (reduces[i].Count > 0)
+                {
+                    List<string> cs = new();
+                    Delta delta = _deltas[i];
                     Symbol[] deltas = delta.Deltas;
-                    string action = delta.Action.Replace("\r","");
+                    string action = delta.Action.Replace("\r", "");
                     bool need = action.Contains("value=");
                     int tokens = 0;
                     int values = 0;
@@ -376,19 +436,20 @@ namespace Compiler.Parser
                             action = action.Replace($"Values[{j}]", $"values[{values++}]");
                         else
                             action = action.Replace($"Values[{j}]", $"tokens[{tokens++}]");
-                    if(tokens>0)
+                    if (tokens > 0)
                         cs.Add($"tokens=PopToken({tokens});");
-                    if(values>0)
+                    if (values > 0)
                         cs.Add($"values=PopValue({values});");
                     cs.AddRange(action.Split("\n"));
-                    if(need) cs.Add($"ValueStack.Push(value);");
+                    if (need) cs.Add($"ValueStack.Push(value);");
                     else cs.Add($"ValueStack.Push(null);");
                     cs.Add($"symbol={delta.Start.Index};");
                     cs.Add("mode = false;");
+                    List<string> terminals = new();
+                    foreach (int t in reduces[i])
+                        terminals.Add($"\"{Terminals[t].Name}\"");
+                    conditions.Add($"if(token.Type is {string.Join(" or ", terminals)})\n\t\t\t\t\t\t{{\n\t\t\t\t\t\t\t{string.Join("\n\t\t\t\t\t\t\t", cs)}\n\t\t\t\t\t\t}}");
                 }
-                else continue;
-                conditions.Add($"if(token.Type==\"{Terminals[i].Name}\")\n\t\t\t\t\t\t{{\n\t\t\t\t\t\t\t{string.Join("\n\t\t\t\t\t\t\t", cs)}\n\t\t\t\t\t\t}}");
-            }
             conditions.Add("return Error(token);");
             return $"case {index}:\n\t\t\t\t\t\t{string.Join("\n\t\t\t\t\t\telse ", conditions)}\n\t\t\t\t\tbreak;";
         }

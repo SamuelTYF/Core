@@ -2,8 +2,9 @@ private ParsingFile File;
 private List<string> NamespaceName;
 private void UsingNamespace()
 {
-    File.Usings.Add(string.Join(".",NamespaceName));
-
+    string name=string.Join(".", NamespaceName);
+    if (File.Usings.ContainsKey(name)) File.Errors.Add($"Found Using Conflict");
+    else File.Usings[name] = NamespaceName.ToArray();
 }
 private void DefineNamespace()
 {
@@ -21,5 +22,4 @@ private UserNamespace Namespace;
 private UserType Type;
 private UserField Field;
 private UserMethod Method;
-private SearchingResult Top;
 private SearchingNode_Root Root;

@@ -1,0 +1,88 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0-windows10.0.22000.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <StartupObject>CSharpCompiler.Program</StartupObject>
+    <PlatformTarget>x64</PlatformTarget>
+    <BaseOutputPath>D:\Core</BaseOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Code\ILCode.cs" />
+    <Compile Include="Code\ILCode_Block.cs" />
+    <Compile Include="Code\ILCode_Br.cs" />
+    <Compile Include="Code\ILCode_Call.cs" />
+    <Compile Include="Code\ILCode_LdArg.cs" />
+    <Compile Include="Code\ILCode_Ldc.cs" />
+    <Compile Include="Code\ILCode_LdFld.cs" />
+    <Compile Include="Code\ILCode_LdLoc.cs" />
+    <Compile Include="Code\ILCode_Operator2.cs" />
+    <Compile Include="Code\ILCode_Ret.cs" />
+    <Compile Include="Code\ILCode_StArg.cs" />
+    <Compile Include="Code\ILCode_StFld.cs" />
+    <Compile Include="Code\ILCode_StLoc.cs" />
+    <Compile Include="CSharp_Parser.cs" />
+    <Compile Include="CSharp_Tokenizer.cs" />
+    <Compile Include="Metadata\Command_DoWhile.cs" />
+    <Compile Include="Metadata\Command_For.cs" />
+    <Compile Include="Metadata\Command_If2.cs" />
+    <Compile Include="Metadata\Command_If1.cs" />
+    <Compile Include="Metadata\Command_While.cs" />
+    <Compile Include="Metadata\Command_Or.cs" />
+    <Compile Include="Metadata\Command_Call.cs" />
+    <Compile Include="Metadata\Command_Constant.cs" />
+    <Compile Include="Metadata\Command_Get.cs" />
+    <Compile Include="Metadata\Command_If3.cs" />
+    <Compile Include="Metadata\Command_Load.cs" />
+    <Compile Include="Metadata\Command_And.cs" />
+    <Compile Include="Metadata\Command_CompareOperator.cs" />
+    <Compile Include="Metadata\Command_Operator2.cs" />
+    <Compile Include="Metadata\Command_Set.cs" />
+    <Compile Include="Metadata\Helper.cs" />
+    <Compile Include="Metadata\ICommand.cs" />
+    <Compile Include="Metadata\IField.cs" />
+    <Compile Include="Metadata\IMethod.cs" />
+    <Compile Include="Metadata\INamespace.cs" />
+    <Compile Include="Metadata\InternalField.cs" />
+    <Compile Include="Metadata\InternalMethod.cs" />
+    <Compile Include="Metadata\InternalNamespace.cs" />
+    <Compile Include="Metadata\InternalProperty.cs" />
+    <Compile Include="Metadata\InternalType.cs" />
+    <Compile Include="Metadata\IProperty.cs" />
+    <Compile Include="Metadata\IType.cs" />
+    <Compile Include="Metadata\Parameter.cs" />
+    <Compile Include="Metadata\ParsingFile.cs" />
+    <Compile Include="Metadata\UserField.cs" />
+    <Compile Include="Metadata\UserMethod.cs" />
+    <Compile Include="Metadata\UserNamespace.cs" />
+    <Compile Include="Metadata\UserType.cs" />
+    <Compile Include="Metadata\Variable.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Searching\ISearchingObject.cs" />
+    <Compile Include="Searching\SearchingNode_Property.cs" />
+    <Compile Include="Searching\SearchingNode_Field.cs" />
+    <Compile Include="Searching\SearchingNode_File.cs" />
+    <Compile Include="Searching\SearchingNode_Method.cs" />
+    <Compile Include="Searching\SearchingNode_Namespace.cs" />
+    <Compile Include="Searching\SearchingNode_Parameter.cs" />
+    <Compile Include="Searching\SearchingNode_Root.cs" />
+    <Compile Include="Searching\SearchingNode_Type.cs" />
+    <Compile Include="Searching\SearchingNode_Variable.cs" />
+    <Compile Include="Searching\SearchingResult.cs" />
+    <Compile Include="Searching\SearchingCondition.cs" />
+    <Compile Include="Searching\SearchingBlock.cs" />
+    <Compile Include="Searching\SearchingValue.cs" />
+    <Compile Include="Test.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Token.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Compiler\Compiler.csproj" />
+  </ItemGroup>
+
+</Project>

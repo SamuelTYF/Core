@@ -1,20 +1,20 @@
->>>
+>>> Unicode characters excepts EOF and keywords
 [\x01-\x27\x2C\x2E-\x5A\x5E-\x7B\x7D\x7E-\xFFFF]
 token=new Token(Value[0]);
 
->>>
+>>> keywords
 [\[\-\]\(\|\)\*\+\\]
 token=new Token(Value);
 
->>>
+>>> escape char of keywords
 \\[\[\-\]\(\|\)\*\+\\]
 token=new Token(Value[1]);
 
->>>
+>>> decimal representation of a character code
 \\d[0-9]+
 token=new Token((char)int.Parse(Value.ToString()[2..]));
 
->>>
+>>> hex representation of a character code
 \\x[0-9a-zA-Z]+
 token=new Token((char)int.Parse(Value.ToString()[2..],System.Globalization.NumberStyles.HexNumber));
 

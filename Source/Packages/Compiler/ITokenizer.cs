@@ -20,7 +20,15 @@ namespace Compiler
         }
         public ITokenizer(int length = 1 << 10) : this(Encoding.UTF8, length) { }
         private void InitValue() => Value.Clear();
-        protected char Peek() => Index == Length && (Length = Source.Read(Buffer, 0, BufferLength)) == 0 ? '\0' : Buffer[Index];
+        protected char Peek()
+        {
+            if(Index==Length)
+            {
+                Index = 0;
+                if ((Length = Source.Read(Buffer, 0, BufferLength)) == 0)return '\0';
+            }
+            return Buffer[Index];
+        }
         protected void Push(char value) => Value.Append(value);
         protected TToken Error(char symbol)
         {
