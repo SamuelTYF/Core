@@ -1,9 +1,45 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net6.0-windows</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
+    <TargetFramework>net6.0-windows10.0.22000.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <PlatformTarget>x64</PlatformTarget>
+    <BaseOutputPath>D:\Core</BaseOutputPath>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="BigInterger.cs" />
+    <Compile Include="Complex.cs" />
+    <Compile Include="ComplexFraction.cs" />
+    <Compile Include="ComplexMorlet.cs" />
+    <Compile Include="ComplexSeries.cs" />
+    <Compile Include="Convolution.cs" />
+    <Compile Include="DotProduct.cs" />
+    <Compile Include="External.cs" />
+    <Compile Include="FactorHelper.cs" />
+    <Compile Include="FactorHelperFraction.cs" />
+    <Compile Include="Fraction.cs" />
+    <Compile Include="Frequency.cs" />
+    <Compile Include="HaarWavelet.cs" />
+    <Compile Include="Hilbert.cs" />
+    <Compile Include="IOperator.cs" />
+    <Compile Include="IWalshFunction.cs" />
+    <Compile Include="MultiTimeFrequency.cs" />
+    <Compile Include="PDF.cs" />
+    <Compile Include="Polynomial.cs" />
+    <Compile Include="PolynomialComplex.cs" />
+    <Compile Include="PolynomialComplexFraction.cs" />
+    <Compile Include="PolynomialFraction.cs" />
+    <Compile Include="Series.cs" />
+    <Compile Include="SeriesFactory.cs" />
+    <Compile Include="UnsigendBigInterger.cs" />
+    <Compile Include="WalshFunction_Add.cs" />
+    <Compile Include="Wavelet.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Collection\Collection.csproj" />
+    <ProjectReference Include="..\Hook\Hook.csproj" />
+  </ItemGroup>
 
 </Project>

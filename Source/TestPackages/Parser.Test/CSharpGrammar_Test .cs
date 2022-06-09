@@ -13,7 +13,7 @@ namespace Parser_Test
             var tree = GrammarParser.GetTree(GrammarParser.GetParsedObject(Parser.Properties.Resources.CSharp));
             Save(GrammarParser.Print(tree), "CSharpGrammar.txt");
             update(1);
-            using VisualStringArg arg = new("using System;");
+            using StringArg arg = new("using System;");
             IParser parser = tree["@using Assembly@"].Install();
             IParseResult result = parser.Parse(arg);
             Ensure.IsTrue(result.Success);

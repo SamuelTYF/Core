@@ -294,7 +294,6 @@ namespace CSharpCompiler
 							else if(token.Type is "EOF" or "namespace")
 							{
 								Namespace=new();
-								Namespace.Errors=File.Errors;
 								ValueStack.Push(null);
 								symbol=4;
 								mode = false;
@@ -450,7 +449,6 @@ namespace CSharpCompiler
 								values=PopValue(3);
 								File.InsertNamespace(Namespace);
 								Namespace=new();
-								Namespace.Errors=File.Errors;
 								ValueStack.Push(null);
 								symbol=4;
 								mode = false;
@@ -547,7 +545,6 @@ namespace CSharpCompiler
 							{
 								values=PopValue(1);
 								Type=new();
-								Type.Errors=File.Errors;
 								ValueStack.Push(null);
 								symbol=8;
 								mode = false;
@@ -630,7 +627,6 @@ namespace CSharpCompiler
 								values=PopValue(3);
 								Namespace.InsertType(Type);
 								Type=new();
-								Type.Errors=File.Errors;
 								ValueStack.Push(null);
 								symbol=8;
 								mode = false;

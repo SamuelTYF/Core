@@ -9,7 +9,7 @@ namespace SAA.Test
         public int[,] Values;
         public int Length;
         public static int GCD(int x, int y) => y == 0 ? x : GCD(y, x % y);
-        public const int Count = 10000;
+        public const int Count = 1000;
         public TSP()
             : base("TSP", Count)
         {

@@ -26,7 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Packages\Language\Language.csproj" />
     <ProjectReference Include="..\..\Packages\TestFramework\TestFramework.csproj" />
   </ItemGroup>
 

@@ -1,9 +1,0 @@
-{
-    "name":"ELF_Header",
-    "size":52,
-    "type":"class",
-    "data":[
-        {"name":"Magic","type":"byte array","size":"16"},
-        {"name":"Type","type":"Type32"}
-    ]
-}

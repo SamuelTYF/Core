@@ -15,7 +15,7 @@ namespace Parser_Test
             update(1);
             IParser parser=tree.Trees["dic"].Install();
             update(2);
-            using VisualStringArg arg=new(Parser.Properties.Resources.Parser);
+            using StringArg arg =new(Parser.Properties.Resources.Parser);
             IParseResult result= parser.Parse(arg);
             Ensure.IsTrue(result.Success);
             update(3);

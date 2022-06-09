@@ -13,7 +13,7 @@ namespace Parser_Test
             ParserTree tree = new();
             tree.FromJson(Parser.Properties.Resources.Parser);
             update(1);
-            using VisualStringArg arg = new(Parser.Properties.Resources.Grammar_Parser);
+            using StringArg arg = new(Parser.Properties.Resources.Grammar_Parser);
             IParser parser= tree.Trees["Parsers"].Install();
             IParseResult result = parser.Parse(arg);
             Ensure.IsTrue(result.Success);
