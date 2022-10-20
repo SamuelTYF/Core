@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "title": "Json Schema for Parser Generator",
+  "type": "object",
+  "properties": {
+    "OutputDir": {
+      "type": "string"
+    },
+    "Parser": {
+      "type": "object",
+      "properties": {
+        "Source": {
+          "type": "string"
+        },
+        "Method": {
+          "type": "string"
+        },
+        "Init": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "Token": {
+          "type": "string"
+        },
+        "Value": {
+          "type": "string"
+        },
+        "Result": {
+          "type": "string"
+        },
+        "Header": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "Footer": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [ "Source", "Name", "Token", "Value", "Result", "Header", "Footer" ]
+    },
+    "Tokenizer": {
+      "type": "object",
+      "properties": {
+        "Source": {
+          "type": "string"
+        },
+        "Method": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "Token": {
+          "type": "string"
+        },
+        "Header": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "Footer": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [ "Source", "Name", "Token", "Header", "Footer" ]
+    }
+  },
+  "required": [ "OutputDir" ]
+}
