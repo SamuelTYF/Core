@@ -100,7 +100,7 @@ namespace Net.Json
 			return s;
 		}
 		public static void BuildSourceFunctions()
-        {
+		{
 			if (SourceFunctions != null) return;
 			SourceFunctions = new CharSourceFunction[256];
 			for (int i = 0; i < 256; i++)

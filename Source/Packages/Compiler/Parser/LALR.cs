@@ -426,6 +426,7 @@ namespace Compiler.Parser
                 {
                     List<string> cs = new();
                     Delta delta = _deltas[i];
+                    cs.Add($"// {delta}");
                     Symbol[] deltas = delta.Deltas;
                     string action = delta.Action.Replace("\r", "");
                     bool need = action.Contains("value=");

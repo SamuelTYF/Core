@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows10.0.22000.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <PlatformTarget>x64</PlatformTarget>
+    <BaseOutputPath>D:\Core</BaseOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="NumberTheory\UnsigendBigInterger.cs" />
+    <Compile Include="NumberTheory\EulerSieve.cs" />
+    <Compile Include="NumberTheory\MillerRabin_BigInteger.cs" />
+  </ItemGroup>
+
+</Project>

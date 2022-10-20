@@ -129,9 +129,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MSTest", "MSTest", "{8B4A5F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeSeriesTests", "Source\MSTest\TimeSeriesTests\TimeSeriesTests.csproj", "{2480A3F0-F363-49C0-A959-DF56EC5E1494}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompilerTests", "Source\MSTest\CompilerTests\CompilerTests.csproj", "{12DCB19B-7F6F-4F1A-A166-1A5FC43D4CB6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CompilerTests", "Source\MSTest\CompilerTests\CompilerTests.csproj", "{12DCB19B-7F6F-4F1A-A166-1A5FC43D4CB6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HookTests", "Source\MSTest\HookTests\HookTests.csproj", "{60EF012F-34EF-4573-B8C2-95082A9C7446}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HookTests", "Source\MSTest\HookTests\HookTests.csproj", "{60EF012F-34EF-4573-B8C2-95082A9C7446}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mathematica", "Source\Packages\Mathematica\Mathematica.csproj", "{8745E126-8AF2-4EA4-9220-3F0F52C26139}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -621,6 +623,14 @@ Global
 		{60EF012F-34EF-4573-B8C2-95082A9C7446}.Release|Any CPU.Build.0 = Release|Any CPU
 		{60EF012F-34EF-4573-B8C2-95082A9C7446}.Release|x64.ActiveCfg = Release|Any CPU
 		{60EF012F-34EF-4573-B8C2-95082A9C7446}.Release|x64.Build.0 = Release|Any CPU
+		{8745E126-8AF2-4EA4-9220-3F0F52C26139}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8745E126-8AF2-4EA4-9220-3F0F52C26139}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8745E126-8AF2-4EA4-9220-3F0F52C26139}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8745E126-8AF2-4EA4-9220-3F0F52C26139}.Debug|x64.Build.0 = Debug|Any CPU
+		{8745E126-8AF2-4EA4-9220-3F0F52C26139}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8745E126-8AF2-4EA4-9220-3F0F52C26139}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8745E126-8AF2-4EA4-9220-3F0F52C26139}.Release|x64.ActiveCfg = Release|Any CPU
+		{8745E126-8AF2-4EA4-9220-3F0F52C26139}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -686,6 +696,7 @@ Global
 		{2480A3F0-F363-49C0-A959-DF56EC5E1494} = {8B4A5FF6-9D23-4288-8EB7-D003B5A51282}
 		{12DCB19B-7F6F-4F1A-A166-1A5FC43D4CB6} = {8B4A5FF6-9D23-4288-8EB7-D003B5A51282}
 		{60EF012F-34EF-4573-B8C2-95082A9C7446} = {8B4A5FF6-9D23-4288-8EB7-D003B5A51282}
+		{8745E126-8AF2-4EA4-9220-3F0F52C26139} = {CAD756E7-2289-4067-A26D-3A2E6EE59E04}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D277F842-459A-4C30-A694-F10A4D3CFF0D}
