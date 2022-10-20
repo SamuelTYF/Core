@@ -1,0 +1,5 @@
+private static readonly HashSet<string> Keys=new(new string[]{
+    "true",
+    "false",
+    "null"
+});

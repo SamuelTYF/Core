@@ -2,7 +2,7 @@
   "profiles": {
     "ParserGenerator": {
       "commandName": "Project",
-      "commandLineArgs": "D:\\Net\\Net.Base\\Grammar\\Parser.json"
+      "commandLineArgs": "D:\\Core\\Source\\Packages\\Json\\Grammar\\Parser.json"
     }
   }
 }

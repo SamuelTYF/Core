@@ -1,0 +1,23 @@
+>>> Operator
+[\s\t\n\r]*[{}\[\],:]
+token = new(Value.ToString().Trim());
+
+>>> Spaces
+[\s\t\n\r]+
+token = new(" ");
+
+>>> Key
+[a-zA-Z]+
+string key=Value.ToString();if(Keys.Contains(key))token = new(key);else return Error(symbol);
+
+>>> String
+"([\x0020-\x0021\x0023-\x005b\x005d-\xFFFF]|\\["\\])*"
+token = new("String",Value.ToString()[1..^1]);
+
+>>> Int
+([\s\t\n\r]*\-|)(0|[1-9][0-9]*)
+token = new("Int",Value.ToString());
+
+>>> Double
+([\s\t\n\r]*\-|)(0|[1-9][0-9]*).[0-9]+
+token = new("Int",Value.ToString());

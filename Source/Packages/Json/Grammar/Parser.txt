@@ -1,0 +1,79 @@
+>>> File
+<File>-><JsonNode><Space>'EOF'
+return Values[0] as JsonNode;
+
+>>> Space
+<Space>->
+
+>>> Space
+<Space>->' '
+
+>>> ArrayNode
+<JsonNode>->'['<Array>']'
+value=Values[1];
+
+>>> Array
+<Array>-><Space>
+value=new ArrayNode();
+
+>>> Array
+<Array>-><Array'>
+value=Values[0];
+
+>>> Array
+<Array'>-><JsonNode>
+ArrayNode an=new();
+an.Values.Add(Values[0]);
+value=an;
+
+>>> Array
+<Array'>-><Array'>','<JsonNode>
+value=Values[0];
+(Values[0] as ArrayNode).Values.Add(Values[2]);
+
+>>> ObjectNode
+<JsonNode>->'{'<Object>'}'
+value=Values[1];
+
+>>> Object
+<Object>-><Space>
+value=new ObjectNode();
+
+>>> Array
+<Object>-><Object'>
+value=Values[0];
+
+>>> Array
+<Object'>-><Space>'String'':'<JsonNode>
+ObjectNode on=new();
+on.Values[Values[1].Value]=Values[3];
+value=on;
+
+>>> Array
+<Object'>-><Object'>','<Space>'String'':'<JsonNode>
+value=Values[0];
+(Values[0] as ObjectNode).Values[Values[3].Value]=Values[5];
+
+>>> StringNode
+<JsonNode>-><Space>'String'
+value=new StringNode(Values[1].Value);
+
+>>> IntNode
+<JsonNode>-><Space>'Int'
+value=new IntNode(int.Parse(Values[1].Value));
+
+>>> DoubleNode
+<JsonNode>-><Space>'Double'
+value=new DoubleNode(double.Parse(Values[1].Value));
+
+>>> NullNode
+<JsonNode>-><Space>'null'
+value=JsonNode.Null;
+
+>>> Boolean
+<JsonNode>-><Space>'true'
+value=JsonNode.True;
+
+>>> Boolean
+<JsonNode>-><Space>'false'
+value=JsonNode.False;

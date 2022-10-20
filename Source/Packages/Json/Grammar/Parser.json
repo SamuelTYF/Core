@@ -1,0 +1,35 @@
+{
+    "$schema": "https://raw.githubusercontent.com/SamuelTYF/Core/master/Source/Packages/ParserGenerator/parser-schema",
+    "OutputDir": ".",
+    "Tokenizer": {
+        "Source": "Tokenizer.txt",
+        "Method": "Tokenizer.Method.txt",
+        "Name": "Tokenizer",
+        "Token": "Token",
+        "Header": [
+            "using Compiler;",
+            "using System.Text;",
+            "namespace Json.Grammar",
+            "{"
+        ],
+        "Footer": [
+            "}"
+        ]
+    },
+    "Parser": {
+        "Source": "Parser.txt",
+        "Name": "Parser",
+        "Token": "Token",
+        "Value": "JsonNode",
+        "Result": "JsonNode",
+        "Header": [
+            "using Compiler;",
+            "",
+            "namespace Json.Grammar",
+            "{"
+        ],
+        "Footer": [
+            "}"
+        ]
+    }
+}
