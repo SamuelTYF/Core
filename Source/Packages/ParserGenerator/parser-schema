@@ -6,6 +6,10 @@
     "OutputDir": {
       "type": "string"
     },
+    "Language":{
+      "type":"string",
+      "default":"CSharp"
+    },
     "Parser": {
       "type": "object",
       "properties": {

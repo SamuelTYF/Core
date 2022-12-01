@@ -1,0 +1,39 @@
+class _Tokenizer(Enumerable[Token]):
+	def __init__(self,stream:Enumerable[int]):
+		self.Stream=stream
+		self.State=0
+		self.Result=Token("_Empty")
+		self.Map=[//Map]
+		self.Symbol=self.Stream.Get() if self.Stream.MoveNext() else None
+		self.Value=""
+	//Methods
+	//Functions
+	def ReturnToken(self,token:Token)->Tuple[bool,Token]:
+		self.State = 0
+		self.Value =0
+		return True,token
+	def Push(self,symbol):
+		self.Value+=symbol
+	def Peek(self)->int:
+		return self.Symbol
+	def Pop(self)->Tuple[bool,Token]:
+		if self.Stream.MoveNext():
+			self.Symbol=self.Stream.Get()
+			return False,None
+		else:
+			self.Symbol=None
+			return True,Token("_Error")
+	def _Get(self)->Token:
+		while self.Symbol is not None:
+			returned,token=self.Map[self.State](self.Symbol)
+			if returned:
+				return token
+	def Get(self)->Token:
+		return self.Result
+	def MoveNext(self)->bool:
+		value=self._Get()
+		if value.Type == "_Error":
+			return False
+		else:
+			self.Result=value
+			return True

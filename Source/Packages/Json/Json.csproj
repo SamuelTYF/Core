@@ -5,9 +5,34 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PlatformTarget>x64</PlatformTarget>
-    <OutputType>Library</OutputType>
+    <OutputType>Exe</OutputType>
     <BaseOutputPath>D:\Core</BaseOutputPath>
+    <StartupObject>Json.Program</StartupObject>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="ArrayNode.cs" />
+    <Compile Include="BooleanNode.cs" />
+    <Compile Include="DoubleNode.cs" />
+    <Compile Include="Grammar\Parser.cs" />
+    <Compile Include="Grammar\Token.cs" />
+    <Compile Include="Grammar\Tokenizer.cs" />
+    <Compile Include="IntNode.cs" />
+    <Compile Include="JsonNode.cs" />
+    <Compile Include="NullNode.cs" />
+    <Compile Include="ObjectArray.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="StringNode.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Grammar\build.cmd" />
+    <None Include="Grammar\Parser.json" />
+    <None Include="Grammar\Parser.Method.txt" />
+    <None Include="Grammar\Parser.txt" />
+    <None Include="Grammar\Tokenizer.Method.txt" />
+    <None Include="Grammar\Tokenizer.txt" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Compiler\Compiler.csproj" />

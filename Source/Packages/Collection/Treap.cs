@@ -1,7 +1,10 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
+
 namespace Collection
 {
-    public sealed class Treap<TKey, TPhi, TValue> : IBST<TKey, TValue> where TKey : IComparable<TKey> where TPhi : IComparable<TPhi>
+    public sealed class Treap<TKey, TPhi, TValue> : IBST<TKey, TValue>, IEnumerable<TValue> where TKey : IComparable<TKey> where TPhi : IComparable<TPhi>
     {
         private sealed class Node
         {
@@ -145,6 +148,7 @@ namespace Collection
                 Node r = null;
                 SplitR(Top, key, ref Top, ref r);
                 Top = Merge(Top, Merge(node, r));
+                Length++;
             }
             else node.Value = value;
         }
@@ -155,6 +159,7 @@ namespace Collection
             SplitR(Top, key, ref Top, ref r);
             SplitL(r, key, ref l, ref r);
             Top = Merge(Top, r);
+            Length--;
             if (l == null)
                 throw new Exception();
         }
@@ -212,5 +217,18 @@ namespace Collection
         public void LDR(Foreach<TKey, TValue> func) => Top.LDR(func);
         public void LRD(Foreach<TKey, TValue> func) => Top.LRD(func);
         public void RDL(Foreach<TKey, TValue> func) => Top.RDL(func);
+        public IEnumerator<TValue> GetEnumerator()
+        {
+            Queue<Node> nodes = new();
+            nodes.Insert(Top);
+            while(nodes.Count>0)
+            {
+                Node n = nodes.Pop();
+                yield return n.Value;
+                if (n.L != null) nodes.Insert(n.L);
+                if (n.R != null) nodes.Insert(n.R);
+            }
+        }
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }

@@ -33,6 +33,7 @@
     <Compile Include="Tokenizor\Automata\NFA.cs" />
     <Compile Include="Tokenizor\CharRange.cs" />
     <Compile Include="Tokenizor\Automata\ENFA.cs" />
+    <Compile Include="Tokenizor\Language.cs" />
     <Compile Include="Tokenizor\RE.cs" />
     <Compile Include="Tokenizor\Token.cs" />
     <Compile Include="Tokenizor\IRE_Block.cs" />
@@ -63,6 +64,7 @@
     <None Include="Resources\Test_Code.txt" />
     <None Include="Resources\Test_LALR.txt" />
     <None Include="Resources\Tokenizer.txt" />
+    <None Include="Resources\TokenizerPython.txt" />
   </ItemGroup>
 
 </Project>

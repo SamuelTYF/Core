@@ -8,6 +8,7 @@
     <StartupObject />
     <Platforms>x64</Platforms>
     <Copyright>Pumpkin</Copyright>
+    <BaseOutputPath>D:\Core</BaseOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <DefineConstants />
@@ -29,6 +30,16 @@
     <PlatformTarget>x64</PlatformTarget>
     <OutputPath>D:\Core\Release\</OutputPath>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="BitStreamReader.cs" />
+    <Compile Include="BitStreamWriter.cs" />
+    <Compile Include="BoolStream.cs" />
+    <Compile Include="CRC.cs" />
+    <Compile Include="DLZW.cs" />
+    <Compile Include="Hadamard.cs" />
+    <Compile Include="HammingCode.cs" />
+    <Compile Include="HammingDistance.cs" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Collection\Collection.csproj" />
   </ItemGroup>

@@ -1,5 +1,4 @@
 ﻿using Compiler.Tokenizor.Automata;
-using System;
 using System.Text;
 
 namespace Compiler.Tokenizor
@@ -153,22 +152,48 @@ namespace Compiler.Tokenizor
 			}
 			return mnfa;
 		}
-		public string BuildTokenizer(string name,string ttoken,string method="")
+		public string BuildTokenizer(string name,string ttoken,string method="", Language language = Language.CSharp)
         {
-			string pattern = Properties.Resources.Tokenizer;
-			pattern = pattern.Replace("_Tokenizer", name);
-			pattern = pattern.Replace("TToken", ttoken);
-			List<string> cases = new();
-			for (int i = 0; i < mDFA.VariableCount; i++)
-            {
-				string temp = CreateVaribaleCode(i);
-				cases.Add($"case {i}:\n{temp}\n\t\t\t\tbreak;");
-			}
-			pattern = pattern.Replace("//Method", string.Join("\n\t\t",method.Split("\n")));
-			pattern = pattern.Replace("//StateCode", string.Join("\n\t\t\t\t", cases));
-			return pattern;
+			switch(language)
+			{
+				case Language.CSharp:
+					{
+                        string pattern = Properties.Resources.TokenizerCSharp;
+                        pattern = pattern.Replace("_Tokenizer", name);
+                        pattern = pattern.Replace("TToken", ttoken);
+                        List<string> cases = new();
+                        for (int i = 0; i < mDFA.VariableCount; i++)
+                        {
+                            string temp = CreateVaribaleCodeCSharp(i);
+                            cases.Add($"case {i}:\n{temp}\n\t\t\t\tbreak;");
+                        }
+                        pattern = pattern.Replace("//Method", string.Join("\n\t\t", method.Split("\n")));
+                        pattern = pattern.Replace("//StateCode", string.Join("\n\t\t\t\t", cases));
+                        return pattern;
+                    }
+				case Language.Python:
+					{
+                        string pattern = Properties.Resources.TokenizerPython;
+                        pattern = pattern.Replace("_Tokenizer", name);
+                        pattern = pattern.Replace("TToken", ttoken);
+                        List<string> funcs = new();
+                        List<string> cases = new();
+                        for (int i = 0; i < mDFA.VariableCount; i++)
+                        {
+                            string temp = CreateVaribaleCodePython(i);
+                            string f = $"Function{i}";
+                            cases.Add($"def {f}(self,symbol:int)->Tuple[bool,{ttoken}]:\n{temp}");
+							funcs.Add("self." + f);
+                        }
+                        pattern = pattern.Replace("//Map", string.Join(",", funcs));
+                        pattern = pattern.Replace("//Methods", string.Join("\n\t", method.Split("\n")));
+                        pattern = pattern.Replace("//Functions", string.Join("\n\t", cases));
+						return pattern;
+                    }
+				default:throw new NotImplementedException();
+            }
         }
-		private string CreateVaribaleCode(int index)
+		private string CreateVaribaleCodeCSharp(int index)
 		{
 			List<int>[] groups = new List<int>[mDFA.VariableCount];
 			for (int i = 0; i < mDFA.VariableCount; i++)
@@ -209,5 +234,55 @@ namespace Compiler.Tokenizor
 			else codes.Add("return Error(symbol);");
 			return $"\t\t\t\t\t{string.Join("\n\t\t\t\t\telse ", codes)}";
 		}
-	}
+        private string CreateVaribaleCodePython(int index)
+        {
+            List<int>[] groups = new List<int>[mDFA.VariableCount];
+            for (int i = 0; i < mDFA.VariableCount; i++)
+                groups[i] = new();
+            for (int terminal = 0; terminal < mDFA.TerminalCount; terminal++)
+                if (mDFA.Deltas[index][terminal].HasValue)
+                    groups[mDFA.Deltas[index][terminal].Value].Add(terminal);
+            List<string> codes = new()
+			{
+				"Value=self.Value"
+			};
+			bool el = false;
+			if (index == 0)
+			{
+				codes.Add("if symbol == '\\0':\n\t\t\treturn True,Token(\"EOF\")");
+                el=true;
+            }
+            for (int i = 0; i < mDFA.VariableCount; i++)
+                if (groups[i].Count > 0)
+                {
+                    List<int> group = groups[i];
+                    groups[i].Sort();
+                    List<string> conditions = new();
+                    char l = CharRanges[group[0]].Min;
+                    char r = CharRanges[group[0]].Max;
+                    for (int j = 1; j < group.Count; j++)
+                    {
+                        if (r + 1 != CharRanges[group[j]].Min)
+                        {
+                            if (l == r) conditions.Add($"symbol == '{l.FromEscape()}'");
+                            else conditions.Add($"symbol >= '{l.FromEscape()}' and symbol <= '{r.FromEscape()}'");
+                            l = CharRanges[group[j]].Min;
+                        }
+                        r = CharRanges[group[j]].Max;
+                    }
+                    if (l == r) conditions.Add($"symbol=='{l.FromEscape()}'");
+                    else conditions.Add($"symbol >= '{l.FromEscape()}' and symbol <= '{r.FromEscape()}'");
+                    codes.Add($"{(el?"el":"")}if {string.Join(" or ", conditions)}:\n\t\t\tself.Push(symbol)\n\t\t\tself.State={i}\n\t\t\treturn self.Pop()");
+					el = true;
+				}
+            if (mDFA.Ends[index].HasValue)
+            {
+                if (codes.Count == 0)
+                    codes.Add($"{(el ? "else:\n\t\t\t" : "")}{RawActions[mDFA.Ends[index].Value]}\n\t\t{(el?"\t":"")}return self.ReturnToken(token)");
+                else codes.Add($"{(el ? "else:\n\t\t\t" : "")}{RawActions[mDFA.Ends[index].Value]}\n\t\t{(el ? "\t" : "")}return self.ReturnToken(token)");
+            }
+            else codes.Add($"{(el ? "else:\n\t\t\t" : "")}return True,Token(\"_Error\",symbol)");
+            return $"\t\t{string.Join("\n\t\t", codes)}";
+        }
+    }
 }

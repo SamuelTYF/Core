@@ -19,7 +19,7 @@ namespace Net.Test.Properties {
     // 类通过类似于 ResGen 或 Visual Studio 的工具自动生成的。
     // 若要添加或移除成员，请编辑 .ResX 文件，然后重新运行 ResGen
     // (以 /str 作为命令选项)，或重新生成 VS 项目。
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -60,6 +60,20 @@ namespace Net.Test.Properties {
             }
         }
         
+        /// <summary>
+        ///   查找类似 GET / HTTP/1.1
+        ///Host: www.baidu.com
+        ///Connection: keep-alive
+        ///Cache-Control: max-age=0
+        ///Upgrade-Insecure-Requests: 1
+        ///User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.87 Safari/537.36 SE 2.X MetaSr 1.0
+        ///Sec-Fetch-Dest: document
+        ///Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+        ///Sec-Fetch-Site: cross-site
+        ///Sec-Fetch-Mode: navigate
+        ///Sec-Fetch-User: ?1
+        ///Referer: https://www [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
         internal static string baidu {
             get {
                 return ResourceManager.GetString("baidu", resourceCulture);

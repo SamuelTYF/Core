@@ -139,7 +139,53 @@ namespace Compiler.Properties {
         }
         
         /// <summary>
-        ///   查找类似  的本地化字符串。
+        ///   查找类似 &gt;&gt;&gt;瀛楃
+        ///[\x20\x21\x23-\x26\x28-\x5B\x5D-\xFFFF]
+        ///token = Values[0];
+        ///
+        ///&gt;&gt;&gt;杞箟瀛楃
+        ///\\0
+        ///token = &apos;\0&apos;;
+        ///
+        ///&gt;&gt;&gt;杞箟瀛楃
+        ///\\a
+        ///token = &apos;\a&apos;;
+        ///
+        ///&gt;&gt;&gt;杞箟瀛楃
+        ///\\b
+        ///token = &apos;\b&apos;;
+        ///
+        ///&gt;&gt;&gt;杞箟瀛楃
+        ///\\t
+        ///token = &apos;\t&apos;;
+        ///
+        ///&gt;&gt;&gt;杞箟瀛楃
+        ///\\n
+        ///token = &apos;\n&apos;;
+        ///
+        ///&gt;&gt;&gt;杞箟瀛楃
+        ///\\v
+        ///token = &apos;\v&apos;;
+        ///
+        ///&gt;&gt;&gt;杞箟瀛楃
+        ///\\f
+        ///token = &apos;\f&apos;;
+        ///
+        ///&gt;&gt;&gt;杞箟瀛楃
+        ///\\r
+        ///token = &apos;\r&apos;;
+        ///
+        ///&gt;&gt;&gt;杞箟瀛楃
+        ///\\&quot;
+        ///token = &apos;\&quot;&apos;;
+        ///
+        ///&gt;&gt;&gt;杞箟瀛楃
+        ///\\\\
+        ///token = &apos;\\&apos;;
+        ///
+        ///&gt;&gt;&gt;杞箟瀛楃
+        ///\\u[0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F]
+        ///token = (char)int.Parse(Value.ToString()[2..5],Sys [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         public static string CSharp_String_Token {
             get {
@@ -161,12 +207,12 @@ namespace Compiler.Properties {
         ///token = new(&quot; &quot;);
         ///
         ///&gt;&gt;&gt;绗﹀彿
-        ///([\+\-\*/&lt;&gt;=!^@\|;,\(\)\[\]{}?:%.]|&lt;=|&gt;=|==|!=|\+\+|\-\-|@@|\|\||??|.?|=&gt;)
+        ///([\+\-\*/%&lt;&gt;=!^@\|&amp;;,\(\)\[\]{}?:.]|&lt;=|&gt;=|==|!=|\+\+|\-\-|\+=|\-=|\|\||&amp;&amp;|.?|=&gt;)
         ///token = new(Value.ToString());
         ///
         ///&gt;&gt;&gt;鏈夌鍙锋暣鏁?
         ///(|\-)0*(0|[1-9][0-9]*)
-        ///token = Token.Int32(int.Parse(Value.ToStri [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///token = Token.Int32(int.Parse(Value. [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         public static string CSharp_Token {
             get {
@@ -182,8 +228,22 @@ namespace Compiler.Properties {
         ///	&quot;int&quot;,
         ///	&quot;void&quot;,
         ///	&quot;using&quot;,
-        ///	&quot;namespace&quot;
-        ///}); 的本地化字符串。
+        ///	&quot;namespace&quot;,
+        ///	&quot;static&quot;
+        ///});
+        ///private int CharState;
+        ///public char? GetChar()
+        ///{
+        ///    char token=&apos;\0&apos;;
+        ///    int value=0;
+        ///    while (true)
+        ///    {
+        ///        char symbol = Peek();
+        ///        switch (CharState)
+        ///        {
+        ///            case 0:
+        ///                if (symbol is &apos;\0&apos;) return null;
+        ///                else if (symbol is &gt;= &apos; &apos; and &lt;= &apos;!&apos; or &gt;= &apos;#&apos; and &lt;= &apos;&amp;&apos; or &gt;= &apos;(&apos; and &lt;= &apos;[&apos; [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         public static string CSharp_Token_Method {
             get {
@@ -330,6 +390,7 @@ namespace Compiler.Properties {
         
         /// <summary>
         ///   查找类似 using System;
+        ///
         ///namespace Test
         ///{
         ///    public class Program
@@ -346,7 +407,7 @@ namespace Compiler.Properties {
         ///            Console.WriteLine(0b101);
         ///            Console.WriteLine(0.1e001);
         ///            Console.WriteLine(-12.1e-12);
-        ///            C [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///            [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         public static string Test_Code {
             get {
@@ -396,9 +457,33 @@ namespace Compiler.Properties {
         ///	//Method
         ///} 的本地化字符串。
         /// </summary>
-        public static string Tokenizer {
+        public static string TokenizerCSharp {
             get {
-                return ResourceManager.GetString("Tokenizer", resourceCulture);
+                return ResourceManager.GetString("TokenizerCSharp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 class _Tokenizer(Enumerable[Token]):
+        ///    def __init__(self,stream:Enumerable[int]):
+        ///        self.Stream=stream
+        ///        self.Mode=0
+        ///        self.Result=Token(TokenType.Empty)
+        ///        self.Map=//Map
+        ///    //Functions
+        ///    def Get(self)-&gt;Token:
+        ///        while self.Stream.HasNext():
+        ///            symbol=self.Stream.Current()
+        ///            if self.Map[self.Mode](symbol):
+        ///                return None
+        ///    def Current(self)-&gt;Token:
+        ///        return self.Result
+        ///    def MoveNext(self)-&gt;bool:
+        ///        value=self.Ge [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        public static string TokenizerPython {
+            get {
+                return ResourceManager.GetString("TokenizerPython", resourceCulture);
             }
         }
     }

@@ -190,9 +190,11 @@ namespace Parser.Properties {
         
         /// <summary>
         ///   查找类似 @Char@:[0123456789]
-        ///@Add@:\(@E@@Add1@
-        ///@Add1@:(\)|\|@Add1@)
-        ///@E@:(@Char@|@Add@) 的本地化字符串。
+        ///@Add@:(\(@E@@AddS@)
+        ///@AddS@:(\)|(\|@E@@AddS@))
+        ///@E@:(@Char@|@Add@|(@Char@@EE@)|(@Add@@EE@))
+        ///@EE@:(@Char@|@Add@|(@Char@@EE@)|(@Add@@EE@)|(@Char@@EE@@EE@)|(@Add@@EE@@EE@)|\*)
+        ///@RE@:@E@$ 的本地化字符串。
         /// </summary>
         public static string RE_Simple {
             get {

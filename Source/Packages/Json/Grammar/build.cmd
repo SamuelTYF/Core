@@ -1,0 +1,1 @@
+D:\Core\Release\net6.0\ParserGenerator.exe Parser.json

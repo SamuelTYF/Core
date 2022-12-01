@@ -135,9 +135,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HookTests", "Source\MSTest\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mathematica", "Source\Packages\Mathematica\Mathematica.csproj", "{8745E126-8AF2-4EA4-9220-3F0F52C26139}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Json", "Source\Packages\Json\Json.csproj", "{904DF330-9E4F-4555-B01E-8F8B58522C3C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Json", "Source\Packages\Json\Json.csproj", "{904DF330-9E4F-4555-B01E-8F8B58522C3C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParserGenerator", "Source\Packages\ParserGenerator\ParserGenerator.csproj", "{53E41000-D08D-4BD2-A739-1816B8DA0543}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParserGenerator", "Source\Packages\ParserGenerator\ParserGenerator.csproj", "{53E41000-D08D-4BD2-A739-1816B8DA0543}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

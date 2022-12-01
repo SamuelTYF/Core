@@ -160,7 +160,10 @@
   <data name="Test_LALR" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Test_LALR.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
   </data>
-  <data name="Tokenizer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="TokenizerCSharp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Tokenizer.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
+  <data name="TokenizerPython" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TokenizerPython.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
   </data>
 </root>

@@ -17,6 +17,8 @@ ObjectNode? node = Node.Parse(json) as ObjectNode;
 if(node==null) Environment.Exit(1);
 string? OutputDir = (node["OutputDir"] as StringNode)?.Value;
 if (OutputDir == null) Environment.Exit(1);
+string? _Language = (node["Language"] as StringNode)?.Value;
+Language language = _Language == null ? Language.CSharp : Enum.Parse<Language>(_Language);
 ObjectNode? tokenizer = node["Tokenizer"] as ObjectNode;
 ObjectNode? parser = node["Parser"] as ObjectNode;
 if (tokenizer != null)
@@ -40,7 +42,7 @@ if (tokenizer != null)
     if (Method != null)
     using (StreamReader sr = new(Method))
         method = sr.ReadToEnd();
-    string result=re.BuildTokenizer(Name, Token, method);
+    string result = re.BuildTokenizer(Name, Token, method, language);
     if (re.Errors.Count != 0)
     {
         Console.ForegroundColor = ConsoleColor.Red;
@@ -48,18 +50,39 @@ if (tokenizer != null)
             Console.WriteLine(error);
         Environment.Exit(1);
     }
-    using StreamWriter sw = new($"{OutputDir}/{Name}.cs");
-    foreach (string? h in Header)
-        if (h != null)
-            sw.WriteLine(h);
-    foreach (string r in result.Split("\r\n"))
+    switch(language)
     {
-        sw.Write('\t');
-        sw.WriteLine(r);
+        case Language.CSharp:
+            {
+                using StreamWriter sw = new($"{OutputDir}/{Name}.py");
+                foreach (string? h in Header)
+                    if (h != null)
+                        sw.WriteLine(h);
+                foreach (string r in result.Split("\r\n"))
+                {
+                    sw.Write('\t');
+                    sw.WriteLine(r);
+                }
+                foreach (string? f in Footer)
+                    if (f != null)
+                        sw.WriteLine(f);
+            }
+            break;
+        case Language.Python:
+            {
+                using StreamWriter sw = new($"{OutputDir}/{Name}.py");
+                foreach (string? h in Header)
+                    if (h != null)
+                        sw.WriteLine(h);
+                foreach (string r in result.Split("\r\n"))
+                    sw.WriteLine(r);
+                foreach (string? f in Footer)
+                    if (f != null)
+                        sw.WriteLine(f);
+            }
+            break;
+        default:throw new Exception();
     }
-    foreach (string? f in Footer)
-        if (f != null)
-            sw.WriteLine(f);
     Console.WriteLine("Tokenizer Generate Success");
 }
 if (parser != null)
