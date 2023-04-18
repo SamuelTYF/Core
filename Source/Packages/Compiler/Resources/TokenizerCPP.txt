@@ -1,0 +1,21 @@
+_Tokenizer::_Tokenizer(int length)
+{
+
+}
+
+//Method
+
+shared_ptr<TToken> _Tokenizer::Get()
+{
+	shared_ptr<TToken> token;
+	while(true)
+	{
+		wchar_t symbol = Peek();
+		switch (State)
+		{
+			//StateCode
+			default:
+				return Error(symbol);
+		}
+	}
+}

@@ -142,6 +142,12 @@
   <data name="Parser" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Parser.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
   </data>
+  <data name="ParserCPP" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ParserCPP.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
+  <data name="ParserCPPshort" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ParserCPPshort.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
   <data name="RE_LALR" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RE_LALR.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
   </data>
@@ -159,6 +165,12 @@
   </data>
   <data name="Test_LALR" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Test_LALR.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
+  <data name="TokenizerCPP" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TokenizerCPP.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
+  <data name="TokenizerCPPshort" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TokenizerCPPshort.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
   </data>
   <data name="TokenizerCSharp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Tokenizer.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>

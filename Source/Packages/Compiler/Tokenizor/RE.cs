@@ -190,7 +190,37 @@ namespace Compiler.Tokenizor
                         pattern = pattern.Replace("//Functions", string.Join("\n\t", cases));
 						return pattern;
                     }
-				default:throw new NotImplementedException();
+				case Language.CPP:
+					{
+                        string pattern = Properties.Resources.TokenizerCPP;
+                        pattern = pattern.Replace("_Tokenizer", name);
+                        pattern = pattern.Replace("TToken", ttoken);
+                        List<string> cases = new();
+                        for (int i = 0; i < mDFA.VariableCount; i++)
+                        {
+                            string temp = CreateVaribaleCodeCPP(i);
+                            cases.Add($"case {i}:\n\t\t{temp}\n\t\t\tbreak;");
+                        }
+                        pattern = pattern.Replace("//Method", method);
+                        pattern = pattern.Replace("//StateCode", string.Join("\n\t\t\t", cases));
+                        return pattern;
+                    }
+                case Language.CPPshort:
+                    {
+                        string pattern = Properties.Resources.TokenizerCPPshort;
+                        List<string> cases = new();
+                        for (int i = 0; i < mDFA.VariableCount; i++)
+                        {
+                            string temp = CreateVaribaleCodeCPPshort(i);
+                            cases.Add($"case {i}:\n\t\t{temp}\n\t\t\tbreak;");
+                        }
+                        pattern = pattern.Replace("//Method", method);
+                        pattern = pattern.Replace("//StateCode", string.Join("\n\t\t\t", cases));
+                        pattern = pattern.Replace("_Tokenizer", name);
+                        pattern = pattern.Replace("TToken", ttoken);
+                        return pattern;
+                    }
+                default:throw new NotImplementedException();
             }
         }
 		private string CreateVaribaleCodeCSharp(int index)
@@ -283,6 +313,88 @@ namespace Compiler.Tokenizor
             }
             else codes.Add($"{(el ? "else:\n\t\t\t" : "")}return True,Token(\"_Error\",symbol)");
             return $"\t\t{string.Join("\n\t\t", codes)}";
+        }
+        private string CreateVaribaleCodeCPP(int index)
+        {
+            List<int>[] groups = new List<int>[mDFA.VariableCount];
+            for (int i = 0; i < mDFA.VariableCount; i++)
+                groups[i] = new();
+            for (int terminal = 0; terminal < mDFA.TerminalCount; terminal++)
+                if (mDFA.Deltas[index][terminal].HasValue)
+                    groups[mDFA.Deltas[index][terminal].Value].Add(terminal);
+            List<string> codes = new();
+            if (index == 0) codes.Add("if(symbol == L'\\0')return new Token(L\"EOF\");");
+            for (int i = 0; i < mDFA.VariableCount; i++)
+                if (groups[i].Count > 0)
+                {
+                    List<int> group = groups[i];
+                    groups[i].Sort();
+                    List<string> conditions = new();
+                    char l = CharRanges[group[0]].Min;
+                    char r = CharRanges[group[0]].Max;
+                    for (int j = 1; j < group.Count; j++)
+                    {
+                        if (r + 1 != CharRanges[group[j]].Min)
+                        {
+                            if (l == r) conditions.Add($"symbol == L'{l.FromEscape()}'");
+                            else conditions.Add($"(symbol >= L'{l.FromEscape()}' && symbol <= L'{r.FromEscape()}')");
+                            l = CharRanges[group[j]].Min;
+                        }
+                        r = CharRanges[group[j]].Max;
+                    }
+                    if (l == r) conditions.Add($"symbol == L'{l.FromEscape()}'");
+                    else conditions.Add($"(symbol >= L'{l.FromEscape()}' && symbol <= L'{r.FromEscape()}')");
+                    codes.Add($"if({string.Join(" || ", conditions)}){{Push(symbol);State={i};Index++;}}");
+                }
+            if (mDFA.Ends[index].HasValue)
+            {
+                if (codes.Count == 0)
+                    codes.Add($"{RawActions[mDFA.Ends[index].Value]}return ReturnToken(token);");
+                else codes.Add($"{{{RawActions[mDFA.Ends[index].Value]}return ReturnToken(token);}}");
+            }
+            else codes.Add("return Error(symbol);");
+            return $"\t\t{string.Join("\n\t\t\t\telse ", codes)}";
+        }
+        private string CreateVaribaleCodeCPPshort(int index)
+        {
+            List<int>[] groups = new List<int>[mDFA.VariableCount];
+            for (int i = 0; i < mDFA.VariableCount; i++)
+                groups[i] = new();
+            for (int terminal = 0; terminal < mDFA.TerminalCount; terminal++)
+                if (mDFA.Deltas[index][terminal].HasValue)
+                    groups[mDFA.Deltas[index][terminal].Value].Add(terminal);
+            List<string> codes = new();
+            if (index == 0) codes.Add("if(symbol == '\\0')return make_shared<TToken>(\"EOF\");");
+            for (int i = 0; i < mDFA.VariableCount; i++)
+                if (groups[i].Count > 0)
+                {
+                    List<int> group = groups[i];
+                    groups[i].Sort();
+                    List<string> conditions = new();
+                    char l = CharRanges[group[0]].Min;
+                    char r = CharRanges[group[0]].Max;
+                    for (int j = 1; j < group.Count; j++)
+                    {
+                        if (r + 1 != CharRanges[group[j]].Min)
+                        {
+                            if (l == r) conditions.Add($"symbol == '{l.FromEscape()}'");
+                            else conditions.Add($"(symbol >= '{l.FromEscape()}' && symbol <= '{r.FromEscape()}')");
+                            l = CharRanges[group[j]].Min;
+                        }
+                        r = CharRanges[group[j]].Max;
+                    }
+                    if (l == r) conditions.Add($"symbol == '{l.FromEscape()}'");
+                    else conditions.Add($"(symbol >= '{l.FromEscape()}' && symbol <= '{r.FromEscape()}')");
+                    codes.Add($"if({string.Join(" || ", conditions)}){{Push(symbol);m_State={i};m_Index++;}}");
+                }
+            if (mDFA.Ends[index].HasValue)
+            {
+                if (codes.Count == 0)
+                    codes.Add($"{RawActions[mDFA.Ends[index].Value]}return ReturnToken(token);");
+                else codes.Add($"{{{RawActions[mDFA.Ends[index].Value]}return ReturnToken(token);}}");
+            }
+            else codes.Add("return Error(symbol);");
+            return $"\t\t{string.Join("\n\t\t\t\telse ", codes)}";
         }
     }
 }

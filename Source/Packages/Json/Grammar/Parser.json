@@ -15,21 +15,5 @@
         "Footer": [
             "}"
         ]
-    },
-    "Parser": {
-        "Source": "Parser.txt",
-        "Name": "Parser",
-        "Token": "Token",
-        "Value": "JsonNode",
-        "Result": "JsonNode",
-        "Header": [
-            "using Compiler;",
-            "",
-            "namespace Json.Grammar",
-            "{"
-        ],
-        "Footer": [
-            "}"
-        ]
     }
 }

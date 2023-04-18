@@ -1,7 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <OutputType>Library</OutputType>
@@ -57,6 +57,8 @@
     <None Include="Resources\CSharp_Token_Method.txt" />
     <None Include="Resources\LALR_Token.txt" />
     <None Include="Resources\Parser.txt" />
+    <None Include="Resources\ParserCPPshort.txt" />
+    <None Include="Resources\ParserCPP.txt" />
     <None Include="Resources\RE_LALR.txt" />
     <None Include="Resources\RE_LALR_Init.txt" />
     <None Include="Resources\RE_LALR_Method.txt" />
@@ -64,6 +66,8 @@
     <None Include="Resources\Test_Code.txt" />
     <None Include="Resources\Test_LALR.txt" />
     <None Include="Resources\Tokenizer.txt" />
+    <None Include="Resources\TokenizerCPPshort.txt" />
+    <None Include="Resources\TokenizerCPP.txt" />
     <None Include="Resources\TokenizerPython.txt" />
   </ItemGroup>
 

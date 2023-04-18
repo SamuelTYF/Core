@@ -8,7 +8,7 @@ public class UnsigendBigInterger : IComparable<UnsigendBigInterger>
 
 	public const int Max = 10000;
 
-	public static readonly Random _R = new Random(DateTime.Now.Millisecond);
+	public static readonly Random _R = new(DateTime.Now.Millisecond);
 
 	public UnsigendBigInterger(int n)
 	{
@@ -189,7 +189,7 @@ public class UnsigendBigInterger : IComparable<UnsigendBigInterger>
 			num3 /= 10000;
 		}
 		list.Add(num3);
-		while (list.Length > 1 && list[list.Length - 1] == 0)
+		while (list.Count > 1 && list[list.Length - 1] == 0)
 		{
 			list.Pop();
 		}

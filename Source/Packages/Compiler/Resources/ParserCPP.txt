@@ -1,0 +1,42 @@
+//class _Parser:public IParser<TToken,TResult,TValues>
+//using _MyBase=IParser<TToken,TResult,TValues>;
+
+int VariableTable//VT
+
+//Method
+
+_Parser::_Parser()
+	:_MyBase()
+{
+}
+
+shared_ptr<TResult> _Parser::Parse(shared_ptr<ITokenizer<TToken>> tokenizer)
+{
+	Init();
+	_MyBase &Parser = *this;
+	//Init
+
+	int symbol = 0;
+	bool mode = true;
+	shared_ptr<TToken> token = tokenizer->Get();
+	Array<shared_ptr<TToken>> tokens(0);
+	while (true)
+	{
+		if (mode)
+		{
+		    switch (StateStack.top())
+            {
+                //ShiftCode
+                default:
+                    return Error(token);
+            }
+		}
+		else
+		{
+			int vt = VariableTable[StateStack.top()][symbol];
+			if (vt < 0)return Error(token);
+			StateStack.push(vt);
+			mode = true;
+		}
+	}
+}

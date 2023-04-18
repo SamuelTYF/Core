@@ -299,6 +299,74 @@ namespace Compiler.Properties {
         }
         
         /// <summary>
+        ///   查找类似 //class _Parser:public IParser&lt;TToken,TResult,TValues&gt;
+        /////using _MyBase=IParser&lt;TToken,TResult,TValues&gt;;
+        ///
+        ///int VariableTable//VT
+        ///
+        /////Method
+        ///
+        ///_Parser::_Parser()
+        ///	:_MyBase()
+        ///{
+        ///}
+        ///
+        ///shared_ptr&lt;TResult&gt; _Parser::Parse(shared_ptr&lt;ITokenizer&lt;TToken&gt;&gt; tokenizer)
+        ///{
+        ///	Init();
+        ///	_MyBase &amp;Parser = *this;
+        ///	//Init
+        ///
+        ///	int symbol = 0;
+        ///	bool mode = true;
+        ///	shared_ptr&lt;TToken&gt; token = tokenizer-&gt;Get();
+        ///	Array&lt;shared_ptr&lt;TToken&gt;&gt; tokens(0);
+        ///	while (true)
+        ///	{
+        ///		if (mode)
+        ///		{
+        ///		    switch (StateStack.top())
+        ///    [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        public static string ParserCPP {
+            get {
+                return ResourceManager.GetString("ParserCPP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 //class _Parser:public IParser&lt;TToken,TResult,TValues&gt;
+        /////using _MyBase=IParser&lt;TToken,TResult,TValues&gt;;
+        ///
+        ///int _ParserVariableTable//VT
+        ///
+        /////Method
+        ///
+        ///shared_ptr&lt;TResult&gt; _Parser::Parse(shared_ptr&lt;ITokenizer&lt;TToken&gt;&gt; tokenizer)
+        ///{
+        ///	Init();
+        ///	_MyBase &amp;Parser = *this;
+        ///	//Init
+        ///
+        ///	int symbol = 0;
+        ///	bool mode = true;
+        ///	shared_ptr&lt;TToken&gt; token = tokenizer-&gt;Get();
+        ///	vector&lt;shared_ptr&lt;TToken&gt;&gt; tokens;
+        ///	while (true)
+        ///	{
+        ///		if (mode)
+        ///		{
+        ///		    switch (StateStack.top())
+        ///            {
+        ///                //ShiftC [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        public static string ParserCPPshort {
+            get {
+                return ResourceManager.GetString("ParserCPPshort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 &gt;&gt;&gt;
         ///&lt;Start&gt;-&gt;&lt;R&gt;&apos;EOF&apos;
         ///return new(Values[0],CharBlocks.ToArray());
@@ -436,6 +504,64 @@ namespace Compiler.Properties {
         }
         
         /// <summary>
+        ///   查找类似 _Tokenizer::_Tokenizer(int length)
+        ///{
+        ///
+        ///}
+        ///
+        /////Method
+        ///
+        ///shared_ptr&lt;TToken&gt; _Tokenizer::Get()
+        ///{
+        ///	shared_ptr&lt;TToken&gt; token;
+        ///	while(true)
+        ///	{
+        ///		wchar_t symbol = Peek();
+        ///		switch (State)
+        ///		{
+        ///			//StateCode
+        ///			default:
+        ///				return Error(symbol);
+        ///		}
+        ///	}
+        ///} 的本地化字符串。
+        /// </summary>
+        public static string TokenizerCPP {
+            get {
+                return ResourceManager.GetString("TokenizerCPP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 _Tokenizer::_Tokenizer(int length)
+        ///{
+        ///
+        ///}
+        ///
+        /////Method
+        ///
+        ///shared_ptr&lt;TToken&gt; _Tokenizer::Get()
+        ///{
+        ///	shared_ptr&lt;TToken&gt; token;
+        ///	while(true)
+        ///	{
+        ///		wchar_t symbol = Peek();
+        ///		switch (m_State)
+        ///		{
+        ///			//StateCode
+        ///			default:
+        ///				return Error(symbol);
+        ///		}
+        ///	}
+        ///} 的本地化字符串。
+        /// </summary>
+        public static string TokenizerCPPshort {
+            get {
+                return ResourceManager.GetString("TokenizerCPPshort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 public class _Tokenizer:ITokenizer&lt;TToken&gt;
         ///{
         ///	public _Tokenizer(Encoding encoding,int length=1&lt;&lt;10):base(encoding,length){}
@@ -465,21 +591,24 @@ namespace Compiler.Properties {
         
         /// <summary>
         ///   查找类似 class _Tokenizer(Enumerable[Token]):
-        ///    def __init__(self,stream:Enumerable[int]):
-        ///        self.Stream=stream
-        ///        self.Mode=0
-        ///        self.Result=Token(TokenType.Empty)
-        ///        self.Map=//Map
-        ///    //Functions
-        ///    def Get(self)-&gt;Token:
-        ///        while self.Stream.HasNext():
-        ///            symbol=self.Stream.Current()
-        ///            if self.Map[self.Mode](symbol):
-        ///                return None
-        ///    def Current(self)-&gt;Token:
-        ///        return self.Result
-        ///    def MoveNext(self)-&gt;bool:
-        ///        value=self.Ge [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///	def __init__(self,stream:Enumerable[int]):
+        ///		self.Stream=stream
+        ///		self.State=0
+        ///		self.Result=Token(&quot;_Empty&quot;)
+        ///		self.Map=[//Map]
+        ///		self.Symbol=self.Stream.Get() if self.Stream.MoveNext() else None
+        ///		self.Value=&quot;&quot;
+        ///	//Methods
+        ///	//Functions
+        ///	def ReturnToken(self,token:Token)-&gt;Tuple[bool,Token]:
+        ///		self.State = 0
+        ///		self.Value =0
+        ///		return True,token
+        ///	def Push(self,symbol):
+        ///		self.Value+=symbol
+        ///	def Peek(self)-&gt;int:
+        ///		return self.Symbol
+        ///	def Pop(self)-&gt;Tuple[bo [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         public static string TokenizerPython {
             get {

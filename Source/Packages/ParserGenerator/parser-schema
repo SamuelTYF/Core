@@ -8,13 +8,18 @@
     },
     "Language":{
       "type":"string",
-      "default":"CSharp"
+      "default":"CSharp",
+      "enum": ["CSharp","CPP","CPPshort"]
     },
     "Parser": {
       "type": "object",
       "properties": {
         "Source": {
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength":1
+          }
         },
         "Method": {
           "type": "string"

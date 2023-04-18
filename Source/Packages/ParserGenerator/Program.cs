@@ -81,16 +81,37 @@ if (tokenizer != null)
                         sw.WriteLine(f);
             }
             break;
+        case Language.CPP or Language.CPPshort:
+            {
+                using StreamWriter sw = new($"{OutputDir}/{Name}.cpp");
+                foreach (string? h in Header)
+                    if (h != null)
+                        sw.WriteLine(h);
+                sw.WriteLine(result);
+                foreach (string? f in Footer)
+                    if (f != null)
+                        sw.WriteLine(f);
+            }
+            break;
         default:throw new Exception();
     }
     Console.WriteLine("Tokenizer Generate Success");
 }
 if (parser != null)
 {
-    string? Source = (parser["Source"] as StringNode)?.Value;
-    if (Source == null) Environment.Exit(1);
+    List<string> Sources = new();
+    if (parser["Source"] is StringNode sn)
+        Sources.Add(sn.Value);
+    else if (parser["Source"] is ArrayNode an)
+    {
+        foreach (StringNode s in an.Nodes)
+            Sources.Add(s.Value);
+    }
+    else Environment.Exit(1);
+    if (Sources.Count == 0) Environment.Exit(1);
     string? Method = (parser["Method"] as StringNode)?.Value;
     string? Init = (parser["Init"] as StringNode)?.Value;
+    string? Types = (parser["Types"] as StringNode)?.Value;
     string? Name = (parser["Name"] as StringNode)?.Value;
     if (Name == null) Environment.Exit(1);
     string? Token = (parser["Token"] as StringNode)?.Value;
@@ -104,10 +125,15 @@ if (parser != null)
     string?[]? Footer = (parser["Footer"] as ArrayNode)?.Nodes.Select(n => (n as StringNode)?.Value).ToArray();
     if (Footer == null) Environment.Exit(1);
     LALR lalr = new();
-    using StreamReader grammar = new(Source);
-    lalr.Register(grammar.ReadToEnd());
+    foreach(string s in Sources)
+    {
+        using StreamReader grammar = new(s);
+        Console.WriteLine($"Adding Source {s}");
+        lalr.Register(grammar.ReadToEnd()+"\n");
+    }
     lalr.ComputeFirst();
     lalr.CreateClosures();
+    if (Types != null) lalr.LoadTypes(Types);
     foreach (var error in lalr.Errors)
         Console.WriteLine(error);
     string method = "";
@@ -118,25 +144,51 @@ if (parser != null)
     if (Init != null)
         using (StreamReader sr = new(Init))
             init = sr.ReadToEnd();
-    string result = lalr.BuildParser(Name, Token, Value, Result, method, init);
+    string result = lalr.BuildParser(Name, Token, Value, Result, method, init,language);
     if(lalr.Errors.Count!=0)
     {
-        Console.ForegroundColor = ConsoleColor.Red;
-        foreach (string error in lalr.Errors)
-            Console.WriteLine(error);
+        //Console.ForegroundColor = ConsoleColor.Red;
+        //foreach (string error in lalr.Errors)
+        //    Console.WriteLine(error);
         Environment.Exit(1);
     }
-    using StreamWriter sw = new($"{OutputDir}/{Name}.cs");
-    foreach (string? h in Header)
-        if (h != null)
-            sw.WriteLine(h);
-    foreach (string r in result.Split("\r\n"))
+    
+    switch(language)
     {
-        sw.Write('\t');
-        sw.WriteLine(r);
+        case Language.CSharp:
+            {
+                using StreamWriter sw = new($"{OutputDir}/{Name}.cs");
+                foreach (string? h in Header)
+                    if (h != null)
+                        sw.WriteLine(h);
+                foreach (string r in result.Split("\r\n"))
+                {
+                    sw.Write('\t');
+                    sw.WriteLine(r);
+                }
+                foreach (string? f in Footer)
+                    if (f != null)
+                        sw.WriteLine(f);
+            }
+            break;
+        case Language.CPP or Language.CPPshort:
+            {
+                using StreamWriter sw = new($"{OutputDir}/{Name}.cpp");
+                foreach (string? h in Header)
+                    if (h != null)
+                        sw.WriteLine(h);
+                sw.WriteLine(result);
+                foreach (string? f in Footer)
+                    if (f != null)
+                        sw.WriteLine(f);
+                using StreamWriter swt = new($"{OutputDir}/{Name}.Types.txt");
+                foreach (Symbol s in lalr.Variables)
+                    if (s.Type != null)
+                        swt.WriteLine($"{s.Name}:{s.Type}");
+                    else swt.WriteLine(s.Name);
+            }
+            break;
+        default:throw new NotImplementedException();
     }
-    foreach (string? f in Footer)
-        if (f != null)
-            sw.WriteLine(f);
     Console.WriteLine("Parser Generate Success");
 }
