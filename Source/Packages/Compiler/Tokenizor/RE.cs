@@ -156,7 +156,7 @@ namespace Compiler.Tokenizor
         {
 			switch(language)
 			{
-				case Language.CSharp:
+				case Language.CSharp or Language.CSharpTyped:
 					{
                         string pattern = Properties.Resources.TokenizerCSharp;
                         pattern = pattern.Replace("_Tokenizer", name);

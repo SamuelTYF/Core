@@ -148,6 +148,9 @@
   <data name="ParserCPPshort" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ParserCPPshort.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
   </data>
+  <data name="ParserTyped" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ParserTyped.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
   <data name="RE_LALR" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RE_LALR.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
   </data>

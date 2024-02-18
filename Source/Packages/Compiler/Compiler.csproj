@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <OutputType>Library</OutputType>
@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <Compile Include="Helper.cs" />
+    <Compile Include="IParserTyped.cs" />
     <Compile Include="Parser\Closure.cs" />
     <Compile Include="Parser\Delta.cs" />
     <Compile Include="Parser\Entity.cs" />
@@ -59,6 +60,7 @@
     <None Include="Resources\Parser.txt" />
     <None Include="Resources\ParserCPPshort.txt" />
     <None Include="Resources\ParserCPP.txt" />
+    <None Include="Resources\ParserTyped.txt" />
     <None Include="Resources\RE_LALR.txt" />
     <None Include="Resources\RE_LALR_Init.txt" />
     <None Include="Resources\RE_LALR_Method.txt" />

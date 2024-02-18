@@ -350,19 +350,48 @@ namespace Compiler.Properties {
         ///
         ///	int symbol = 0;
         ///	bool mode = true;
-        ///	shared_ptr&lt;TToken&gt; token = tokenizer-&gt;Get();
+        ///	shared_ptr&lt;TToken&gt; token = tokenizer-&gt;get();
         ///	vector&lt;shared_ptr&lt;TToken&gt;&gt; tokens;
         ///	while (true)
         ///	{
         ///		if (mode)
         ///		{
-        ///		    switch (StateStack.top())
+        ///		    switch (m_StateStack.top())
         ///            {
-        ///                //ShiftC [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///                //Shif [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         public static string ParserCPPshort {
             get {
                 return ResourceManager.GetString("ParserCPPshort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 public class _Parser:IParser&lt;TToken, TResult&gt;
+        ///{
+        ///    //TypeStacks
+        ///    public static readonly int[,] VariableTable={
+        ///        //VariableTable
+        ///    };
+        ///    public override TResult Parse(ITokenizer&lt;TToken&gt; tokenizer)
+        ///    {
+        ///        Init();
+        ///        //Init
+        ///        TToken token = tokenizer.Get();
+        ///        int symbol = 0;
+        ///        bool mode = true;
+        ///        TToken[] tokens;
+        ///        while (true)
+        ///        {
+        ///            if (mode)
+        ///            {
+        ///                switch (StateStack.Peek())
+        ///                {
+        ///   [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        public static string ParserTyped {
+            get {
+                return ResourceManager.GetString("ParserTyped", resourceCulture);
             }
         }
         
@@ -540,7 +569,7 @@ namespace Compiler.Properties {
         ///
         /////Method
         ///
-        ///shared_ptr&lt;TToken&gt; _Tokenizer::Get()
+        ///shared_ptr&lt;TToken&gt; _Tokenizer::get()
         ///{
         ///	shared_ptr&lt;TToken&gt; token;
         ///	while(true)
