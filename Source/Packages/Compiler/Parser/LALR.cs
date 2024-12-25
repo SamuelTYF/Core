@@ -379,7 +379,7 @@ namespace Compiler.Parser
             string pattern = Properties.Resources.ParserTyped;
             pattern = pattern.Replace("_Parser", name);
             pattern = pattern.Replace("TToken", ttoken);
-            pattern = pattern.Replace("//TypeStacks", string.Join("\n\t\t", Types.Select(t => $"protected Stack<{t}> Stack_{t.GetHashCode()} = new();")));
+            pattern = pattern.Replace("//TypeStacks", string.Join("\n\t\t", Types.Select(t => $"protected Stack<{t}> Stack_{t.GetHashCode().ToString().Replace("-","_")} = new();")));
             pattern = pattern.Replace("TResult", tresult);
             pattern = pattern.Replace("//Init", string.Join("\n\t\t", init.Split("\n")));
             List<string> variablerows = new();
@@ -590,8 +590,10 @@ namespace Compiler.Parser
                     cs.Add($"// {delta}");
                     Symbol[] deltas = delta.Deltas;
                     string action = delta.Action.Replace("\r", "");
-                    if (delta.Start.Type is null && action.Contains("value=")) throw new Exception($"{delta.Start}类型为空");
-                    if (delta.Start.Type is not null && !action.Contains("value=")) throw new Exception($"{delta.Start}类型不为空");
+                    if (delta.Start.Type is null && action.Contains("value=")) throw new Exception($"{delta}类型为空\n{action}");
+                    if (delta.Start.Type is not null && !action.Contains("value=")) throw new Exception($"{delta}类型不为空\n{action}");
+                    if (delta.Start.Type != null)
+                        cs.Add($"{delta.Start.Type} value;");
                     int tokens = 0;
                     int values = 0;
                     Stack<Symbol> vs = new();
@@ -603,7 +605,7 @@ namespace Compiler.Parser
                                 action = action.Replace($"Values[{j}]", $"value{values++}");
                                 vs.Push(deltas[j]);
                             }
-                            else if (action.Contains($"Values[{j}]")) throw new Exception($"无法引用None类型对象");
+                            else if (action.Contains($"Values[{j}]")) throw new Exception($"无法引用None类型对象Values[{j}]\n{action}");
                         }
                         else
                             action = action.Replace($"Values[{j}]", $"tokens[{tokens++}]");
@@ -615,10 +617,10 @@ namespace Compiler.Parser
                     {
                         Symbol s = vs.Pop();
                         if (s.Type is null) throw new Exception($"{s}的类型为null");
-                        cs.Add($"{s.Type} value{vs.Count}=Stack_{s.Type.GetHashCode()}.Pop();");
+                        cs.Add($"{s.Type} value{vs.Count}=Stack_{s.Type.GetHashCode().ToString().Replace("-","_")}.Pop();");
                     }
                     cs.AddRange(action.Split("\n"));
-                    if (delta.Start.Type is not null) cs.Add($"Stack_{delta.Start.Type.GetHashCode()}.Push(value);");
+                    if (delta.Start.Type is not null) cs.Add($"Stack_{delta.Start.Type.GetHashCode().ToString().Replace("-","_")}.Push(value);");
                     cs.Add($"symbol={delta.Start.Index};");
                     cs.Add("mode = false;");
                     List<string> terminals = new();

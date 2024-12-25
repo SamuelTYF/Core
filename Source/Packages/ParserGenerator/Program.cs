@@ -52,9 +52,9 @@ if (tokenizer != null)
     }
     switch(language)
     {
-        case Language.CSharp:
+        case Language.CSharp or Language.CSharpTyped:
             {
-                using StreamWriter sw = new($"{OutputDir}/{Name}.py");
+                using StreamWriter sw = new($"{OutputDir}/{Name}.cs");
                 foreach (string? h in Header)
                     if (h != null)
                         sw.WriteLine(h);
@@ -144,7 +144,7 @@ if (parser != null)
     if (Init != null)
         using (StreamReader sr = new(Init))
             init = sr.ReadToEnd();
-    string result = lalr.BuildParser(Name, Token, Value, Result, method, init,language);
+    string result = lalr.BuildParser(Name, Token, Value, Result, method, init, language);
     if(lalr.Errors.Count!=0)
     {
         //Console.ForegroundColor = ConsoleColor.Red;
@@ -169,6 +169,27 @@ if (parser != null)
                 foreach (string? f in Footer)
                     if (f != null)
                         sw.WriteLine(f);
+            }
+            break;
+        case Language.CSharpTyped:
+            {
+                using StreamWriter sw = new($"{OutputDir}/{Name}.cs");
+                foreach (string? h in Header)
+                    if (h != null)
+                        sw.WriteLine(h);
+                foreach (string r in result.Split("\r\n"))
+                {
+                    sw.Write('\t');
+                    sw.WriteLine(r);
+                }
+                foreach (string? f in Footer)
+                    if (f != null)
+                        sw.WriteLine(f);
+                using StreamWriter swt = new($"{OutputDir}/{Name}.Types.txt");
+                foreach (Symbol s in lalr.Variables)
+                    if (s.Type != null)
+                        swt.WriteLine($"{s.Name}:{s.Type}");
+                    else swt.WriteLine(s.Name);
             }
             break;
         case Language.CPP or Language.CPPshort:
